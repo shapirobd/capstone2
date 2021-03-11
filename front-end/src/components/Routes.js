@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 
 const useStyles = makeStyles(() => ({
 	root: {
-		height: "93vh",
+		// height: "93vh",
 		padding: "100px 0 0 0 ",
 	},
 }));
@@ -21,10 +21,9 @@ const useStyles = makeStyles(() => ({
 const Routes = () => {
 	const classes = useStyles();
 	const user = useSelector((state) => state.user);
-	console.log(user);
 
 	return (
-		<Container maxWidth="lg" className={classes.root}>
+		<Container maxWidth="xl" className={classes.root}>
 			<Switch>
 				<Route exact path="/">
 					{user ? <HomePage /> : <WelcomePage />}
@@ -39,7 +38,7 @@ const Routes = () => {
 				<Route path="/user/:username">
 					<Profile />
 				</Route>
-				<Route path="/recipe/:recipeId">
+				<Route path="/recipes/:recipeId">
 					<Recipe />
 				</Route>
 			</Switch>

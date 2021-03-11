@@ -1,41 +1,71 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import { GridList, GridListTile, GridListTileBar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
+import useWindowDimensions from "../customHooks/getWindowDimensions";
 
-const useStyles = makeStyles(() => ({
+// const useStyles = makeStyles(() => ({
+// 	gridList: {
+// 		width: "75%",
+// 	},
+// 	gridTile: {
+// 		margin: "20px 0",
+// 		height: "auto",
+// 	},
+// }));
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		display: "flex",
+		flexWrap: "wrap",
+		justifyContent: "center",
+		// overflow: "hidden",
+		// backgroundColor: theme.palette.background.paper,
+	},
 	gridList: {
-		width: "75%",
+		width: "100%",
+		height: "100%",
+	},
+	gridTile: {
+		// width: "20%",
+	},
+	icon: {
+		color: "rgba(255, 255, 255, 0.54)",
 	},
 }));
 
 const RecipeGrid = ({ feed }) => {
 	const classes = useStyles();
+	const history = useHistory();
+	const dispatch = useDispatch();
+
+	const { height, width } = useWindowDimensions();
+
 	return (
-		<GridList className={classes.gridList} cols={3}>
-			{/* <GridListTile cols={3} style={{ height: "auto" }}>
-						<ListSubheader component="div">Recipes!</ListSubheader>
-					</GridListTile> */}
-			{feed.map((recipe) => (
-				<Link to={`/recipe/${recipe.id}`}>
-					<GridListTile key={recipe.id} id={recipe.id} cols={1}>
-						<img src={recipe.image} />
-						<GridListTileBar
-							title={recipe.title}
-							// subtitle={<span>by: {tile.author}</span>}
-							// actionIcon={
-							// 	<IconButton
-							// 		aria-label={`info about ${recipe.name}`}
-							// 		className={classes.icon}
-							// 	>
-							// 		<InfoIcon />
-							// 	</IconButton>
-							// }
-						/>
+		<div className={classes.root}>
+			<GridList
+				cols={Math.floor(width / 300)}
+				spacing={20}
+				cellHeight={180}
+				className={classes.gridList}
+			>
+				{feed.map((recipe) => (
+					<GridListTile
+						key={recipe.id}
+						name={recipe.id}
+						cols={1}
+						className={classes.gridTile}
+					>
+						<Link to={`/recipes/${recipe.id}`}>
+							<img src={recipe.image} alt={recipe.title} />
+							<GridListTileBar title={recipe.title} />
+						</Link>
 					</GridListTile>
-				</Link>
-			))}
-		</GridList>
+				))}
+			</GridList>
+		</div>
 	);
 };
 

@@ -6,9 +6,7 @@ const API_URL = "http://localhost:5000";
 export const login = (data) => {
 	return async (dispatch) => {
 		try {
-			console.log(data);
 			const loginResp = await axios.post(`${API_URL}/auth/login`, data);
-			console.log(loginResp);
 			const { token } = loginResp.data;
 			const userResp = await axios.get(`${API_URL}/users/${data.username}`);
 			dispatch(loggedIn(token, userResp.data));

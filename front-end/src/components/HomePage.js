@@ -5,14 +5,19 @@ import { loadFeed } from "../actionCreators/recipeActionCreators";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import RecipeGrid from "./RecipeGrid";
 import SideNav from "./SideNav";
+import useWindowDimensions from "../customHooks/getWindowDimensions";
 // import FilterPanel from "./FilterPanel";
 
 const useStyles = makeStyles(() => ({
 	root: {
 		display: "flex",
-		flexWrap: "wrap",
+		// flexWrap: "wrap",
 		justifyContent: "space-around",
-		overflow: "hidden",
+		// overflow: "hidden",
+	},
+	mainContent: {
+		// float: "right",
+		justifyContent: "center",
 	},
 }));
 
@@ -24,6 +29,9 @@ const HomePage = () => {
 	const page = useSelector((state) => state.page, shallowEqual);
 	const totalResults = useSelector((state) => state.totalResults, shallowEqual);
 	const countPerPage = useSelector((state) => state.countPerPage, shallowEqual);
+
+	const { height, width } = useWindowDimensions();
+
 	useEffect(() => {
 		dispatch(loadFeed(page));
 	}, [page]);
@@ -40,14 +48,19 @@ const HomePage = () => {
 			<div className={classes.root}>
 				<SideNav />
 				{/* <FilterPanel /> */}
-				<RecipeGrid feed={feed} />
-				<Pagination
-					count={Math.ceil(totalResults / countPerPage) + 1}
-					defaultPage={1}
-					siblingCount={0}
-					page={page}
-					onChange={handleChange}
-				/>
+				<div
+					className={classes.mainContent}
+					style={{ width: `${width - 240}px`, height: `${height}px` }}
+				>
+					<RecipeGrid feed={feed} />
+					<Pagination
+						count={Math.ceil(totalResults / countPerPage) + 1}
+						defaultPage={1}
+						siblingCount={0}
+						page={page}
+						onChange={handleChange}
+					/>
+				</div>
 			</div>
 		</>
 	);

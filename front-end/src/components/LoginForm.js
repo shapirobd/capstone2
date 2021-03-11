@@ -48,7 +48,6 @@ const LoginForm = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(formData);
 		dispatch(login(formData));
 		setFormData(INITIAL_FORM_DATA);
 		history.push("/");

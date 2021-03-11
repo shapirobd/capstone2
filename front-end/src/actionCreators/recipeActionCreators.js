@@ -30,6 +30,7 @@ const loadedFeed = (data) => {
 };
 
 export const loadRecipe = (recipeId) => {
+	console.log("2: ", recipeId);
 	return async (dispatch) => {
 		try {
 			const recipe = await axios.get(
@@ -40,15 +41,18 @@ export const loadRecipe = (recipeId) => {
 					},
 				}
 			);
+			console.log(`3.`, recipe);
 			const instructions = await axios.get(
-				`https://api.spoonacular.com/recipes/{id}/analyzedInstructions`,
+				`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions`,
 				{
 					params: {
+						apiKey: "73baf9bb95a14f5fb4d71e2f12ab8479",
 						stepBreakdown: true,
 					},
 				}
 			);
-			dispatch(loadedRecipe(recipe.data, instructions.data));
+			console.log("4.", instructions);
+			dispatch(loadedRecipe(recipe.data, instructions.data[0]));
 		} catch (e) {
 			console.error(e);
 		}

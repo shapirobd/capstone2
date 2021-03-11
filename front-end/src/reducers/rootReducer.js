@@ -23,8 +23,6 @@ const rootReducer = (state = INITIAL_STATE, action) => {
 		}
 		case "LOGIN": {
 			const { token, user } = action.payload;
-			console.log(token);
-			console.log(user);
 			return { ...state, token, user };
 		}
 		case "LOGOUT": {

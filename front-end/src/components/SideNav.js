@@ -42,48 +42,38 @@ const SideNav = () => {
 	const classes = useStyles();
 
 	return (
-		<div className={classes.root}>
-			<CssBaseline />
-			{/* <AppBar position="fixed" className={classes.appBar}>
-				<Toolbar>
-					<Typography variant="h6" noWrap>
-						Clipped drawer
-					</Typography>
-				</Toolbar>
-			</AppBar> */}
-			<Drawer
-				className={classes.drawer}
-				variant="permanent"
-				classes={{
-					paper: classes.drawerPaper,
-				}}
-			>
-				<Toolbar />
-				<div className={classes.drawerContainer}>
-					<List>
-						{["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-							<ListItem button key={text}>
-								<ListItemIcon>
-									{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-								</ListItemIcon>
-								<ListItemText primary={text} />
-							</ListItem>
-						))}
-					</List>
-					<Divider />
-					<List>
-						{["All mail", "Trash", "Spam"].map((text, index) => (
-							<ListItem button key={text}>
-								<ListItemIcon>
-									{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-								</ListItemIcon>
-								<ListItemText primary={text} />
-							</ListItem>
-						))}
-					</List>
-				</div>
-			</Drawer>
-		</div>
+		<Drawer
+			className={classes.drawer}
+			variant="permanent"
+			classes={{
+				paper: classes.drawerPaper,
+			}}
+		>
+			<Toolbar />
+			<div className={classes.drawerContainer}>
+				<List>
+					{["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+						<ListItem button key={text}>
+							<ListItemIcon>
+								{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+							</ListItemIcon>
+							<ListItemText primary={text} />
+						</ListItem>
+					))}
+				</List>
+				<Divider />
+				<List>
+					{["All mail", "Trash", "Spam"].map((text, index) => (
+						<ListItem button key={text}>
+							<ListItemIcon>
+								{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+							</ListItemIcon>
+							<ListItemText primary={text} />
+						</ListItem>
+					))}
+				</List>
+			</div>
+		</Drawer>
 	);
 };
 
