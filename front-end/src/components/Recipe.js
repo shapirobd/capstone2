@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loadRecipe } from "./actionCreators/recipeActionCreators";
+import { loadRecipe } from "../actionCreators/recipeActionCreators";
 
 const Recipe = () => {
 	const { recipeId } = useParams();

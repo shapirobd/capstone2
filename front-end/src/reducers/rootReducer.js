@@ -27,6 +27,9 @@ const rootReducer = (state = INITIAL_STATE, action) => {
 			console.log(user);
 			return { ...state, token, user };
 		}
+		case "LOGOUT": {
+			return { ...state, user: null, token: null };
+		}
 		default: {
 			return state;
 		}

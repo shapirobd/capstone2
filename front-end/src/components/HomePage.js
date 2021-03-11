@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Pagination } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
-import { loadFeed } from "./actionCreators/recipeActionCreators";
+import { loadFeed } from "../actionCreators/recipeActionCreators";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import RecipeGrid from "./RecipeGrid";
 import SideNav from "./SideNav";

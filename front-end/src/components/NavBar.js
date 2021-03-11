@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
 	AppBar,
 	Toolbar,
@@ -11,7 +11,9 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
-import logo from "./images/logo.png";
+import logo from "../images/logo.png";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../actionCreators/userActionCreators";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -68,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
 	inputRoot: {
 		color: "inherit",
 	},
-	inputInput: {
+	input: {
 		padding: theme.spacing(1, 1, 1, 0),
 		paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
 		transition: theme.transitions.create("width"),
@@ -81,6 +83,16 @@ const useStyles = makeStyles((theme) => ({
 
 const NavBar = () => {
 	const classes = useStyles();
+	const dispatch = useDispatch();
+	const history = useHistory();
+
+	const user = useSelector((state) => state.user);
+
+	const handleLogout = (evt) => {
+		evt.preventDefault();
+		dispatch(logout());
+		history.push("/");
+	};
 
 	return (
 		<div className={classes.root}>
@@ -108,19 +120,33 @@ const NavBar = () => {
 							placeholder="Search…"
 							classes={{
 								root: classes.inputRoot,
-								input: classes.inputInput,
+								input: classes.input,
 							}}
 							inputProps={{ "aria-label": "search" }}
 						/>
 					</div>
-					<Link to="/login" className={classes.navLink}>
-						<Button color="inherit">Login</Button>
-					</Link>
-					<Link to="/signup" className={classes.navLink}>
-						<Button color="inherit" className={classes.signupBtn}>
-							Sign up
-						</Button>
-					</Link>
+					{user ? (
+						<>
+							<Button
+								onClick={handleLogout}
+								color="inherit"
+								className={classes.navLink}
+							>
+								Logout
+							</Button>
+						</>
+					) : (
+						<>
+							<Link to="/login" className={classes.navLink}>
+								<Button color="inherit">Login</Button>
+							</Link>
+							<Link to="/signup" className={classes.navLink}>
+								<Button color="inherit" className={classes.signupBtn}>
+									Sign up
+								</Button>
+							</Link>
+						</>
+					)}
 				</Toolbar>
 			</AppBar>
 		</div>

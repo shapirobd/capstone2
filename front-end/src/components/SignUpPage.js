@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, TextField, Button, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import signup_facts from "./images/signup_facts.png";
+import signup_facts from "../images/signup_facts.png";
 
 const useStyles = makeStyles(() => ({
 	root: {

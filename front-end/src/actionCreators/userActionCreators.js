@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN } from "../actionTypes";
+import { LOGIN, LOGOUT } from "../components/actionTypes";
 
 const API_URL = "http://localhost:5000";
 
@@ -31,5 +31,11 @@ const loggedIn = (token, user) => {
 				last_name,
 			},
 		},
+	};
+};
+
+export const logout = () => {
+	return {
+		type: LOGOUT,
 	};
 };
