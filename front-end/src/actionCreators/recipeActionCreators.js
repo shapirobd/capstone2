@@ -38,6 +38,7 @@ export const loadRecipe = (recipeId) => {
 				{
 					params: {
 						apiKey: "73baf9bb95a14f5fb4d71e2f12ab8479",
+						includeNutrition: true,
 					},
 				}
 			);
