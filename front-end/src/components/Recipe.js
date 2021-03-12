@@ -2,9 +2,13 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadRecipe } from "../actionCreators/recipeActionCreators";
-import { Typography, Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import PieChart from "./PieChart";
+import NutrientList from "./NutrientList";
+import DietList from "./DietList";
+import RecipeSteps from "./RecipeSteps";
+import { generateMacros } from "../helpers/generateMacros";
+import { Typography, Grid, Button, ButtonGroup } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -16,12 +20,21 @@ const useStyles = makeStyles(() => ({
 	image: {
 		width: "100%",
 	},
+	buttonGroup: {
+		margin: "15px 0",
+	},
+	button: {
+		color: "#fff",
+		backgroundColor: "#4caf50",
+		border: "1px solid #fff",
+		"&:hover": {
+			backgroundColor: "#81c784",
+		},
+	},
 	main: {
 		padding: "0 36px 0 0 !important",
 	},
 	infoPanel: {
-		// border: "3px solid #378E3C",
-		// borderRadius: "5px",
 		padding: "0 !important",
 	},
 }));
@@ -33,9 +46,15 @@ const Recipe = () => {
 	const currentRecipe = useSelector((state) => state.currentRecipe);
 	console.log(currentRecipe);
 
+	const { recipe, instructions } = currentRecipe;
+	const { diets } = recipe;
+	const { nutrients, caloricBreakdown } = recipe.nutrition;
+	const calories = nutrients[0].amount;
+
+	const macronutrients = generateMacros(nutrients);
+
 	useEffect(() => {
 		const getRecipe = async () => {
-			console.log("1. INITIAL RENDER");
 			dispatch(loadRecipe(recipeId));
 		};
 		getRecipe();
@@ -45,26 +64,26 @@ const Recipe = () => {
 		<div className={classes.root}>
 			{currentRecipe ? (
 				<>
-					<Typography variant="h3">{currentRecipe.recipe.title}</Typography>
+					<Typography variant="h3">{recipe.title}</Typography>
 					<Grid container spacing={3} className={classes.grid}>
-						<Grid item md={8} className={classes.main}>
-							<img src={currentRecipe.recipe.image} className={classes.image} />
-							<Button>I ate this</Button>
-							<Button>Bookmark</Button>
-							<h2>Steps: </h2>
-							<ol>
-								{currentRecipe.instructions.steps.map((step) => (
-									<li key={step.number}>{step.step}</li>
-								))}
-							</ol>
+						<Grid item xs={12} md={8} className={classes.main}>
+							<img src={recipe.image} className={classes.image} />
+							<ButtonGroup fullWidth className={classes.buttonGroup}>
+								<Button className={classes.button}>I ate this</Button>
+								<Button className={classes.button}>Bookmark</Button>
+							</ButtonGroup>
+							<RecipeSteps steps={instructions.steps} />
 						</Grid>
-						<Grid item md={4} className={classes.infoPanel}>
+						<Grid item xs={12} md={4} className={classes.infoPanel}>
+							<DietList diets={diets} />
 							<PieChart
 								title="Caloric Breakdown"
-								caloricBreakdown={
-									currentRecipe.recipe.nutrition.caloricBreakdown
-								}
+								caloricBreakdown={caloricBreakdown}
 							/>
+							<NutrientList
+								title="Macronutrients"
+								data={macronutrients}
+							></NutrientList>
 						</Grid>
 					</Grid>
 				</>
