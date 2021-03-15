@@ -5,6 +5,7 @@ import { loadFeed } from "../actionCreators/recipeActionCreators";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import RecipeGrid from "./RecipeGrid";
 import SideNav from "./SideNav";
+import FilterPanel from "./FilterPanel";
 import useWindowDimensions from "../customHooks/getWindowDimensions";
 // import FilterPanel from "./FilterPanel";
 
@@ -52,6 +53,7 @@ const HomePage = () => {
 					className={classes.mainContent}
 					style={{ width: `${width - 240}px`, height: `${height}px` }}
 				>
+					<FilterPanel />
 					<RecipeGrid feed={feed} />
 					<Pagination
 						count={Math.ceil(totalResults / countPerPage) + 1}

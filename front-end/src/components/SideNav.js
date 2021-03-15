@@ -10,8 +10,10 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import BookmarkIcon from "@material-ui/icons/Bookmark";
+import EventNoteIcon from "@material-ui/icons/EventNote";
+import SettingsIcon from "@material-ui/icons/Settings";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const drawerWidth = 240;
 
@@ -52,25 +54,33 @@ const SideNav = () => {
 			<Toolbar />
 			<div className={classes.drawerContainer}>
 				<List>
-					{["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-						<ListItem button key={text}>
-							<ListItemIcon>
-								{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-							</ListItemIcon>
-							<ListItemText primary={text} />
-						</ListItem>
-					))}
+					<ListItem button>
+						<ListItemIcon>
+							<BookmarkIcon />
+						</ListItemIcon>
+						<ListItemText primary="Bookmarks" />
+					</ListItem>
+					<ListItem button>
+						<ListItemIcon>
+							<EventNoteIcon />
+						</ListItemIcon>
+						<ListItemText primary="Food Tracker" />
+					</ListItem>
 				</List>
 				<Divider />
 				<List>
-					{["All mail", "Trash", "Spam"].map((text, index) => (
-						<ListItem button key={text}>
-							<ListItemIcon>
-								{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-							</ListItemIcon>
-							<ListItemText primary={text} />
-						</ListItem>
-					))}
+					<ListItem button>
+						<ListItemIcon>
+							<AccountCircleIcon />
+						</ListItemIcon>
+						<ListItemText primary="Profile" />
+					</ListItem>
+					<ListItem button>
+						<ListItemIcon>
+							<SettingsIcon />
+						</ListItemIcon>
+						<ListItemText primary="Settings" />
+					</ListItem>
 				</List>
 			</div>
 		</Drawer>

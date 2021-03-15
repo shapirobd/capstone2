@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 const useStyles = makeStyles(() => ({
 	root: {
 		// height: "93vh",
-		padding: "100px 0 0 0 ",
+		padding: "65px 0 0 0 ",
 	},
 }));
 
