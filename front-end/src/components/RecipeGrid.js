@@ -6,16 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
 import useWindowDimensions from "../customHooks/getWindowDimensions";
 
-// const useStyles = makeStyles(() => ({
-// 	gridList: {
-// 		width: "75%",
-// 	},
-// 	gridTile: {
-// 		margin: "20px 0",
-// 		height: "auto",
-// 	},
-// }));
-
 const useStyles = makeStyles((theme) => ({
 	root: {
 		display: "flex",

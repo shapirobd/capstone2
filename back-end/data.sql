@@ -3,7 +3,9 @@ CREATE TABLE "users" (
   "email" text,
   "first_name" text,
   "last_name" text,
-  "password" text
+  "password" text,
+  "api_hash" text,
+  "api_username" text
 );
 
 CREATE TABLE "meals" (

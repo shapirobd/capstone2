@@ -43,6 +43,7 @@ const Recipe = () => {
 	const classes = useStyles();
 	const { recipeId } = useParams();
 	const dispatch = useDispatch();
+	const user = useSelector((state) => state.user);
 	const currentRecipe = useSelector((state) => state.currentRecipe);
 	console.log(currentRecipe);
 
@@ -55,7 +56,7 @@ const Recipe = () => {
 
 	useEffect(() => {
 		const getRecipe = async () => {
-			dispatch(loadRecipe(recipeId));
+			dispatch(loadRecipe(recipeId, user.api_hash));
 		};
 		getRecipe();
 	}, []);

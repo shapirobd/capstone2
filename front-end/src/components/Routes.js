@@ -12,8 +12,9 @@ import { useSelector } from "react-redux";
 
 const useStyles = makeStyles(() => ({
 	root: {
-		// height: "93vh",
+		height: "100vh",
 		padding: "65px 0 0 0 ",
+		overflowY: "auto",
 	},
 }));
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { LOAD_FEED, LOAD_RECIPE, LOGIN } from "../components/actionTypes";
 
-export const loadFeed = (page) => {
+export const loadFeed = (page, api_hash) => {
 	return async (dispatch) => {
 		try {
 			const recipes = await axios.get(
