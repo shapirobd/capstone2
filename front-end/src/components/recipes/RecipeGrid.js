@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { GridList } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import useWindowDimensions from "../customHooks/getWindowDimensions";
+import useWindowDimensions from "../../customHooks/getWindowDimensions";
 import RecipeTile from "./RecipeTile";
 import BookmarkTile from "./BookmarkTile";
 

@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	bookmarkRecipe,
 	unbookmarkRecipe,
-} from "../actionCreators/bookmarkActionCreators";
+} from "../../actionCreators/bookmarkActionCreators";
 import { makeStyles } from "@material-ui/core/styles";
 import PieChart from "./PieChart";
 import NutrientList from "./NutrientList";
 import DietList from "./DietList";
 import RecipeSteps from "./RecipeSteps";
-import { generateMacros } from "../helpers/generateMacros";
+import { generateMacros } from "../../helpers/generateMacros";
 import { Typography, Grid, Button, ButtonGroup } from "@material-ui/core";
 import axios from "axios";
 

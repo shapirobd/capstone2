@@ -4,9 +4,9 @@ import { AppBar, Toolbar, Button, InputBase } from "@material-ui/core";
 // import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
-import logo from "../images/logo.png";
+import logo from "../../images/logo.png";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../actionCreators/userActionCreators";
+import { logout } from "../../actionCreators/userActionCreators";
 
 const useStyles = makeStyles((theme) => ({
 	root: {

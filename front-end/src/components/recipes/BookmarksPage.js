@@ -4,7 +4,7 @@ import axios from "axios";
 import RecipeGrid from "./RecipeGrid";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import useWindowDimensions from "../customHooks/getWindowDimensions";
+import useWindowDimensions from "../../customHooks/getWindowDimensions";
 
 const useStyles = makeStyles(() => ({
 	root: {

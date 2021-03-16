@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { GridListTile, GridListTileBar, Badge } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { unbookmarkRecipe } from "../actionCreators/bookmarkActionCreators";
+import { unbookmarkRecipe } from "../../actionCreators/bookmarkActionCreators";
 import ClearIcon from "@material-ui/icons/Clear";
 
 const useStyles = makeStyles((theme) => ({

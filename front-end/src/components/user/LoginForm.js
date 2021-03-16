@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
-import { login } from "../actionCreators/userActionCreators";
+import { login } from "../../actionCreators/userActionCreators";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({

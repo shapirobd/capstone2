@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Pagination } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
-import { loadFeed } from "../actionCreators/recipeActionCreators";
+import { loadFeed } from "../../actionCreators/recipeActionCreators";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import RecipeGrid from "./RecipeGrid";
+import RecipeGrid from "../recipes/RecipeGrid";
 import FilterPanel from "./FilterPanel";
-import useWindowDimensions from "../customHooks/getWindowDimensions";
+import useWindowDimensions from "../../customHooks/getWindowDimensions";
 
 const useStyles = makeStyles(() => ({
 	root: {

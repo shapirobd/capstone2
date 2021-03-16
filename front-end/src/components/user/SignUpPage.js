@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Typography, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import signup_facts from "../images/signup_facts.png";
+import signup_facts from "../../images/signup_facts.png";
 import SignUpForm from "./SignUpForm";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { register } from "../actionCreators/userActionCreators";
+import { register } from "../../actionCreators/userActionCreators";
 
 const useStyles = makeStyles(() => ({
 	root: {
