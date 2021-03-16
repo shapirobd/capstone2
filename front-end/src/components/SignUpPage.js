@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography, TextField, Button, Grid } from "@material-ui/core";
+import { Typography, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import signup_facts from "../images/signup_facts.png";
 import SignUpForm from "./SignUpForm";
@@ -77,7 +77,11 @@ const SignUpPage = () => {
 				<SignUpForm handleChange={handleChange} handleSubmit={handleSubmit} />
 			</Grid>
 			<Grid cols={1} item xs={12} md={6} className={classes.gridItem}>
-				<img src={signup_facts} className={classes.signUpFacts} />
+				<img
+					src={signup_facts}
+					className={classes.signUpFacts}
+					alt={signup_facts}
+				/>
 			</Grid>
 		</Grid>
 	);

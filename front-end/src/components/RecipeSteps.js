@@ -27,22 +27,18 @@ const RecipeSteps = ({ steps }) => {
 
 	return (
 		<div className={classes.root}>
-			<Typography variant="h4">Steps</Typography>
+			<Typography variant="h5">Steps</Typography>
 			<List>
 				{steps.map((step) => (
-					<>
+					<div key={step.number}>
 						<Divider />
-						<ListItem
-							key={step.number}
-							alignItems="flex-start"
-							className={classes.step}
-						>
+						<ListItem alignItems="flex-start" className={classes.step}>
 							<ListItemAvatar>
 								<Avatar>{step.number}</Avatar>
 							</ListItemAvatar>
 							<ListItemText>{step.step}</ListItemText>
 						</ListItem>
-					</>
+					</div>
 				))}
 			</List>
 		</div>

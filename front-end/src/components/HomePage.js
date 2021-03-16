@@ -4,22 +4,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import { loadFeed } from "../actionCreators/recipeActionCreators";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import RecipeGrid from "./RecipeGrid";
-import SideNav from "./SideNav";
 import FilterPanel from "./FilterPanel";
 import useWindowDimensions from "../customHooks/getWindowDimensions";
-// import FilterPanel from "./FilterPanel";
 
 const useStyles = makeStyles(() => ({
 	root: {
 		display: "flex",
-		// flexWrap: "wrap",
 		justifyContent: "space-around",
-		// overflow: "hidden",
 	},
-	// mainContent: {
-	// 	// float: "right",
-	// 	justifyContent: "center",
-	// },
 }));
 
 const HomePage = () => {
@@ -36,7 +28,7 @@ const HomePage = () => {
 
 	useEffect(() => {
 		dispatch(loadFeed(page, user.api_hash));
-	}, [page]);
+	}, [page, dispatch, user.api_hash]);
 
 	const handleChange = (event, value) => {
 		dispatch({
@@ -48,12 +40,7 @@ const HomePage = () => {
 	return (
 		<>
 			<div className={classes.root}>
-				{/* <SideNav /> */}
-				{/* <FilterPanel /> */}
-				<div
-					className={classes.mainContent}
-					style={{ width: `${width - 240}px`, height: `${height}px` }}
-				>
+				<div style={{ width: `${width - 240}px`, height: `${height}px` }}>
 					<FilterPanel />
 					<RecipeGrid feed={feed} />
 					<Pagination

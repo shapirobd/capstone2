@@ -110,6 +110,7 @@ class User {
 			`,
 			[username, recipeId]
 		);
+		return { message: "Bookmark added" };
 	}
 
 	static async unbookmarkRecipe(username, recipeId) {
@@ -120,6 +121,7 @@ class User {
 			`,
 			[username, recipeId]
 		);
+		return { message: "Bookmark deleted" };
 	}
 
 	static async getAllBookmarks(username) {

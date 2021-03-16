@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOAD_FEED, LOAD_RECIPE, LOGIN } from "../components/actionTypes";
+import { LOAD_FEED, LOAD_RECIPE } from "../components/actionTypes";
 
 export const loadFeed = (page, api_hash) => {
 	return async (dispatch) => {

@@ -28,7 +28,7 @@ const DietList = ({ diets }) => {
 		<div className={classes.root}>
 			<List>
 				{diets.map((diet) => (
-					<ListItem>
+					<ListItem key={diet}>
 						<ListItemAvatar>
 							<Avatar className={classes.avatar}>
 								<EcoIcon />

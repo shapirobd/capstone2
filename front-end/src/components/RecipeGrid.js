@@ -1,59 +1,52 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import { GridList, GridListTile, GridListTileBar } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { GridList } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
 import useWindowDimensions from "../customHooks/getWindowDimensions";
+import RecipeTile from "./RecipeTile";
+import BookmarkTile from "./BookmarkTile";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		display: "flex",
 		flexWrap: "wrap",
 		justifyContent: "center",
-		// overflow: "hidden",
-		// backgroundColor: theme.palette.background.paper,
 	},
 	gridList: {
 		width: "100%",
 		height: "100%",
-	},
-	gridTile: {
-		// width: "20%",
-	},
-	icon: {
-		color: "rgba(255, 255, 255, 0.54)",
+		padding: "20px",
 	},
 }));
 
-const RecipeGrid = ({ feed }) => {
+const RecipeGrid = ({ feed, areBookmarks, removeBookmark }) => {
 	const classes = useStyles();
-	const history = useHistory();
-	const dispatch = useDispatch();
 
-	const { height, width } = useWindowDimensions();
+	const { width } = useWindowDimensions();
+
+	const user = useSelector((state) => state.user);
 
 	return (
 		<div className={classes.root}>
 			<GridList
-				cols={Math.floor(width / 300)}
+				cols={Math.round(width / 300)}
 				spacing={20}
 				cellHeight={180}
 				className={classes.gridList}
+				justify="flex-start"
 			>
-				{feed.map((recipe) => (
-					<GridListTile
-						key={recipe.id}
-						name={recipe.id}
-						cols={1}
-						className={classes.gridTile}
-					>
-						<Link to={`/recipes/${recipe.id}`}>
-							<img src={recipe.image} alt={recipe.title} />
-							<GridListTileBar title={recipe.title} />
-						</Link>
-					</GridListTile>
-				))}
+				{feed.map((recipe) =>
+					areBookmarks ? (
+						<BookmarkTile
+							user={user}
+							recipe={recipe}
+							removeBookmark={removeBookmark}
+							key={recipe.id}
+						/>
+					) : (
+						<RecipeTile recipe={recipe} />
+					)
+				)}
 			</GridList>
 		</div>
 	);

@@ -23,28 +23,30 @@ const NutrientList = ({ title, data }) => {
 			<Typography variant="h5">{title}</Typography>
 			<TableContainer>
 				<Table>
-					{Object.keys(data).map((nutrient) => (
-						<>
-							<TableRow>
-								<TableCell>
-									<b>{data[nutrient].name}</b>
-								</TableCell>
-								<TableCell>
-									<b>{data[nutrient].amount}</b>
-								</TableCell>
-							</TableRow>
-							{Object.keys(data[nutrient].subNutrients).map((subNutrient) => (
-								<TableRow>
+					<TableBody>
+						{Object.keys(data).map((nutrient) => (
+							<>
+								<TableRow key={data[nutrient].name}>
 									<TableCell>
-										{data[nutrient].subNutrients[subNutrient].name}
+										<b>{data[nutrient].name}</b>
 									</TableCell>
 									<TableCell>
-										{data[nutrient].subNutrients[subNutrient].amount}
+										<b>{data[nutrient].amount}</b>
 									</TableCell>
 								</TableRow>
-							))}
-						</>
-					))}
+								{Object.keys(data[nutrient].subNutrients).map((subNutrient) => (
+									<TableRow key={data[nutrient].subNutrients[subNutrient].name}>
+										<TableCell>
+											{data[nutrient].subNutrients[subNutrient].name}
+										</TableCell>
+										<TableCell>
+											{data[nutrient].subNutrients[subNutrient].amount}
+										</TableCell>
+									</TableRow>
+								))}
+							</>
+						))}
+					</TableBody>
 				</Table>
 			</TableContainer>
 		</div>

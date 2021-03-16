@@ -47,17 +47,21 @@ const useStyles = makeStyles(() => ({
 const Recipe = () => {
 	const classes = useStyles();
 	const { recipeId } = useParams();
+	const dispatch = useDispatch();
 	const user = useSelector((state) => state.user);
+	const bookmarks = useSelector((state) => state.user.bookmarks);
 	console.log(user);
 
-	const [isBookmarked, setIsBookmarked] = useState(false);
+	const [isBookmarked, setIsBookmarked] = useState(
+		bookmarks.includes(+recipeId)
+	);
 	const [currentRecipe, setCurrentRecipe] = useState(null);
 
 	const toggleBookmarked = () => {
 		if (!isBookmarked) {
-			bookmarkRecipe(user.username, currentRecipe.recipe.id);
+			dispatch(bookmarkRecipe(user.username, currentRecipe.recipe.id));
 		} else {
-			unbookmarkRecipe(user.username, currentRecipe.recipe.id);
+			dispatch(unbookmarkRecipe(user.username, currentRecipe.recipe.id));
 		}
 		setIsBookmarked(!isBookmarked);
 	};
@@ -92,7 +96,7 @@ const Recipe = () => {
 			}
 		};
 		getRecipe();
-	}, []);
+	}, [recipeId]);
 
 	console.log(currentRecipe);
 
@@ -100,17 +104,23 @@ const Recipe = () => {
 		<div className={classes.root}>
 			{currentRecipe ? (
 				<>
-					<Typography variant="h3">{currentRecipe.recipe.title}</Typography>
+					<Typography variant="h4">{currentRecipe.recipe.title}</Typography>
 					<Grid container spacing={3} className={classes.grid}>
 						<Grid item xs={12} md={8} className={classes.main}>
-							<img src={currentRecipe.recipe.image} className={classes.image} />
+							<img
+								src={currentRecipe.recipe.image}
+								className={classes.image}
+								alt={currentRecipe.recipe.image}
+							/>
 							<ButtonGroup fullWidth className={classes.buttonGroup}>
 								<Button className={classes.button}>I ate this</Button>
 								<Button className={classes.button} onClick={toggleBookmarked}>
 									{isBookmarked ? "Unbookmark" : "Bookmark"}
 								</Button>
 							</ButtonGroup>
-							<RecipeSteps steps={currentRecipe.instructions[0].steps} />
+							{currentRecipe.instructions.length ? (
+								<RecipeSteps steps={currentRecipe.instructions[0].steps} />
+							) : null}
 						</Grid>
 						<Grid item xs={12} md={4} className={classes.infoPanel}>
 							<DietList diets={currentRecipe.recipe.diets} />

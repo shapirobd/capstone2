@@ -1,16 +1,10 @@
 import React from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import { Typography, TextField, FormControl, Grid } from "@material-ui/core";
 import Select from "@material-ui/core/Select";
 
@@ -33,11 +27,11 @@ const ALL_MACROS = ["Fat", "Protein", "Carbohydrates"];
 const useStyles = makeStyles((theme) => ({
 	root: {
 		display: "flex",
+		backgroundImage: "linear-gradient(#c8e6c9, #fff)",
 		flexWrap: "wrap",
 		margin: "0 0 10px 0",
 		padding: "20px",
 		justifyContent: "left",
-		backgroundColor: "#fff",
 		boxShadow: "2px 2px 3px lightgray",
 		maxHeight: "40vh",
 	},
@@ -119,7 +113,7 @@ const FilterPanel = () => {
 				<Typography>Macros</Typography>
 
 				{ALL_MACROS.map((macro, idx) => {
-					const labelId = `checkbox-list-label-${idx}`;
+					// const labelId = `checkbox-list-label-${idx}`;
 					return (
 						<Grid container cols={2} spacing={2} alignItems="flex-end">
 							<Grid
@@ -130,17 +124,19 @@ const FilterPanel = () => {
 								cols={1}
 								md={3}
 							>
-								<Select size="small" label="Comparison" fullWidth>
-									<option value={"<"} className={classes.selectOption}>
-										Less than
-									</option>
-									<option value={">"} className={classes.selectOption}>
-										Greater than
-									</option>
-									<option value={"==="} className={classes.selectOption}>
-										Equal to
-									</option>
-								</Select>
+								<FormControl variant="outlined" fullWidth size="small">
+									<Select size="small" label="Comparison">
+										<option value={"<"} className={classes.selectOption}>
+											Less than
+										</option>
+										<option value={">"} className={classes.selectOption}>
+											Greater than
+										</option>
+										<option value={"==="} className={classes.selectOption}>
+											Equal to
+										</option>
+									</Select>
+								</FormControl>
 							</Grid>
 							<Grid
 								item
@@ -150,7 +146,7 @@ const FilterPanel = () => {
 								cols={1}
 								md={3}
 							>
-								<TextField size="small" label={macro} />
+								<TextField variant="outlined" size="small" label={macro} />
 							</Grid>
 							<Grid
 								item

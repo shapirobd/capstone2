@@ -28,7 +28,8 @@ router.post("/bookmarkRecipe", async function (req, res, next) {
 	try {
 		const { username, recipeId } = req.body;
 		console.log(username, recipeId);
-		await User.bookmarkRecipe(username, recipeId);
+		const resp = await User.bookmarkRecipe(username, recipeId);
+		return res.json(resp);
 	} catch (e) {
 		return next(e);
 	}
@@ -37,7 +38,8 @@ router.post("/bookmarkRecipe", async function (req, res, next) {
 router.post("/unbookmarkRecipe", async function (req, res, next) {
 	try {
 		const { username, recipeId } = req.body;
-		await User.unbookmarkRecipe(username, recipeId);
+		const resp = await User.unbookmarkRecipe(username, recipeId);
+		return res.json(resp);
 	} catch (e) {
 		return next(e);
 	}

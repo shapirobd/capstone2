@@ -28,6 +28,29 @@ const rootReducer = (state = INITIAL_STATE, action) => {
 		case "LOGOUT": {
 			return { ...state, user: null, token: null };
 		}
+		case "BOOKMARK_RECIPE": {
+			const { recipeId } = action.payload;
+			return {
+				...state,
+				user: {
+					...state.user,
+					bookmarks: [...state.user.bookmarks, recipeId],
+				},
+			};
+		}
+		case "UNBOOKMARK_RECIPE": {
+			const { recipeId } = action.payload;
+			console.log(recipeId);
+			return {
+				...state,
+				user: {
+					...state.user,
+					bookmarks: state.user.bookmarks.filter(
+						(bookmark) => bookmark !== recipeId
+					),
+				},
+			};
+		}
 		default: {
 			return state;
 		}

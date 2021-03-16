@@ -1,11 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
+// import AppBar from "@material-ui/core/AppBar";
+// import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
+// import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -14,8 +14,8 @@ import BookmarkIcon from "@material-ui/icons/Bookmark";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import SettingsIcon from "@material-ui/icons/Settings";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+// import { Button } from "@material-ui/core";
+// import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
@@ -48,7 +48,7 @@ const SideNav = () => {
 
 	const user = useSelector((state) => state.user);
 
-	return (
+	return user ? (
 		<Drawer
 			className={classes.drawer}
 			variant="permanent"
@@ -89,7 +89,7 @@ const SideNav = () => {
 				</List>
 			</div>
 		</Drawer>
-	);
+	) : null;
 };
 
 export default SideNav;

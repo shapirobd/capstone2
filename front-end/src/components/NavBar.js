@@ -1,14 +1,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import {
-	AppBar,
-	Toolbar,
-	Typography,
-	IconButton,
-	Button,
-	InputBase,
-} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+import { AppBar, Toolbar, Button, InputBase } from "@material-ui/core";
+// import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import logo from "../images/logo.png";
@@ -110,7 +103,7 @@ const NavBar = () => {
 						{/* <Typography variant="h6" className={classes.title}>
 							App Name
 						</Typography> */}
-						<img className={classes.logo} src={logo} />
+						<img className={classes.logo} src={logo} alt={logo} />
 					</Link>
 					<div className={classes.search}>
 						<div className={classes.searchIcon}>

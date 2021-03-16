@@ -51,11 +51,7 @@ const Routes = () => {
 					<Profile />
 				</Route>
 				<Route path="/bookmarks/:username">
-					{user ? (
-						<BookmarksPage bookmarkIds={user.bookmarks} />
-					) : (
-						<WelcomePage />
-					)}
+					{user ? <BookmarksPage /> : <WelcomePage />}
 				</Route>
 				<Route path="/recipes/:recipeId">
 					<Recipe />
