@@ -14,6 +14,10 @@ const rootReducer = (state = INITIAL_STATE, action) => {
 			const { recipes, totalResults } = action.payload;
 			return { ...state, feed: recipes, totalResults };
 		}
+		case "FILTER_FEED": {
+			const { recipes, totalResults } = action.payload;
+			return { ...state, page: 1, feed: recipes, totalResults };
+		}
 		case "CHANGE_PAGE": {
 			return { ...state, page: action.payload };
 		}

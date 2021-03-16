@@ -44,7 +44,7 @@ const RecipeGrid = ({ feed, areBookmarks, removeBookmark }) => {
 							key={recipe.id}
 						/>
 					) : (
-						<RecipeTile recipe={recipe} />
+						<RecipeTile recipe={recipe} key={recipe.id} />
 					)
 				)}
 			</GridList>

@@ -1,12 +1,10 @@
-import React from "react";
-import Checkbox from "@material-ui/core/Checkbox";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import { Typography, TextField, FormControl, Grid } from "@material-ui/core";
-import Select from "@material-ui/core/Select";
+import { Button } from "@material-ui/core";
+import MacroInputs from "./MacroInputs";
+import DietInputs from "./DietInputs";
+import { useDispatch } from "react-redux";
+import { filterFeed } from "../../actionCreators/recipeActionCreators";
 
 const ALL_DIETS = [
 	"gluten free",
@@ -35,134 +33,86 @@ const useStyles = makeStyles((theme) => ({
 		boxShadow: "2px 2px 3px lightgray",
 		maxHeight: "40vh",
 	},
-	list: {
-		columnCount: 2,
-	},
-	listTitle: {
-		width: "100%",
-	},
-	listItem: {
-		verticalAlign: "top",
-	},
-	checkbox: {
-		padding: 0,
-	},
-	textField: {
-		padding: "5px 0",
-		display: "flex",
-		flexDirection: "row",
-		justifyContent: "space-around",
-	},
-	selectOption: {
-		margin: "5px",
+	button: {
+		float: "right",
 	},
 }));
 
 const FilterPanel = () => {
 	const classes = useStyles();
+	const dispatch = useDispatch();
 
-	const [checked, setChecked] = React.useState([0]);
+	const INITIAL_FORM_DATA = {
+		diets: [],
+		macros: {
+			Fat: {
+				operator: null,
+				amount: null,
+			},
+			Protein: {
+				operator: null,
+				amount: null,
+			},
+			Carbohydrates: {
+				operator: null,
+				amount: null,
+			},
+		},
+	};
 
-	const handleToggle = (value) => () => {
-		const currentIndex = checked.indexOf(value);
-		const newChecked = [...checked];
+	const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+	console.log(formData);
 
-		if (currentIndex === -1) {
-			newChecked.push(value);
-		} else {
-			newChecked.splice(currentIndex, 1);
+	const handleChange = (evt) => {
+		let { name, value } = evt.target;
+		let category;
+
+		if (name.startsWith("operator")) {
+			name = name.slice(9);
+			category = "operator";
+		} else if (name.startsWith("amount")) {
+			name = name.slice(7);
+			category = "amount";
 		}
 
-		setChecked(newChecked);
+		setFormData((formData) => {
+			if (ALL_MACROS.includes(name)) {
+				return {
+					...formData,
+					macros: {
+						...formData.macros,
+						[name]: {
+							...formData.macros[name],
+							[category]: value,
+						},
+					},
+				};
+			}
+		});
+	};
+
+	const handleSubmit = (evt) => {
+		evt.preventDefault();
+		console.log("FORM SUBMITTED");
+		dispatch(filterFeed(formData));
 	};
 
 	return (
-		<div className={classes.root}>
-			<div style={{ float: "left", width: "50%" }}>
-				<Typography>Diets</Typography>
-				<List className={classes.list}>
-					{ALL_DIETS.map((diet, idx) => {
-						const labelId = `checkbox-list-label-${idx}`;
-
-						return (
-							<ListItem
-								key={diet}
-								role={undefined}
-								dense
-								// button
-								onClick={handleToggle(diet)}
-								className={classes.listItem}
-							>
-								<ListItemIcon>
-									<Checkbox
-										edge="start"
-										checked={checked.indexOf(diet) !== -1}
-										tabIndex={-1}
-										disableRipple
-										inputProps={{ "aria-labelledby": labelId }}
-										className={classes.checkbox}
-									/>
-								</ListItemIcon>
-								<ListItemText id={labelId} primary={diet.toUpperCase()} />
-							</ListItem>
-						);
-					})}
-				</List>
-			</div>
-			<div style={{ float: "left", width: "50%" }}>
-				<Typography>Macros</Typography>
-
-				{ALL_MACROS.map((macro, idx) => {
-					// const labelId = `checkbox-list-label-${idx}`;
-					return (
-						<Grid container cols={2} spacing={2} alignItems="flex-end">
-							<Grid
-								item
-								key={macro}
-								onClick={handleToggle(macro)}
-								// className={classes.textField}
-								cols={1}
-								md={3}
-							>
-								<FormControl variant="outlined" fullWidth size="small">
-									<Select size="small" label="Comparison">
-										<option value={"<"} className={classes.selectOption}>
-											Less than
-										</option>
-										<option value={">"} className={classes.selectOption}>
-											Greater than
-										</option>
-										<option value={"==="} className={classes.selectOption}>
-											Equal to
-										</option>
-									</Select>
-								</FormControl>
-							</Grid>
-							<Grid
-								item
-								key={macro}
-								onClick={handleToggle(macro)}
-								// className={classes.textField}
-								cols={1}
-								md={3}
-							>
-								<TextField variant="outlined" size="small" label={macro} />
-							</Grid>
-							<Grid
-								item
-								key={macro}
-								onClick={handleToggle(macro)}
-								// className={classes.textField}
-								cols={1}
-								md={3}
-							>
-								<Typography style={{ display: "inline" }}>grams</Typography>
-							</Grid>
-						</Grid>
-					);
-				})}
-			</div>
-		</div>
+		<form className={classes.root} onSubmit={handleSubmit}>
+			<DietInputs
+				allDiets={ALL_DIETS}
+				handleChange={handleChange}
+				setFormData={setFormData}
+			/>
+			<MacroInputs
+				allMacros={ALL_MACROS}
+				handleChange={handleChange}
+				setFormData={setFormData}
+			/>
+			<Button type="submit" className={classes.button}>
+				Apply
+			</Button>
+		</form>
 	);
 };
 
