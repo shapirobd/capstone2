@@ -42,7 +42,6 @@ export const loadRecipe = (recipeId) => {
 					},
 				}
 			);
-			console.log(`3.`, recipe);
 			const instructions = await axios.get(
 				`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions`,
 				{
@@ -52,7 +51,6 @@ export const loadRecipe = (recipeId) => {
 					},
 				}
 			);
-			console.log("4.", instructions);
 			dispatch(loadedRecipe(recipe.data, instructions.data[0]));
 		} catch (e) {
 			console.error(e);

@@ -24,6 +24,7 @@ const registered = (token, user) => {
 		last_name,
 		api_hash,
 		api_username,
+		bookmarks,
 	} = user;
 	return {
 		type: LOGIN,
@@ -36,6 +37,7 @@ const registered = (token, user) => {
 				last_name,
 				api_hash,
 				api_username,
+				bookmarks,
 			},
 		},
 	};
@@ -44,10 +46,9 @@ const registered = (token, user) => {
 export const login = (data) => {
 	return async (dispatch) => {
 		try {
-			const loginResp = await axios.post(`${API_URL}/auth/login`, data);
-			const { token } = loginResp.data;
-			const userResp = await axios.get(`${API_URL}/users/${data.username}`);
-			dispatch(loggedIn(token, userResp.data));
+			const user = await axios.post(`${API_URL}/auth/login`, data);
+			const { api_hash } = user.data;
+			dispatch(loggedIn(api_hash, user.data));
 		} catch (e) {
 			console.error(e);
 		}
@@ -55,7 +56,7 @@ export const login = (data) => {
 };
 
 const loggedIn = (token, user) => {
-	const { username, email, first_name, last_name, api_hash } = user;
+	const { username, email, first_name, last_name, api_hash, bookmarks } = user;
 	return {
 		type: LOGIN,
 		payload: {
@@ -66,6 +67,7 @@ const loggedIn = (token, user) => {
 				first_name,
 				last_name,
 				api_hash,
+				bookmarks,
 			},
 		},
 	};

@@ -3,3 +3,4 @@ export const CHANGE_PAGE = "CHANGE_PAGE";
 export const LOAD_RECIPE = "LOAD_RECIPE";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
+export const BOOKMARK_RECIPE = "BOOKMARK_RECIPE";

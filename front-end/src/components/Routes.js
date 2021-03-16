@@ -6,6 +6,8 @@ import SignUpPage from "./SignUpPage";
 import LoginPage from "./LoginPage";
 import Profile from "./Profile";
 import Recipe from "./Recipe";
+import SideNav from "./SideNav";
+import BookmarksPage from "./BookmarksPage";
 import { Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
@@ -15,6 +17,14 @@ const useStyles = makeStyles(() => ({
 		height: "100vh",
 		padding: "65px 0 0 0 ",
 		overflowY: "auto",
+		display: "flex",
+		// flexWrap: "wrap",
+		justifyContent: "space-around",
+		// overflow: "hidden",
+	},
+	mainContent: {
+		// float: "right",
+		justifyContent: "center",
 	},
 }));
 
@@ -25,7 +35,8 @@ const Routes = () => {
 
 	return (
 		<Container maxWidth="xl" className={classes.root}>
-			<Switch>
+			<SideNav />
+			<Switch className={classes.mainContent}>
 				<Route exact path="/">
 					{user ? <HomePage /> : <WelcomePage />}
 				</Route>
@@ -38,6 +49,13 @@ const Routes = () => {
 				<Route exact path="/logout" />
 				<Route path="/user/:username">
 					<Profile />
+				</Route>
+				<Route path="/bookmarks/:username">
+					{user ? (
+						<BookmarksPage bookmarkIds={user.bookmarks} />
+					) : (
+						<WelcomePage />
+					)}
 				</Route>
 				<Route path="/recipes/:recipeId">
 					<Recipe />

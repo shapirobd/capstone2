@@ -16,10 +16,10 @@ const useStyles = makeStyles(() => ({
 		justifyContent: "space-around",
 		// overflow: "hidden",
 	},
-	mainContent: {
-		// float: "right",
-		justifyContent: "center",
-	},
+	// mainContent: {
+	// 	// float: "right",
+	// 	justifyContent: "center",
+	// },
 }));
 
 const HomePage = () => {
@@ -48,7 +48,7 @@ const HomePage = () => {
 	return (
 		<>
 			<div className={classes.root}>
-				<SideNav />
+				{/* <SideNav /> */}
 				{/* <FilterPanel /> */}
 				<div
 					className={classes.mainContent}

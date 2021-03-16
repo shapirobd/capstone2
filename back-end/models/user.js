@@ -33,7 +33,7 @@ class User {
 	}
 
 	static async authenticate(username, password) {
-		const results = await db.query(
+		const userRes = await db.query(
 			`
             SELECT * 
             FROM users
@@ -41,9 +41,20 @@ class User {
         `,
 			[username]
 		);
-		const user = results.rows[0];
+		const user = userRes.rows[0];
 		if (user) {
 			if (await bcrypt.compare(password, user.password)) {
+				const bookmarksRes = await db.query(
+					`
+					SELECT meal_id
+					FROM bookmarks
+					WHERE username=$1
+					`,
+					[username]
+				);
+				const bookmarks = bookmarksRes.rows.map((bookmark) => bookmark.meal_id);
+				user.bookmarks = bookmarks;
+				console.log(user);
 				return user;
 			}
 		}
@@ -71,14 +82,56 @@ class User {
             SELECT username,
                 email,
                 first_name,
-                last_name
-            FROM users
+                last_name,
+            FROM users 
             WHERE username=$1
             `,
 			[username]
 		);
+		const bookmarksRes = await db.query(
+			`
+			SELECT meal_id
+			FROM bookmarks
+			WHERE username=$1
+			`,
+			[username]
+		);
+		userRes.rows[0].bookmarks = bookmarksRes.rows;
 
 		return userRes.rows[0];
+	}
+
+	static async bookmarkRecipe(username, recipeId) {
+		console.log(username, recipeId);
+		await db.query(
+			`
+			INSERT INTO bookmarks (username, meal_id)
+			VALUES ($1, $2)
+			`,
+			[username, recipeId]
+		);
+	}
+
+	static async unbookmarkRecipe(username, recipeId) {
+		await db.query(
+			`
+			DELETE FROM bookmarks 
+			WHERE username=$1 AND meal_id=$2
+			`,
+			[username, recipeId]
+		);
+	}
+
+	static async getAllBookmarks(username) {
+		const results = await db.query(
+			`
+			SELECT * FROM bookmarks
+			WHERE username=$1
+			RETURNING meal_id
+			`,
+			[username]
+		);
+		return results.rows;
 	}
 }
 

@@ -51,11 +51,7 @@ CREATE TABLE "minerals" (
 
 ALTER TABLE "users_meals" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
-ALTER TABLE "users_meals" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");
-
 ALTER TABLE "bookmarks" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
-
-ALTER TABLE "bookmarks" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");
 
 ALTER TABLE "nutrients" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");
 
@@ -64,3 +60,8 @@ ALTER TABLE "nutrients" ADD FOREIGN KEY ("nutrient_id") REFERENCES "macros" ("id
 ALTER TABLE "nutrients" ADD FOREIGN KEY ("nutrient_id") REFERENCES "vitamins" ("id");
 
 ALTER TABLE "nutrients" ADD FOREIGN KEY ("nutrient_id") REFERENCES "minerals" ("id");
+
+-- ALTER TABLE "users_meals" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");
+
+-- ALTER TABLE "bookmarks" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");
+

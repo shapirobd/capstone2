@@ -9,10 +9,11 @@ const router = new express.Router();
 router.post("/login", async function (req, res, next) {
 	try {
 		const { username, password } = req.body;
-		const user = User.authenticate(username, password);
+		const user = await User.authenticate(username, password);
+		console.log(user);
 		if (user) {
-			const user = jwt.sign({ username }, SECRET_KEY);
-			return res.json({ token: user.api_hash });
+			// const user = jwt.sign({ username }, SECRET_KEY);
+			return res.json(user);
 		}
 	} catch (e) {
 		return next(e);

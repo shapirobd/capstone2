@@ -14,6 +14,9 @@ import BookmarkIcon from "@material-ui/icons/Bookmark";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import SettingsIcon from "@material-ui/icons/Settings";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -43,6 +46,8 @@ const useStyles = makeStyles((theme) => ({
 const SideNav = () => {
 	const classes = useStyles();
 
+	const user = useSelector((state) => state.user);
+
 	return (
 		<Drawer
 			className={classes.drawer}
@@ -54,7 +59,7 @@ const SideNav = () => {
 			<Toolbar />
 			<div className={classes.drawerContainer}>
 				<List>
-					<ListItem button>
+					<ListItem button component="a" href={`/bookmarks/${user.username}`}>
 						<ListItemIcon>
 							<BookmarkIcon />
 						</ListItemIcon>
