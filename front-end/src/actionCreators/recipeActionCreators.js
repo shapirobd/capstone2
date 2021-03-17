@@ -10,23 +10,23 @@ export const loadFeed = (page) => {
 				{
 					params: {
 						apiKey: "73baf9bb95a14f5fb4d71e2f12ab8479",
-						offset: 30 * (page - 1),
-						number: 30,
+						offset: 40 * (page - 1),
+						number: 40,
 					},
 				}
 			);
 			console.log(recipes.data);
-			dispatch(loadedFeed(recipes.data));
+			dispatch(loadedFeed(recipes.data, page));
 		} catch (e) {
 			console.error(e);
 		}
 	};
 };
 
-const loadedFeed = (data) => {
+const loadedFeed = (data, page) => {
 	return {
 		type: LOAD_FEED,
-		payload: { recipes: data.results, totalResults: data.totalResults },
+		payload: { recipes: data.results, totalResults: data.totalResults, page },
 	};
 };
 
@@ -71,6 +71,7 @@ export const filterFeed = (filterData) => {
 		try {
 			const { diets, macros } = filterData;
 			const macrosParams = createMacrosParams(macros);
+			const dietsParams = diets.join(",");
 			console.log(macrosParams);
 			const recipes = await axios.get(
 				"https://api.spoonacular.com/recipes/complexSearch",
@@ -78,7 +79,8 @@ export const filterFeed = (filterData) => {
 					params: {
 						apiKey: "73baf9bb95a14f5fb4d71e2f12ab8479",
 						offset: 0,
-						number: 30,
+						number: 40,
+						diet: dietsParams,
 						...macrosParams,
 					},
 				}

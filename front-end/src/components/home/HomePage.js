@@ -12,6 +12,10 @@ const useStyles = makeStyles(() => ({
 		display: "flex",
 		justifyContent: "space-around",
 	},
+	pagination: {
+		margin: "10px auto",
+		width: "fit-content",
+	},
 }));
 
 const HomePage = () => {
@@ -27,21 +31,30 @@ const HomePage = () => {
 	const { height, width } = useWindowDimensions();
 
 	useEffect(() => {
-		dispatch(loadFeed(page, user.api_hash));
+		if (!feed.length) {
+			dispatch(loadFeed(page, user.api_hash));
+		}
 	}, [page, dispatch, user.api_hash]);
 
 	const handleChange = (event, value) => {
-		dispatch({
-			type: "CHANGE_PAGE",
-			payload: value,
-		});
+		console.log(value);
+		dispatch(loadFeed(value, user.api_hash));
 	};
 
 	return (
 		<>
+			{console.log(page)}
 			<div className={classes.root}>
 				<div style={{ width: `${width - 240}px`, height: `${height}px` }}>
 					<FilterPanel />
+					<Pagination
+						count={Math.ceil(totalResults / countPerPage) + 1}
+						defaultPage={1}
+						siblingCount={0}
+						page={page}
+						onChange={handleChange}
+						className={classes.pagination}
+					/>
 					<RecipeGrid feed={feed} />
 					<Pagination
 						count={Math.ceil(totalResults / countPerPage) + 1}
@@ -49,6 +62,7 @@ const HomePage = () => {
 						siblingCount={0}
 						page={page}
 						onChange={handleChange}
+						className={classes.pagination}
 					/>
 				</div>
 			</div>

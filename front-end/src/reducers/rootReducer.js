@@ -11,8 +11,8 @@ const INITIAL_STATE = {
 const rootReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case "LOAD_FEED": {
-			const { recipes, totalResults } = action.payload;
-			return { ...state, feed: recipes, totalResults };
+			const { recipes, totalResults, page } = action.payload;
+			return { ...state, feed: recipes, totalResults, page };
 		}
 		case "FILTER_FEED": {
 			const { recipes, totalResults } = action.payload;

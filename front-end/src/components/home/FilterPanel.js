@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, fade } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import MacroInputs from "./MacroInputs";
 import DietInputs from "./DietInputs";
@@ -7,12 +7,12 @@ import { useDispatch } from "react-redux";
 import { filterFeed } from "../../actionCreators/recipeActionCreators";
 
 const ALL_DIETS = [
-	"gluten free",
+	"glutenFree",
 	"ketogenic",
 	"vegetarian",
-	"lacto vegetarian",
-	"ovo vegetarian",
-	"lacto ovo vegetarian",
+	"lactoVegetarian",
+	"ovoVegetarian",
+	"lactoOvoVegetarian",
 	"vegan",
 	"pescetarian",
 	"paleo",
@@ -25,7 +25,8 @@ const ALL_MACROS = ["Fat", "Protein", "Carbohydrates"];
 const useStyles = makeStyles((theme) => ({
 	root: {
 		display: "flex",
-		backgroundImage: "linear-gradient(#c8e6c9, #fff)",
+		// backgroundImage: "linear-gradient(#c8e6c9, #fff)",
+		backgroundColor: "#fff",
 		flexWrap: "wrap",
 		margin: "0 0 10px 0",
 		padding: "20px",
@@ -35,6 +36,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 	button: {
 		float: "right",
+		backgroundColor: "#4caf50",
+		color: "#fff",
+		"&:hover": {
+			backgroundColor: "#81c784",
+		},
 	},
 }));
 
@@ -109,9 +115,11 @@ const FilterPanel = () => {
 				handleChange={handleChange}
 				setFormData={setFormData}
 			/>
-			<Button type="submit" className={classes.button}>
-				Apply
-			</Button>
+			<div style={{ width: "100%" }}>
+				<Button type="submit" className={classes.button}>
+					Apply
+				</Button>
+			</div>
 		</form>
 	);
 };
