@@ -39,9 +39,6 @@ const MacroInputs = ({ allMacros, handleChange, setFormData }) => {
 									<option value={">"} className={classes.selectOption}>
 										Greater than
 									</option>
-									<option value={"==="} className={classes.selectOption}>
-										Equal to
-									</option>
 								</Select>
 							</FormControl>
 						</Grid>

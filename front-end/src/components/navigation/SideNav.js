@@ -74,7 +74,7 @@ const SideNav = () => {
 				</List>
 				<Divider />
 				<List>
-					<ListItem button>
+					<ListItem button component="a" href={`/user/${user.username}`}>
 						<ListItemIcon>
 							<AccountCircleIcon />
 						</ListItemIcon>

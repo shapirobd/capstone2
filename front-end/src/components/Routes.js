@@ -48,7 +48,7 @@ const Routes = () => {
 				</Route>
 				<Route exact path="/logout" />
 				<Route path="/user/:username">
-					<Profile />
+					{user ? <Profile /> : <WelcomePage />}
 				</Route>
 				<Route path="/bookmarks/:username">
 					{user ? <BookmarksPage /> : <WelcomePage />}
