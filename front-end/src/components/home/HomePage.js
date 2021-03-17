@@ -43,7 +43,6 @@ const HomePage = () => {
 
 	return (
 		<>
-			{console.log(page)}
 			<div className={classes.root}>
 				<div style={{ width: `${width - 240}px`, height: `${height}px` }}>
 					<FilterPanel />

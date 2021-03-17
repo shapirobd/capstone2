@@ -43,6 +43,9 @@ const Routes = () => {
 				<Route exact path="/signup">
 					<SignUpPage />
 				</Route>
+				<Route exact path="/ingredients">
+					<WelcomePage />
+				</Route>
 				<Route exact path="/login">
 					<LoginPage />
 				</Route>

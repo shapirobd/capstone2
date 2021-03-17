@@ -1,6 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, TextField, FormControl, Grid } from "@material-ui/core";
+import {
+	Typography,
+	TextField,
+	FormControl,
+	Grid,
+	InputAdornment,
+} from "@material-ui/core";
 import Select from "@material-ui/core/Select";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +26,7 @@ const MacroInputs = ({ allMacros, handleChange, setFormData }) => {
 				return (
 					<Grid
 						container
-						cols={2}
+						cols={3}
 						spacing={2}
 						alignItems="flex-end"
 						key={macro}
@@ -42,18 +48,23 @@ const MacroInputs = ({ allMacros, handleChange, setFormData }) => {
 								</Select>
 							</FormControl>
 						</Grid>
-						<Grid item cols={1} md={3}>
+						<Grid item cols={2} md={6}>
 							<TextField
 								name={`amount-${macro}`}
 								variant="outlined"
 								size="small"
 								label={macro}
 								onChange={handleChange}
+								InputProps={{
+									endAdornment: (
+										<InputAdornment position="end">g</InputAdornment>
+									),
+								}}
 							/>
 						</Grid>
-						<Grid item cols={1} md={3}>
+						{/* <Grid item cols={1} md={3}>
 							<Typography style={{ display: "inline" }}>grams</Typography>
-						</Grid>
+						</Grid> */}
 					</Grid>
 				);
 			})}
