@@ -24,6 +24,7 @@ const HomePage = () => {
 
 	const user = useSelector((state) => state.user, shallowEqual);
 	const feed = useSelector((state) => state.feed, shallowEqual);
+	console.log(feed);
 	const page = useSelector((state) => state.page, shallowEqual);
 	const totalResults = useSelector((state) => state.totalResults, shallowEqual);
 	const countPerPage = useSelector((state) => state.countPerPage, shallowEqual);
@@ -31,7 +32,7 @@ const HomePage = () => {
 	const { height, width } = useWindowDimensions();
 
 	useEffect(() => {
-		if (!feed.length) {
+		if (!feed.length || feed.isIngredientBased) {
 			dispatch(loadFeed(page, user.api_hash));
 		}
 	}, [page, dispatch, user.api_hash]);

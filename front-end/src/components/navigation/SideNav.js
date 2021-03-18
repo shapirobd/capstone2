@@ -19,6 +19,7 @@ import KitchenIcon from "@material-ui/icons/Kitchen";
 // import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Button } from "@material-ui/core";
+import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 
 const drawerWidth = 240;
 
@@ -47,11 +48,16 @@ const useStyles = makeStyles((theme) => ({
 		height: "92vh",
 		minWidth: "10px",
 		padding: "0",
-		backgroundColor: "white",
+		// backgroundColor: "#a2d8a5",
+		backgroundColor: "#fff",
 		position: "absolute",
 		left: "0",
-		boxShadow: "2px 2px 3px lightgray",
+		boxShadow: "2px 2px 3px black",
 		zIndex: "1200",
+		"&:hover": {
+			backgroundColor: "#fff",
+		},
+		borderRadius: "0px",
 	},
 }));
 
@@ -75,9 +81,6 @@ const SideNav = () => {
 
 	const list = (anchor) => (
 		<div
-			// className={clsx(classes.list, {
-			// 	[classes.fullList]: anchor === "top" || anchor === "bottom",
-			// })}
 			role="presentation"
 			onClick={toggleDrawer(anchor, false)}
 			onKeyDown={toggleDrawer(anchor, false)}
@@ -110,10 +113,9 @@ const SideNav = () => {
 
 	return user ? (
 		<React.Fragment>
-			<Button
-				onClick={toggleDrawer("left", true)}
-				className={classes.toggler}
-			></Button>
+			<Button onClick={toggleDrawer("left", true)} className={classes.toggler}>
+				<ArrowRightIcon />
+			</Button>
 			<SwipeableDrawer
 				anchor={"left"}
 				open={state["left"]}

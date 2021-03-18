@@ -1,5 +1,10 @@
 import axios from "axios";
-import { LOAD_FEED, LOAD_RECIPE, FILTER_FEED } from "../components/actionTypes";
+import {
+	LOAD_FEED,
+	LOAD_RECIPE,
+	FILTER_FEED,
+	FILTER_BY_INGREDIENTS,
+} from "../components/actionTypes";
 import createMacrosParams from "../helpers/createMacrosParams";
 
 export const loadFeed = (page) => {
@@ -99,3 +104,34 @@ const filteredFeed = (data) => {
 		payload: { recipes: data.results, totalResults: data.totalResults },
 	};
 };
+
+export const getRecipesByIngredients = (ingredients) => {
+	return async (dispatch) => {
+		try {
+			const ingredientsParams = ingredients.join(",");
+			const recipes = await axios.get(
+				"https://api.spoonacular.com/recipes/findByIngredients",
+				{
+					params: {
+						apiKey: "73baf9bb95a14f5fb4d71e2f12ab8479",
+						offset: 0,
+						number: 6900,
+						ingredients: ingredientsParams,
+					},
+				}
+			);
+			dispatch(
+				filteredFeed({ results: recipes.data, totalResults: recipes.length })
+			);
+		} catch (e) {
+			console.error(e);
+		}
+	};
+};
+
+// const gotRecipesByIngredients = (results) => {
+// 	return {
+// 		type: FILTER_BY_INGREDIENTS,
+// 		payload: { recipes: data.results, totalResults: data.totalResults },
+// 	};
+// };

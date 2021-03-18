@@ -7,6 +7,7 @@ import {
 	ListSubheader,
 	GridListTileBar,
 	IconButton,
+	Badge,
 } from "@material-ui/core";
 import InfoIcon from "@material-ui/icons/Info";
 import { makeStyles } from "@material-ui/core/styles";
@@ -34,15 +35,34 @@ const useStyles = makeStyles((theme) => ({
 		// height: "100%",
 		width: "100%",
 	},
+	ingredientStats: {
+		width: "20%",
+		top: 0,
+		right: 0,
+		// bottom: "100%",
+		// left: "100%",
+	},
 }));
 
-const RecipeGrid = ({ feed, areBookmarks, removeBookmark }) => {
+const RecipeGrid = ({
+	feed,
+	areBookmarks,
+	removeBookmark,
+	ingredientBased,
+}) => {
 	const classes = useStyles();
 
 	const { width } = useWindowDimensions();
 	console.log(width);
 
 	const user = useSelector((state) => state.user);
+
+	if (ingredientBased) {
+		feed.sort((a, b) =>
+			a.missedIngredientCount > b.missedIngredientCount ? 1 : -1
+		);
+		console.log(feed);
+	}
 
 	return (
 		<div className={classes.root}>
@@ -55,12 +75,17 @@ const RecipeGrid = ({ feed, areBookmarks, removeBookmark }) => {
 				{feed.map((recipe) => (
 					<GridListTile key={recipe.image}>
 						<Link to={`/recipes/${recipe.id}`}>
+							{ingredientBased ? (
+								<GridListTileBar
+									className={classes.ingredientStats}
+									title={`+ ${recipe.missedIngredientCount}`}
+								/>
+							) : null}
 							<img
 								src={recipe.image}
 								alt={recipe.title}
 								className={classes.img}
 							/>
-
 							<GridListTileBar title={recipe.title} />
 						</Link>
 					</GridListTile>

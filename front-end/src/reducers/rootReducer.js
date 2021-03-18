@@ -6,17 +6,41 @@ const INITIAL_STATE = {
 	token: null,
 	user: null,
 	currentRecipe: null,
+	isIngredientBased: false,
 };
 
 const rootReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case "LOAD_FEED": {
 			const { recipes, totalResults, page } = action.payload;
-			return { ...state, feed: recipes, totalResults, page };
+			return {
+				...state,
+				feed: recipes,
+				totalResults,
+				page,
+				isIngredientBased: false,
+			};
 		}
 		case "FILTER_FEED": {
 			const { recipes, totalResults } = action.payload;
-			return { ...state, page: 1, feed: recipes, totalResults };
+			console.log(recipes);
+			return {
+				...state,
+				page: 1,
+				feed: recipes,
+				totalResults,
+				isIngredientBased: false,
+			};
+		}
+		case "FILTER_BY_INGREDIENTS": {
+			const { recipes, totalResults } = action.payload;
+			return {
+				...state,
+				page: 1,
+				feed: recipes,
+				totalResults,
+				isIngredientBased: true,
+			};
 		}
 		case "CHANGE_PAGE": {
 			return { ...state, page: action.payload };
@@ -30,7 +54,7 @@ const rootReducer = (state = INITIAL_STATE, action) => {
 			return { ...state, token, user };
 		}
 		case "LOGOUT": {
-			return { ...state, user: null, token: null };
+			return { ...state, user: null, token: null, feed: [] };
 		}
 		case "BOOKMARK_RECIPE": {
 			const { recipeId } = action.payload;
