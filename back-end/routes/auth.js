@@ -2,6 +2,7 @@ const express = require("express");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config");
+const ExpressError = require("../expressError");
 
 const router = new express.Router();
 
@@ -13,7 +14,10 @@ router.post("/login", async function (req, res, next) {
 		console.log(user);
 		if (user) {
 			// const user = jwt.sign({ username }, SECRET_KEY);
+			console.log(user);
 			return res.json(user);
+		} else {
+			throw new ExpressError("User not found", 404);
 		}
 	} catch (e) {
 		return next(e);

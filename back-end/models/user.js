@@ -5,7 +5,16 @@ const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require("../config");
 const { default: axios } = require("axios");
 
 class User {
-	static async register({ username, password, email, first_name, last_name }) {
+	static async register({
+		username,
+		password,
+		email,
+		first_name,
+		last_name,
+		weight,
+		weight_goal,
+		calorie_goal,
+	}) {
 		const hashedPwd = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 		const apiResp = await axios.post(
 			`https://api.spoonacular.com/users/connect?apiKey=73baf9bb95a14f5fb4d71e2f12ab8479`,
@@ -15,9 +24,9 @@ class User {
 		const api_username = apiResp.data.username;
 		const results = await db.query(
 			`
-            INSERT INTO users (username, password, email, first_name, last_name, api_hash, api_username)
-            VALUES ($1, $2, $3, $4, $5, $6, $7)
-            RETURNING username, email, first_name, last_name, api_hash, api_username
+            INSERT INTO users (username, password, email, first_name, last_name, api_hash, api_username, weight, weight_goal, calorie_goal)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+            RETURNING username, email, first_name, last_name, api_hash, api_username, weight, weight_goal, calorie_goal
         `,
 			[
 				username,
@@ -27,6 +36,9 @@ class User {
 				last_name,
 				api_hash,
 				api_username,
+				weight,
+				weight_goal,
+				calorie_goal,
 			]
 		);
 		return results.rows[0];
@@ -43,6 +55,7 @@ class User {
 		);
 		const user = userRes.rows[0];
 		if (user) {
+			console.log(user);
 			if (await bcrypt.compare(password, user.password)) {
 				const bookmarksRes = await db.query(
 					`
@@ -54,7 +67,7 @@ class User {
 				);
 				const bookmarks = bookmarksRes.rows.map((bookmark) => bookmark.meal_id);
 				user.bookmarks = bookmarks;
-				console.log(user);
+
 				return user;
 			}
 		}

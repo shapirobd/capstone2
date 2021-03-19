@@ -4,6 +4,9 @@ CREATE TABLE "users" (
   "first_name" text,
   "last_name" text,
   "password" text,
+  "weight" int,
+  "weight_goal" int,
+  "calorie_goal" int,
   "api_hash" text,
   "api_username" text
 );

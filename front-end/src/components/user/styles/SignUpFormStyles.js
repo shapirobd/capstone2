@@ -3,6 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles(() => ({
 	form: {
 		margin: "30px 0",
+		backgroundColor: "#fff",
+		padding: "40px",
+		borderRadius: "5px",
 	},
 	textField: {
 		display: "block",

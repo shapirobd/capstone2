@@ -25,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	toggler: {
 		height: "92vh",
-		minWidth: "10px",
+		minWidth: "2%",
 		padding: "0",
 		backgroundColor: "#fff",
 		position: "absolute",

@@ -25,6 +25,9 @@ const registered = (token, user) => {
 		api_hash,
 		api_username,
 		bookmarks,
+		weight,
+		weight_goal,
+		calorie_goal,
 	} = user;
 	return {
 		type: LOGIN,
@@ -38,6 +41,9 @@ const registered = (token, user) => {
 				api_hash,
 				api_username,
 				bookmarks,
+				weight,
+				weight_goal,
+				calorie_goal,
 			},
 		},
 	};
@@ -46,7 +52,9 @@ const registered = (token, user) => {
 export const login = (data) => {
 	return async (dispatch) => {
 		try {
+			console.log("login");
 			const user = await axios.post(`${API_URL}/auth/login`, data);
+			console.log(user);
 			const { api_hash } = user.data;
 			dispatch(loggedIn(api_hash, user.data));
 		} catch (e) {
@@ -56,7 +64,17 @@ export const login = (data) => {
 };
 
 const loggedIn = (token, user) => {
-	const { username, email, first_name, last_name, api_hash, bookmarks } = user;
+	const {
+		username,
+		email,
+		first_name,
+		last_name,
+		api_hash,
+		bookmarks,
+		weight,
+		weight_goal,
+		calorie_goal,
+	} = user;
 	return {
 		type: LOGIN,
 		payload: {
@@ -68,6 +86,9 @@ const loggedIn = (token, user) => {
 				last_name,
 				api_hash,
 				bookmarks,
+				weight,
+				weight_goal,
+				calorie_goal,
 			},
 		},
 	};

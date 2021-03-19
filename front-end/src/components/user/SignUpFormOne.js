@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, TextField, Button } from "@material-ui/core";
 import { useStyles } from "./styles/SignUpFormStyles";
 
-const SignUpForm = ({ handleSubmit, handleChange }) => {
+const SignUpFormOne = ({ handleSubmit, handleChange }) => {
 	const classes = useStyles();
 	return (
 		<form className={classes.form} onSubmit={handleSubmit}>
@@ -70,11 +70,11 @@ const SignUpForm = ({ handleSubmit, handleChange }) => {
 					/>
 				</Grid>
 			</Grid>
-			<Button type="submit" className={classes.button}>
+			{/* <Button type="submit" className={classes.button}>
 				Submit
-			</Button>
+			</Button> */}
 		</form>
 	);
 };
 
-export default SignUpForm;
+export default SignUpFormOne;

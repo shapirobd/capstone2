@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import HomePage from "./home/HomePage";
 import WelcomePage from "./home/WelcomePage";
 import SignUpPage from "./user/SignUpPage";
+// import SignUpPageTwo from "./user/SignUpPageTwo";
 import LoginPage from "./user/LoginPage";
 import Profile from "./user/Profile";
 import Recipe from "./recipes/Recipe";
@@ -19,7 +20,7 @@ const useStyles = makeStyles(() => ({
 		overflowY: "auto",
 		display: "flex",
 		// flexWrap: "wrap",
-		justifyContent: "space-around",
+		justifyContent: "center",
 		// overflow: "hidden",
 	},
 	mainContent: {
@@ -41,6 +42,7 @@ const Routes = () => {
 					{user ? <HomePage /> : <WelcomePage />}
 				</Route>
 				<Route exact path="/signup">
+					{/* <SignUpPage /> */}
 					<SignUpPage />
 				</Route>
 				<Route exact path="/ingredients">
