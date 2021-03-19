@@ -7,7 +7,7 @@ import {
 } from "../components/actionTypes";
 import createMacrosParams from "../helpers/createMacrosParams";
 
-export const loadFeed = (page) => {
+export const loadFeed = (page = 1) => {
 	return async (dispatch) => {
 		try {
 			const recipes = await axios.get(

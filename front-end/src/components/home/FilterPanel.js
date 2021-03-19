@@ -4,7 +4,10 @@ import { Button } from "@material-ui/core";
 import MacroInputs from "./MacroInputs";
 import DietInputs from "./DietInputs";
 import { useDispatch } from "react-redux";
-import { filterFeed } from "../../actionCreators/recipeActionCreators";
+import {
+	filterFeed,
+	loadFeed,
+} from "../../actionCreators/recipeActionCreators";
 
 const ALL_DIETS = [
 	"glutenFree",
@@ -41,6 +44,16 @@ const useStyles = makeStyles((theme) => ({
 		"&:hover": {
 			backgroundColor: "#81c784",
 		},
+		marginLeft: "20px",
+	},
+	resetButton: {
+		float: "right",
+		backgroundColor: "#f50257",
+		color: "#fff",
+		"&:hover": {
+			backgroundColor: "#ff4667",
+		},
+		marginLeft: "20px",
 	},
 }));
 
@@ -68,6 +81,11 @@ const FilterPanel = () => {
 
 	const [formData, setFormData] = useState(INITIAL_FORM_DATA);
 	console.log(formData);
+
+	const resetFeed = (evt) => {
+		evt.preventDefault();
+		dispatch(loadFeed());
+	};
 
 	const handleChange = (evt) => {
 		let { name, value } = evt.target;
@@ -118,6 +136,9 @@ const FilterPanel = () => {
 			<div style={{ width: "100%" }}>
 				<Button type="submit" className={classes.button}>
 					Apply
+				</Button>
+				<Button onClick={resetFeed} className={classes.resetButton}>
+					Reset
 				</Button>
 			</div>
 		</form>

@@ -13,13 +13,21 @@ const useStyles = makeStyles((theme) => ({
 	selectOption: {
 		margin: "5px",
 	},
+	selectField: {
+		borderTopRightRadius: 0,
+		borderBottomRightRadius: 0,
+	},
+	textField: {
+		borderTopLeftRadius: 0,
+		borderBottomLeftRadius: 0,
+	},
 }));
 
 const MacroInputs = ({ allMacros, handleChange, setFormData }) => {
 	const classes = useStyles();
 
 	return (
-		<div style={{ float: "left", width: "50%" }}>
+		<div style={{ width: "50%", justifyContent: "right" }}>
 			<Typography>Macros</Typography>
 
 			{allMacros.map((macro, idx) => {
@@ -31,13 +39,14 @@ const MacroInputs = ({ allMacros, handleChange, setFormData }) => {
 						alignItems="flex-end"
 						key={macro}
 					>
-						<Grid item cols={1} md={3}>
+						<Grid item cols={1} md={6} style={{ paddingRight: 0 }}>
 							<FormControl variant="outlined" fullWidth size="small">
 								<Select
 									name={`operator-${macro}`}
 									size="small"
 									label="Comparison"
 									onChange={handleChange}
+									className={classes.selectField}
 								>
 									<option value={"<"} className={classes.selectOption}>
 										Less than
@@ -48,17 +57,19 @@ const MacroInputs = ({ allMacros, handleChange, setFormData }) => {
 								</Select>
 							</FormControl>
 						</Grid>
-						<Grid item cols={2} md={6}>
+						<Grid item cols={2} md={6} style={{ paddingLeft: 0 }}>
 							<TextField
 								name={`amount-${macro}`}
 								variant="outlined"
 								size="small"
 								label={macro}
 								onChange={handleChange}
+								style={{ width: "100%" }}
 								InputProps={{
 									endAdornment: (
 										<InputAdornment position="end">g</InputAdornment>
 									),
+									className: classes.textField,
 								}}
 							/>
 						</Grid>
