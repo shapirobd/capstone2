@@ -7,9 +7,10 @@ import {
 } from "../components/actionTypes";
 import createMacrosParams from "../helpers/createMacrosParams";
 
-export const loadFeed = (page = 1) => {
+export const loadFeed = (page = 1, keywords = null) => {
 	return async (dispatch) => {
 		try {
+			console.log(keywords);
 			const recipes = await axios.get(
 				"https://api.spoonacular.com/recipes/complexSearch",
 				{
@@ -17,6 +18,7 @@ export const loadFeed = (page = 1) => {
 						apiKey: "73baf9bb95a14f5fb4d71e2f12ab8479",
 						offset: 40 * (page - 1),
 						number: 40,
+						query: keywords,
 					},
 				}
 			);
@@ -128,6 +130,30 @@ export const getRecipesByIngredients = (ingredients) => {
 		}
 	};
 };
+
+// export const getRecipesByKeywords = (keywords) => {
+// 	return async (dispatch) => {
+// 		try {
+// 			const ingredientsParams = ingredients.join(",");
+// 			const recipes = await axios.get(
+// 				"https://api.spoonacular.com/recipes/findByIngredients",
+// 				{
+// 					params: {
+// 						apiKey: "73baf9bb95a14f5fb4d71e2f12ab8479",
+// 						offset: 0,
+// 						number: 6900,
+// 						query: keywords,
+// 					},
+// 				}
+// 			);
+// 			dispatch(
+// 				filteredFeed({ results: recipes.data, totalResults: recipes.length })
+// 			);
+// 		} catch (e) {
+// 			console.error(e);
+// 		}
+// 	};
+// };
 
 // const gotRecipesByIngredients = (results) => {
 // 	return {

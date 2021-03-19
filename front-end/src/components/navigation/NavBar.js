@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { AppBar, Toolbar, Button, InputBase } from "@material-ui/core";
 // import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
@@ -7,6 +7,7 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import logo from "../../images/logo.png";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../actionCreators/userActionCreators";
+import { loadFeed } from "../../actionCreators/recipeActionCreators";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -78,6 +79,7 @@ const NavBar = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const location = useLocation();
 
 	const user = useSelector((state) => state.user);
 
@@ -86,6 +88,21 @@ const NavBar = () => {
 		dispatch(logout());
 		history.push("/");
 	};
+
+	const handleChange = (evt) => {
+		setSearchData((searchData) => evt.target.value);
+		console.log(searchData);
+	};
+
+	const handleSearch = (evt) => {
+		evt.preventDefault();
+		dispatch(loadFeed(1, searchData));
+		if (location.pathname !== "/") {
+			history.push("/");
+		}
+	};
+
+	const [searchData, setSearchData] = useState("");
 
 	return (
 		<div className={classes.root}>
@@ -105,7 +122,7 @@ const NavBar = () => {
 						</Typography> */}
 						<img className={classes.logo} src={logo} alt={logo} />
 					</Link>
-					<div className={classes.search}>
+					<form className={classes.search} onSubmit={handleSearch}>
 						<div className={classes.searchIcon}>
 							<SearchIcon />
 						</div>
@@ -116,8 +133,9 @@ const NavBar = () => {
 								input: classes.input,
 							}}
 							inputProps={{ "aria-label": "search" }}
+							onChange={handleChange}
 						/>
-					</div>
+					</form>
 					{user ? (
 						<>
 							<Button

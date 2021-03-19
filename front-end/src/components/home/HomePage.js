@@ -33,7 +33,7 @@ const HomePage = () => {
 
 	useEffect(() => {
 		if (!feed.length || feed.isIngredientBased) {
-			dispatch(loadFeed(page, user.api_hash));
+			dispatch(loadFeed(page));
 		}
 	}, [page, dispatch, user.api_hash]);
 
