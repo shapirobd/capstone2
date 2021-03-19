@@ -2,9 +2,11 @@ function createMacrosParams(macros) {
 	console.log(macros);
 	const macrosParams = {};
 
-	createMacroParam("Fat", macros.Fat, macrosParams);
-	createMacroParam("Protein", macros.Protein, macrosParams);
-	createMacroParam("Carbs", macros.Carbohydrates, macrosParams);
+	if (Object.keys(macros).length) {
+		createMacroParam("Fat", macros.Fat, macrosParams);
+		createMacroParam("Protein", macros.Protein, macrosParams);
+		createMacroParam("Carbs", macros.Carbohydrates, macrosParams);
+	}
 
 	return macrosParams;
 }

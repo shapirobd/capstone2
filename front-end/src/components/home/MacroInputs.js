@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./styles/MacroInputsStyles";
 import {
 	Typography,
 	TextField,
@@ -9,21 +9,7 @@ import {
 } from "@material-ui/core";
 import Select from "@material-ui/core/Select";
 
-const useStyles = makeStyles((theme) => ({
-	selectOption: {
-		margin: "5px",
-	},
-	selectField: {
-		borderTopRightRadius: 0,
-		borderBottomRightRadius: 0,
-	},
-	textField: {
-		borderTopLeftRadius: 0,
-		borderBottomLeftRadius: 0,
-	},
-}));
-
-const MacroInputs = ({ allMacros, handleChange, setFormData }) => {
+const MacroInputs = ({ allMacros, handleChange }) => {
 	const classes = useStyles();
 
 	return (

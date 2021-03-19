@@ -3,15 +3,8 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import RecipeGrid from "./RecipeGrid";
 import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./styles/BookmarksPageStyles";
 import useWindowDimensions from "../../customHooks/getWindowDimensions";
-
-const useStyles = makeStyles(() => ({
-	root: {
-		display: "flex",
-		justifyContent: "space-around",
-	},
-}));
 
 const BookmarksPage = () => {
 	const classes = useStyles();

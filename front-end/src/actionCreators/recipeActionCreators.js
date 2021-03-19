@@ -7,10 +7,12 @@ import {
 } from "../components/actionTypes";
 import createMacrosParams from "../helpers/createMacrosParams";
 
-export const loadFeed = (page = 1, keywords = null) => {
+export const loadFeed = (page = 1, filterData = { diets: [], macros: {} }) => {
 	return async (dispatch) => {
 		try {
-			console.log(keywords);
+			const { diets, macros, recipeName } = filterData;
+			const macrosParams = createMacrosParams(macros);
+			const dietsParams = diets.join(",");
 			const recipes = await axios.get(
 				"https://api.spoonacular.com/recipes/complexSearch",
 				{
@@ -18,7 +20,9 @@ export const loadFeed = (page = 1, keywords = null) => {
 						apiKey: "73baf9bb95a14f5fb4d71e2f12ab8479",
 						offset: 40 * (page - 1),
 						number: 40,
-						query: keywords,
+						diet: dietsParams,
+						...macrosParams,
+						query: recipeName,
 					},
 				}
 			);
@@ -33,7 +37,11 @@ export const loadFeed = (page = 1, keywords = null) => {
 const loadedFeed = (data, page) => {
 	return {
 		type: LOAD_FEED,
-		payload: { recipes: data.results, totalResults: data.totalResults, page },
+		payload: {
+			recipes: data.results,
+			totalResults: data.totalResults <= 900 ? data.totalResults : 900,
+			page,
+		},
 	};
 };
 
@@ -70,41 +78,6 @@ const loadedRecipe = (recipe, instructions) => {
 	return {
 		type: LOAD_RECIPE,
 		payload: { currentRecipe: { recipe, instructions } },
-	};
-};
-
-export const filterFeed = (filterData) => {
-	return async (dispatch) => {
-		try {
-			const { diets, macros, recipeName } = filterData;
-			const macrosParams = createMacrosParams(macros);
-			const dietsParams = diets.join(",");
-			console.log(macrosParams);
-			const recipes = await axios.get(
-				"https://api.spoonacular.com/recipes/complexSearch",
-				{
-					params: {
-						apiKey: "73baf9bb95a14f5fb4d71e2f12ab8479",
-						offset: 0,
-						number: 40,
-						diet: dietsParams,
-						...macrosParams,
-						query: recipeName,
-					},
-				}
-			);
-			console.log(recipes.data);
-			dispatch(filteredFeed(recipes.data));
-		} catch (e) {
-			console.error(e);
-		}
-	};
-};
-
-const filteredFeed = (data) => {
-	return {
-		type: FILTER_FEED,
-		payload: { recipes: data.results, totalResults: data.totalResults },
 	};
 };
 
@@ -162,3 +135,37 @@ export const getRecipesByIngredients = (ingredients) => {
 // 		payload: { recipes: data.results, totalResults: data.totalResults },
 // 	};
 // };
+
+// export const filterFeed = (filterData, page = 1) => {
+// 	return async (dispatch) => {
+// 		try {
+// 			const { diets, macros, recipeName } = filterData;
+// 			const macrosParams = createMacrosParams(macros);
+// 			const dietsParams = diets.join(",");
+// 			const recipes = await axios.get(
+// 				"https://api.spoonacular.com/recipes/complexSearch",
+// 				{
+// 					params: {
+// 						apiKey: "73baf9bb95a14f5fb4d71e2f12ab8479",
+// 						offset: 40 * (page - 1),
+// 						number: 40,
+// 						diet: dietsParams,
+// 						...macrosParams,
+// 						query: recipeName,
+// 					},
+// 				}
+// 			);
+// 			console.log(recipes.data);
+// 			dispatch(filteredFeed(recipes.data, page));
+// 		} catch (e) {
+// 			console.error(e);
+// 		}
+// 	};
+// };
+
+const filteredFeed = (data, page) => {
+	return {
+		type: FILTER_FEED,
+		payload: { recipes: data.results, totalResults: data.totalResults, page },
+	};
+};

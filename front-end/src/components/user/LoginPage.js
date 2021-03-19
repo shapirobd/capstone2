@@ -1,21 +1,7 @@
 import React from "react";
 import { Typography, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./styles/LoginPageStyles";
 import LoginForm from "./LoginForm";
-
-const useStyles = makeStyles(() => ({
-	root: {
-		margin: "0 auto",
-		width: "100%",
-		height: "100%",
-		flexGrow: 1,
-	},
-	login: {
-		backgroundColor: "white",
-		padding: "35px 50px !important",
-		borderRadius: "5px",
-	},
-}));
 
 const LoginPage = () => {
 	const classes = useStyles();

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { loadRecipe } from "../actionCreators/recipeActionCreators";
 import {
 	bookmarkRecipe,
 	unbookmarkRecipe,
 } from "../../actionCreators/bookmarkActionCreators";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./styles/RecipeStyles";
 import PieChart from "./PieChart";
 import NutrientList from "./NutrientList";
 import DietList from "./DietList";
@@ -15,42 +14,12 @@ import { generateMacros } from "../../helpers/generateMacros";
 import { Typography, Grid, Button, ButtonGroup } from "@material-ui/core";
 import axios from "axios";
 
-const useStyles = makeStyles(() => ({
-	root: {
-		margin: "0 75px",
-	},
-	grid: {
-		margin: "20px 0",
-	},
-	image: {
-		width: "100%",
-	},
-	buttonGroup: {
-		margin: "15px 0",
-	},
-	button: {
-		color: "#fff",
-		backgroundColor: "#4caf50",
-		border: "1px solid #fff",
-		"&:hover": {
-			backgroundColor: "#81c784",
-		},
-	},
-	main: {
-		padding: "0 36px 0 0 !important",
-	},
-	infoPanel: {
-		padding: "0 !important",
-	},
-}));
-
 const Recipe = () => {
 	const classes = useStyles();
 	const { recipeId } = useParams();
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.user);
 	const bookmarks = useSelector((state) => state.user.bookmarks);
-	console.log(user);
 
 	const [isBookmarked, setIsBookmarked] = useState(
 		bookmarks.includes(+recipeId)
@@ -97,8 +66,6 @@ const Recipe = () => {
 		};
 		getRecipe();
 	}, [recipeId]);
-
-	console.log(currentRecipe);
 
 	return (
 		<div className={classes.root}>

@@ -1,31 +1,9 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./styles/LoginFormStyles";
 import { useDispatch } from "react-redux";
 import { login } from "../../actionCreators/userActionCreators";
 import { useHistory } from "react-router-dom";
-
-const useStyles = makeStyles(() => ({
-	form: {
-		margin: "30px 0",
-	},
-	textField: {
-		display: "block",
-		width: "100%",
-		// backgroundColor: "lightgray",
-		borderRadius: "5px 5px 0 0",
-		margin: "10px 0",
-	},
-	button: {
-		float: "right",
-		margin: "15px 0 0 0",
-		color: "#fff",
-		backgroundColor: "#4caf50",
-		"&:hover": {
-			backgroundColor: "#81c784",
-		},
-	},
-}));
 
 const LoginForm = () => {
 	const classes = useStyles();

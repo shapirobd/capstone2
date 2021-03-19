@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+import { useStyles } from "./styles/RecipeStepsStyles";
 import {
 	Typography,
 	List,
@@ -9,18 +9,6 @@ import {
 	Avatar,
 	Divider,
 } from "@material-ui/core";
-
-const useStyles = makeStyles(() => ({
-	root: {
-		margin: "0 0 20px 0",
-		backgroundColor: "#fff",
-		padding: "20px",
-		boxShadow: "2px 3px 3px lightgray",
-	},
-	step: {
-		margin: "20px 0",
-	},
-}));
 
 const RecipeSteps = ({ steps }) => {
 	const classes = useStyles();

@@ -1,26 +1,6 @@
 import React from "react";
 import { Grid, TextField, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles(() => ({
-	form: {
-		margin: "30px 0",
-	},
-	textField: {
-		display: "block",
-		width: "100%",
-		borderRadius: "5px 5px 0 0",
-	},
-	button: {
-		float: "right",
-		margin: "15px 0 0 0",
-		color: "#fff",
-		backgroundColor: "#4caf50",
-		"&:hover": {
-			backgroundColor: "#81c784",
-		},
-	},
-}));
+import { useStyles } from "./styles/SignUpFormStyles";
 
 const SignUpForm = ({ handleSubmit, handleChange }) => {
 	const classes = useStyles();

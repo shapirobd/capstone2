@@ -1,65 +1,21 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-// import AppBar from "@material-ui/core/AppBar";
-// import CssBaseline from "@material-ui/core/CssBaseline";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-// import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+import React from "react";
+import { useStyles } from "./styles/SideNavStyles";
+import {
+	Button,
+	SwipeableDrawer,
+	List,
+	Divider,
+	ListItem,
+	ListItemText,
+	ListItemIcon,
+} from "@material-ui/core";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import SettingsIcon from "@material-ui/icons/Settings";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import KitchenIcon from "@material-ui/icons/Kitchen";
-// import { Button } from "@material-ui/core";
-// import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { Button } from "@material-ui/core";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
-
-const drawerWidth = 240;
-
-const useStyles = makeStyles((theme) => ({
-	root: {
-		display: "flex",
-	},
-	appBar: {
-		zIndex: theme.zIndex.drawer + 1,
-	},
-	drawer: {
-		width: drawerWidth,
-		flexShrink: 0,
-	},
-	drawerPaper: {
-		width: drawerWidth,
-	},
-	drawerContainer: {
-		overflow: "auto",
-	},
-	content: {
-		flexGrow: 1,
-		padding: theme.spacing(3),
-	},
-	toggler: {
-		height: "92vh",
-		minWidth: "10px",
-		padding: "0",
-		// backgroundColor: "#a2d8a5",
-		backgroundColor: "#fff",
-		position: "absolute",
-		left: "0",
-		boxShadow: "2px 2px 3px black",
-		zIndex: "1200",
-		"&:hover": {
-			backgroundColor: "#fff",
-		},
-		borderRadius: "0px",
-	},
-}));
+import { useSelector } from "react-redux";
 
 const SideNav = () => {
 	const classes = useStyles();

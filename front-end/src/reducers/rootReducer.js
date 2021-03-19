@@ -1,10 +1,11 @@
 const INITIAL_STATE = {
 	feed: [],
 	page: 1,
-	countPerPage: 30,
+	countPerPage: 40,
 	totalResults: null,
 	token: null,
 	user: null,
+	filtered: false,
 	currentRecipe: null,
 	isIngredientBased: false,
 };
@@ -22,13 +23,12 @@ const rootReducer = (state = INITIAL_STATE, action) => {
 			};
 		}
 		case "FILTER_FEED": {
-			const { recipes, totalResults } = action.payload;
-			console.log(recipes);
+			const { recipes, totalResults, page } = action.payload;
 			return {
 				...state,
-				page: 1,
 				feed: recipes,
 				totalResults,
+				page,
 				isIngredientBased: false,
 			};
 		}

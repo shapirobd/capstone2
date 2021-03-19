@@ -1,22 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Pagination } from "@material-ui/lab";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./styles/HomePageStyles";
 import { loadFeed } from "../../actionCreators/recipeActionCreators";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import RecipeGrid from "../recipes/RecipeGrid";
 import FilterPanel from "./FilterPanel";
 import useWindowDimensions from "../../customHooks/getWindowDimensions";
-
-const useStyles = makeStyles(() => ({
-	root: {
-		display: "flex",
-		justifyContent: "space-around",
-	},
-	pagination: {
-		margin: "10px auto",
-		width: "fit-content",
-	},
-}));
+import { INITIAL_FILTER_DATA } from "../../constants";
 
 const HomePage = () => {
 	const classes = useStyles();
@@ -24,31 +14,38 @@ const HomePage = () => {
 
 	const user = useSelector((state) => state.user, shallowEqual);
 	const feed = useSelector((state) => state.feed, shallowEqual);
-	console.log(feed);
 	const page = useSelector((state) => state.page, shallowEqual);
 	const totalResults = useSelector((state) => state.totalResults, shallowEqual);
 	const countPerPage = useSelector((state) => state.countPerPage, shallowEqual);
 
 	const { height, width } = useWindowDimensions();
+	const [filtered, setFiltered] = useState(false);
+
+	const [filterData, setFilterData] = useState(INITIAL_FILTER_DATA);
 
 	useEffect(() => {
-		if (!feed.length || feed.isIngredientBased) {
-			dispatch(loadFeed(page));
-		}
-	}, [page, dispatch, user.api_hash]);
+		filtered ? dispatch(loadFeed(page, filterData)) : dispatch(loadFeed(page));
+	}, [page, dispatch]);
 
 	const handleChange = (event, value) => {
-		console.log(value);
-		dispatch(loadFeed(value, user.api_hash));
+		filtered
+			? dispatch(loadFeed(value, filterData))
+			: dispatch(loadFeed(value));
 	};
 
 	return (
 		<>
+			{console.log(totalResults)}
+			{console.log(countPerPage)}
 			<div className={classes.root}>
 				<div style={{ width: `${width - 240}px`, height: `${height}px` }}>
-					<FilterPanel />
+					<FilterPanel
+						setFiltered={setFiltered}
+						filterData={filterData}
+						setFilterData={setFilterData}
+					/>
 					<Pagination
-						count={Math.ceil(totalResults / countPerPage) + 1}
+						count={Math.ceil(totalResults / 40)}
 						defaultPage={1}
 						siblingCount={0}
 						page={page}
@@ -57,7 +54,7 @@ const HomePage = () => {
 					/>
 					<RecipeGrid feed={feed} />
 					<Pagination
-						count={Math.ceil(totalResults / countPerPage) + 1}
+						count={Math.ceil(totalResults / 40)}
 						defaultPage={1}
 						siblingCount={0}
 						page={page}
