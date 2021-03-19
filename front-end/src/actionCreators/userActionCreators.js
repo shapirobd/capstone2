@@ -99,3 +99,21 @@ export const logout = () => {
 		type: LOGOUT,
 	};
 };
+
+export const editProfile = (username, data) => {
+	return async (dispatch) => {
+		try {
+			const editResp = await axios.patch(`${API_URL}/users/${username}`, data);
+			dispatch(edittedProfile(editResp.data));
+		} catch (e) {
+			console.error(e);
+		}
+	};
+};
+
+const edittedProfile = (user) => {
+	return {
+		type: "EDIT_PROFILE",
+		payload: { user },
+	};
+};

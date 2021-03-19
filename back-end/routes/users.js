@@ -24,6 +24,16 @@ router.get("/:username", async function (req, res, next) {
 	}
 });
 
+router.patch("/:username", async function (req, res, next) {
+	try {
+		console.log(req.body);
+		const resp = await User.editProfile(req.body, req.params.username);
+		return res.json(resp);
+	} catch (e) {
+		return next(e);
+	}
+});
+
 router.post("/bookmarkRecipe", async function (req, res, next) {
 	try {
 		const { username, recipeId } = req.body;

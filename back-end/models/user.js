@@ -114,6 +114,42 @@ class User {
 		return userRes.rows[0];
 	}
 
+	static async editProfile(data, username) {
+		let query = "";
+		let count = 1;
+
+		Object.keys(data).map((key, idx) => {
+			query += `${key}=$${count}`;
+			idx === Object.keys(data).length - 1 ? (query += " ") : (query += ", ");
+			count++;
+		});
+
+		const userRes = await db.query(
+			`
+			UPDATE users
+			SET ${query}
+			WHERE username=$${count}
+			RETURNING username, email, first_name, last_name, api_hash, weight, weight_goal, calorie_goal
+			`,
+			[...Object.values(data), username]
+		);
+
+		const user = userRes.rows[0];
+
+		const bookmarksRes = await db.query(
+			`
+					SELECT meal_id
+					FROM bookmarks
+					WHERE username=$1
+					`,
+			[username]
+		);
+		const bookmarks = bookmarksRes.rows.map((bookmark) => bookmark.meal_id);
+		user.bookmarks = bookmarks;
+
+		return user;
+	}
+
 	static async bookmarkRecipe(username, recipeId) {
 		console.log(username, recipeId);
 		await db.query(
