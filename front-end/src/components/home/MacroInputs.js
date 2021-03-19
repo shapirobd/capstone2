@@ -73,12 +73,19 @@ const MacroInputs = ({ allMacros, handleChange, setFormData }) => {
 								}}
 							/>
 						</Grid>
-						{/* <Grid item cols={1} md={3}>
-							<Typography style={{ display: "inline" }}>grams</Typography>
-						</Grid> */}
 					</Grid>
 				);
 			})}
+			<Typography>Name</Typography>
+			<div>
+				<TextField
+					name="recipeName"
+					variant="outlined"
+					size="small"
+					style={{ width: "100%" }}
+					onChange={handleChange}
+				/>
+			</div>
 		</div>
 	);
 };

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { TextField } from "@material-ui/core";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import MacroInputs from "./MacroInputs";
@@ -111,12 +112,18 @@ const FilterPanel = () => {
 						},
 					},
 				};
+			} else if (name === "recipeName") {
+				return {
+					...formData,
+					[name]: value,
+				};
 			}
 		});
 	};
 
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
+		console.log(formData);
 		console.log("FORM SUBMITTED");
 		dispatch(filterFeed(formData));
 	};

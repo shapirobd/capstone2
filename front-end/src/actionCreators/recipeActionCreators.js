@@ -76,7 +76,7 @@ const loadedRecipe = (recipe, instructions) => {
 export const filterFeed = (filterData) => {
 	return async (dispatch) => {
 		try {
-			const { diets, macros } = filterData;
+			const { diets, macros, recipeName } = filterData;
 			const macrosParams = createMacrosParams(macros);
 			const dietsParams = diets.join(",");
 			console.log(macrosParams);
@@ -89,6 +89,7 @@ export const filterFeed = (filterData) => {
 						number: 40,
 						diet: dietsParams,
 						...macrosParams,
+						query: recipeName,
 					},
 				}
 			);
