@@ -64,4 +64,14 @@ router.get("/:username/getAllBookmarks", async function (req, res, next) {
 	}
 });
 
+router.get("/:username/getEatenMeals", async function (req, res, next) {
+	try {
+		const meals = await User.getEatenMeals(req.params.username, req.query.date);
+		console.log(meals);
+		return res.json(meals);
+	} catch (e) {
+		return next(e);
+	}
+});
+
 module.exports = router;

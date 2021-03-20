@@ -184,6 +184,21 @@ class User {
 		);
 		return results.rows;
 	}
+
+	static async getEatenMeals(username, date) {
+		console.log(189, username);
+		console.log(190, date);
+		const results = await db.query(
+			`
+			SELECT um.meal_id FROM users
+			JOIN users_meals AS um 
+			ON users.username = um.username
+			WHERE users.username=$1 AND um.date=$2
+			`,
+			[username, date]
+		);
+		return results.rows.map((meal) => meal.meal_id);
+	}
 }
 
 module.exports = User;

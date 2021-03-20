@@ -35,36 +35,6 @@ const SideNav = () => {
 		setState({ ...state, [anchor]: open });
 	};
 
-	const list = (anchor) => (
-		<div
-			role="presentation"
-			onClick={toggleDrawer(anchor, false)}
-			onKeyDown={toggleDrawer(anchor, false)}
-		>
-			<List>
-				{["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-					<ListItem button key={text}>
-						<ListItemIcon>
-							{index % 2 === 0 ? <KitchenIcon /> : <SettingsIcon />}
-						</ListItemIcon>
-						<ListItemText primary={text} />
-					</ListItem>
-				))}
-			</List>
-			<Divider />
-			<List>
-				{["All mail", "Trash", "Spam"].map((text, index) => (
-					<ListItem button key={text}>
-						<ListItemIcon>
-							{index % 2 === 0 ? <KitchenIcon /> : <SettingsIcon />}
-						</ListItemIcon>
-						<ListItemText primary={text} />
-					</ListItem>
-				))}
-			</List>
-		</div>
-	);
-
 	const user = useSelector((state) => state.user);
 
 	return user ? (
@@ -99,7 +69,7 @@ const SideNav = () => {
 							</ListItemIcon>
 							<ListItemText primary="Bookmarks" />
 						</ListItem>
-						<ListItem button>
+						<ListItem button component="a" href={`/tracker`}>
 							<ListItemIcon>
 								<EventNoteIcon />
 							</ListItemIcon>

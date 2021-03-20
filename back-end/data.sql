@@ -64,6 +64,21 @@ ALTER TABLE "nutrients" ADD FOREIGN KEY ("nutrient_id") REFERENCES "vitamins" ("
 
 ALTER TABLE "nutrients" ADD FOREIGN KEY ("nutrient_id") REFERENCES "minerals" ("id");
 
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716426, '2021-03-15');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 715594, '2021-03-15');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 715497, '2021-03-16');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 644387, '2021-03-16');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 715392, '2021-03-17');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716268, '2021-03-17');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716381, '2021-03-18');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 782601, '2021-03-18');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 715446, '2021-03-19');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 715415, '2021-03-19');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716426, '2021-03-20');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 766453, '2021-03-20');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716627, '2021-03-21');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716408, '2021-03-21');
+
 -- ALTER TABLE "users_meals" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");
 
 -- ALTER TABLE "bookmarks" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");

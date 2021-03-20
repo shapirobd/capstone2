@@ -8,6 +8,7 @@ import LoginPage from "./user/LoginPage";
 import Profile from "./user/Profile";
 import Recipe from "./recipes/Recipe";
 import SideNav from "./navigation/SideNav";
+import TrackerPage from "./tracker/TrackerPage";
 import BookmarksPage from "./recipes/BookmarksPage";
 import { Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -42,8 +43,10 @@ const Routes = () => {
 					{user ? <HomePage /> : <WelcomePage />}
 				</Route>
 				<Route exact path="/signup">
-					{/* <SignUpPage /> */}
 					<SignUpPage />
+				</Route>
+				<Route exact path="/tracker">
+					<TrackerPage />
 				</Route>
 				<Route exact path="/ingredients">
 					<WelcomePage />
