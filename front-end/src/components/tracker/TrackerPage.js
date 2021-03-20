@@ -4,7 +4,7 @@ import { Grid, Typography, ButtonGroup, Button } from "@material-ui/core";
 import { useStyles } from "./styles/TrackerPageStyles";
 import { Doughnut, Bar } from "react-chartjs-2";
 import Calendar from "react-calendar";
-// import moment from "moment";
+import moment from "moment";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
 
@@ -26,23 +26,76 @@ const getDailyMacros = (carbs = 0, fat = 0, protein = 0) => ({
 	],
 });
 
-const barData = {
-	labels: [
-		"Monday",
-		"Tuesday",
-		"Wednesday",
-		"Thursday",
-		"Friday",
-		"Saturday",
-		"Sunday",
-	],
-	datasets: [
-		{
-			label: "Fat",
-			data: [120, 140, 130, 90, 200, 150, 110],
-			backgroundColor: ["red", "red", "red", "red", "red", "red", "red"],
-		},
-	],
+const getWeeklyMacros = (weekData) => {
+	Object.keys(weekData).map((date) => console.log(date));
+	return {
+		labels: [
+			"Sunday",
+			"Monday",
+			"Tuesday",
+			"Wednesday",
+			"Thursday",
+			"Friday",
+			"Saturday",
+		],
+		datasets: [
+			{
+				label: "Carbohydrates",
+				// data: [120, 140, 130, 90, 200, 150, 110],
+				data: weekData
+					? Object.keys(weekData).map((date) => weekData[date].carbs)
+					: [0, 0, 0, 0, 0, 0, 0],
+				backgroundColor: ["red", "red", "red", "red", "red", "red", "red"],
+			},
+			{
+				label: "Fat",
+				data: weekData
+					? Object.keys(weekData).map((date) => weekData[date].fat)
+					: [0, 0, 0, 0, 0, 0, 0],
+				backgroundColor: [
+					"green",
+					"green",
+					"green",
+					"green",
+					"green",
+					"green",
+					"green",
+				],
+			},
+			{
+				label: "Protein",
+				data: weekData
+					? Object.keys(weekData).map((date) => weekData[date].protein)
+					: [0, 0, 0, 0, 0, 0, 0],
+				backgroundColor: [
+					"blue",
+					"blue",
+					"blue",
+					"blue",
+					"blue",
+					"blue",
+					"blue",
+				],
+			},
+		],
+	};
+};
+
+const getWeekNumber = (calendarDate) => {
+	return moment(convertDate(calendarDate), "YYYY-MM-DD").week();
+};
+
+const getWeekDates = (calendarDate) => {
+	return [0, 1, 2, 3, 4, 5, 6].map((d) =>
+		convertDate(
+			moment(
+				`${convertDate(calendarDate).substring(0, 4)}-${getWeekNumber(
+					calendarDate
+				)}-` + d,
+				"YYYY-w-e"
+			)["_d"]
+		)
+	);
 };
 
 const TrackerPage = () => {
@@ -50,8 +103,6 @@ const TrackerPage = () => {
 	const user = useSelector((state) => state.user);
 	// const [selectedDate, setSelectedDate] = useState(findDate());
 	const [calendarDate, setCalendarDate] = useState(new Date());
-	const [pieChartData, setPieChartData] = useState(getDailyMacros());
-	const [barChartData, setBarChartData] = useState(barData);
 	const [dayState, setDayState] = useState({
 		date: convertDate(calendarDate),
 		macros: {
@@ -60,44 +111,83 @@ const TrackerPage = () => {
 			protein: 150,
 		},
 	});
+	const [weekState, setWeekState] = useState({
+		weekNumber: null,
+		dates: getWeekDates(calendarDate),
+		weekData: {},
+	});
 
-	useEffect(() => {
-		const getCurrDateMacros = async () => {
-			const mealIds = await axios.get(
-				`http://localhost:5000/users/${user.username}/getEatenMeals`,
-				{
-					params: {
-						date: convertDate(calendarDate),
-					},
-				}
-			);
-			const meals = await axios.get(
-				`https://api.spoonacular.com/recipes/informationBulk`,
-				{
-					params: {
-						apiKey: "73baf9bb95a14f5fb4d71e2f12ab8479",
-						ids: mealIds.data.join(","),
-						includeNutrition: true,
-					},
-				}
-			);
-			const macros = {
-				carbs: meals.data.reduce((totalCarbs, meal) => {
-					return Math.round(totalCarbs + meal.nutrition.nutrients[3].amount);
-				}, 0),
-				fat: meals.data.reduce((totalFat, meal) => {
-					return Math.round(totalFat + meal.nutrition.nutrients[1].amount);
-				}, 0),
-				protein: meals.data.reduce((totalProtein, meal) => {
-					return Math.round(totalProtein + meal.nutrition.nutrients[8].amount);
-				}, 0),
-			};
+	const [pieChartData, setPieChartData] = useState(getDailyMacros());
+	const [barChartData, setBarChartData] = useState(
+		getWeeklyMacros(weekState.weekData)
+	);
+
+	const getDateMacros = async (context = "day", date = calendarDate) => {
+		const mealIds = await axios.get(
+			`http://localhost:5000/users/${user.username}/getEatenMeals`,
+			{
+				params: {
+					date: context === "day" ? convertDate(date) : date,
+				},
+			}
+		);
+		const meals = await axios.get(
+			`https://api.spoonacular.com/recipes/informationBulk`,
+			{
+				params: {
+					apiKey: "73baf9bb95a14f5fb4d71e2f12ab8479",
+					ids: mealIds.data.join(","),
+					includeNutrition: true,
+				},
+			}
+		);
+
+		const macros = {
+			carbs: meals.data.reduce((totalCarbs, meal) => {
+				return Math.round(totalCarbs + meal.nutrition.nutrients[3].amount);
+			}, 0),
+			fat: meals.data.reduce((totalFat, meal) => {
+				return Math.round(totalFat + meal.nutrition.nutrients[1].amount);
+			}, 0),
+			protein: meals.data.reduce((totalProtein, meal) => {
+				return Math.round(totalProtein + meal.nutrition.nutrients[8].amount);
+			}, 0),
+		};
+		if (context === "day") {
 			setDayState({
-				date: convertDate(calendarDate),
+				date: convertDate(date),
 				macros,
 			});
-		};
-		getCurrDateMacros();
+		} else {
+			return macros;
+		}
+	};
+
+	const updateWeekData = async (weekData, date) => {
+		const dateMacros = await getDateMacros("week", date);
+		weekData[date] = dateMacros;
+	};
+
+	const getWeekMacros = async (weekDates) => {
+		let weekData = {};
+		for (let date of weekDates) {
+			await updateWeekData(weekData, date);
+		}
+		setWeekState((weekState) => ({
+			...weekState,
+			weekData,
+		}));
+	};
+
+	useEffect(() => {
+		getDateMacros();
+		if (getWeekNumber(calendarDate) !== weekState.weekNumber) {
+			setWeekState({
+				weekNumber: getWeekNumber(calendarDate),
+				dates: getWeekDates(calendarDate),
+				weekData: getWeekMacros(getWeekDates(calendarDate)),
+			});
+		}
 	}, [calendarDate]);
 
 	useEffect(() => {
@@ -110,10 +200,13 @@ const TrackerPage = () => {
 		);
 	}, [dayState]);
 
+	useEffect(() => {
+		setBarChartData(getWeeklyMacros(weekState.weekData));
+	}, [weekState]);
+
 	return (
 		<div style={{ width: "100%" }}>
-			{console.log(calendarDate)}
-			{console.log(convertDate(calendarDate))}
+			{console.log(weekState)}
 			<Grid container cols={2} className={classes.root}>
 				<Grid item cols={1} md={3}>
 					<Calendar
@@ -121,6 +214,7 @@ const TrackerPage = () => {
 						value={calendarDate}
 						minDetail="year"
 						className={classes.calendar}
+						calendarType="US"
 					/>
 					<div>
 						<Doughnut data={pieChartData} width={200} height={200} />
@@ -128,15 +222,6 @@ const TrackerPage = () => {
 				</Grid>
 				<Grid item cols={1} md={8} className={classes.rightGridItem}>
 					<Typography variant="h3">Weekly Data</Typography>
-					<ButtonGroup
-						color="primary"
-						aria-label="outlined primary button group"
-						className={classes.buttonGroup}
-					>
-						<Button className={classes.button}>Carbohydrates</Button>
-						<Button className={classes.button}>Fat</Button>
-						<Button className={classes.button}>Protein</Button>
-					</ButtonGroup>
 					<Bar data={barChartData} className={classes.barChart} />
 				</Grid>
 			</Grid>
