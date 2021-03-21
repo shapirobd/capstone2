@@ -130,21 +130,25 @@ const TrackerPage = () => {
 		getWeeklyMacros(weekState.weekData)
 	);
 
-	const getDateMacros = async (context = "day", date = calendarDate) => {
-		const mealIds = await axios.get(
-			`http://localhost:5000/users/${user.username}/getEatenMeals`,
-			{
-				params: {
-					date: context === "day" ? convertDate(date) : date,
-				},
-			}
-		);
+	const getDateMacros = async (
+		context = "day",
+		date = convertDate(calendarDate)
+	) => {
+		// const mealIds = await axios.get(
+		// 	`http://localhost:5000/users/${user.username}/getEatenMeals`,
+		// 	{
+		// 		params: {
+		// 			date: context === "day" ? convertDate(date) : date,
+		// 		},
+		// 	}
+		// );
+		const mealIds = user.eatenMeals[date];
 		const meals = await axios.get(
 			`https://api.spoonacular.com/recipes/informationBulk`,
 			{
 				params: {
 					apiKey: "73baf9bb95a14f5fb4d71e2f12ab8479",
-					ids: mealIds.data.join(","),
+					ids: mealIds.join(","),
 					includeNutrition: true,
 				},
 			}
@@ -163,7 +167,7 @@ const TrackerPage = () => {
 		};
 		if (context === "day") {
 			setDayState({
-				date: convertDate(date),
+				date,
 				macros,
 			});
 		} else {
