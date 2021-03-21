@@ -44,23 +44,37 @@ const HomePage = () => {
 						filterData={filterData}
 						setFilterData={setFilterData}
 					/>
-					<Pagination
-						count={Math.ceil(totalResults / 40)}
-						defaultPage={1}
-						siblingCount={0}
-						page={page}
-						onChange={handleChange}
-						className={classes.pagination}
-					/>
-					<RecipeGrid feed={feed} />
-					<Pagination
-						count={Math.ceil(totalResults / 40)}
-						defaultPage={1}
-						siblingCount={0}
-						page={page}
-						onChange={handleChange}
-						className={classes.pagination}
-					/>
+					<div
+						style={{
+							width: "100%",
+							backgroundColor: "white",
+							display: "flex",
+							flexDirection: "column",
+							justifyContent: "space-around",
+							alignItems: "center",
+							borderRadius: "5px",
+						}}
+					>
+						<Pagination
+							variant="outlined"
+							count={Math.ceil(totalResults / 40)}
+							defaultPage={1}
+							siblingCount={0}
+							page={page}
+							onChange={handleChange}
+							className={classes.pagination}
+						/>
+						<RecipeGrid feed={feed} />
+						<Pagination
+							variant="outlined"
+							count={Math.ceil(totalResults / 40)}
+							defaultPage={1}
+							siblingCount={0}
+							page={page}
+							onChange={handleChange}
+							className={classes.pagination}
+						/>
+					</div>
 				</div>
 			</div>
 		</>

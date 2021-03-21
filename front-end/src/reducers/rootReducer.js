@@ -83,6 +83,35 @@ const rootReducer = (state = INITIAL_STATE, action) => {
 				},
 			};
 		}
+		case "ADD_EATEN_MEAL": {
+			const { recipeId, date } = action.payload;
+			return {
+				...state,
+				user: {
+					...state.user,
+					eatenMeals: {
+						...state.user.eatenMeals,
+						[date]: [...state.user.eatenMeals[date], recipeId],
+					},
+				},
+			};
+		}
+		case "REMOVE_EATEN_MEAL": {
+			const { recipeId, date } = action.payload;
+			console.log(recipeId);
+			return {
+				...state,
+				user: {
+					...state.user,
+					eatenMeals: {
+						...state.user.eatenMeals,
+						[date]: state.user.eatenMeals[date].filter(
+							(meal) => meal !== recipeId
+						),
+					},
+				},
+			};
+		}
 		default: {
 			return state;
 		}

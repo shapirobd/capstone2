@@ -73,7 +73,7 @@ const FilterPanel = ({ setFiltered, filterData, setFilterData }) => {
 				handleChange={handleChange}
 				setFilterData={setFilterData}
 			/>
-			<div style={{ width: "100%" }}>
+			<div style={{ width: "100%", margin: "15px 0 0 0" }}>
 				<Button type="submit" className={classes.button}>
 					Apply
 				</Button>

@@ -74,4 +74,26 @@ router.get("/:username/getEatenMeals", async function (req, res, next) {
 	}
 });
 
+router.post("/addEatenMeal", async function (req, res, next) {
+	try {
+		const { username, recipeId, date } = req.body;
+		console.log(username, recipeId);
+		const resp = await User.addEatenMeal(username, recipeId, date);
+		console.log(resp);
+		return res.json(resp);
+	} catch (e) {
+		return next(e);
+	}
+});
+
+router.post("/removeEatenMeal", async function (req, res, next) {
+	try {
+		const { username, recipeId, date } = req.body;
+		const resp = await User.removeEatenMeal(username, recipeId, date);
+		return res.json(resp);
+	} catch (e) {
+		return next(e);
+	}
+});
+
 module.exports = router;

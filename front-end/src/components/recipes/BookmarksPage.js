@@ -29,7 +29,7 @@ const BookmarksPage = () => {
 			);
 			setFullBookmarks(resp.data);
 		};
-		loadBookmarks();
+		if (bookmarks.length) loadBookmarks();
 	}, [bookmarks]);
 
 	return (

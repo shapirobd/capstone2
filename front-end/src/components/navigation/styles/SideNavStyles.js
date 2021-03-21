@@ -30,7 +30,7 @@ export const useStyles = makeStyles((theme) => ({
 		backgroundColor: "#fff",
 		position: "absolute",
 		left: "0",
-		boxShadow: "2px 2px 3px black",
+		boxShadow: "0px 2px 8px black",
 		zIndex: "1200",
 		"&:hover": {
 			backgroundColor: "#fff",

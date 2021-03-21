@@ -78,8 +78,21 @@ INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 7
 INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 715415, '2021-03-19');
 INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716426, '2021-03-20');
 INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 766453, '2021-03-20');
-INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716627, '2021-03-21');
-INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716408, '2021-03-21');
+
+-- INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 652423, '2021-03-21');
+-- INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 660306, '2021-03-21');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 715424, '2021-03-22');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 662670, '2021-03-22');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716195, '2021-03-23');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 663559, '2021-03-23');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 633942, '2021-03-24');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 715521, '2021-03-24');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716276, '2021-03-25');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 782622, '2021-03-25');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 661340, '2021-03-26');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 715385, '2021-03-26');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716406, '2021-03-27');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 658579, '2021-03-27');
 
 -- ALTER TABLE "users_meals" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");
 

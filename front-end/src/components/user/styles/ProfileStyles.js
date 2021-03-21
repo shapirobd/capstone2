@@ -23,6 +23,7 @@ export const useStyles = makeStyles(() => ({
 		width: "40%",
 		boxShadow: "2px 2px 8px rgba(0,0,0,0.5)",
 		position: "relative",
+		backgroundColor: "#fff",
 	},
 	gridItem: { padding: "20px", height: "100%" },
 	profPic: {

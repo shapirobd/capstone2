@@ -4,6 +4,13 @@ const bcrypt = require("bcrypt");
 const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require("../config");
 const { default: axios } = require("axios");
 
+const convertDate = (date = new Date()) => {
+	let dd = String(date.getDate()).padStart(2, "0");
+	let mm = String(date.getMonth() + 1).padStart(2, "0");
+	let yyyy = date.getFullYear();
+	return yyyy + "-" + mm + "-" + dd;
+};
+
 class User {
 	static async register({
 		username,
@@ -68,6 +75,23 @@ class User {
 				const bookmarks = bookmarksRes.rows.map((bookmark) => bookmark.meal_id);
 				user.bookmarks = bookmarks;
 
+				const eatenMealsRes = await db.query(
+					`
+					SELECT meal_id, date
+					FROM users_meals
+					WHERE username=$1
+					`,
+					[username]
+				);
+				const eatenMeals = {};
+				eatenMealsRes.rows.map((meal) => {
+					let date = convertDate(meal.date);
+					eatenMeals[date]
+						? eatenMeals[date].push(meal.meal_id)
+						: (eatenMeals[date] = [meal.meal_id]);
+				});
+				user.eatenMeals = eatenMeals;
+
 				return user;
 			}
 		}
@@ -95,12 +119,14 @@ class User {
             SELECT username,
                 email,
                 first_name,
-                last_name,
+                last_name
             FROM users 
             WHERE username=$1
             `,
 			[username]
 		);
+		const user = userRes.rows[0];
+
 		const bookmarksRes = await db.query(
 			`
 			SELECT meal_id
@@ -109,9 +135,24 @@ class User {
 			`,
 			[username]
 		);
-		userRes.rows[0].bookmarks = bookmarksRes.rows;
+		user.bookmarks = bookmarksRes.rows;
 
-		return userRes.rows[0];
+		const eatenMealsRes = await db.query(
+			`
+					SELECT meal_id, date
+					FROM users_meals
+					WHERE username=$1
+					`,
+			[username]
+		);
+		const eatenMeals = {};
+		eatenMealsRes.rows.map(
+			(meal) =>
+				(eatenMeals[meal.date] = [...eatenMeals[meal.date], meal.meal_id])
+		);
+		user.eatenMeals = eatenMeals;
+
+		return user;
 	}
 
 	static async editProfile(data, username) {
@@ -198,6 +239,29 @@ class User {
 			[username, date]
 		);
 		return results.rows.map((meal) => meal.meal_id);
+	}
+
+	static async addEatenMeal(username, recipeId, date) {
+		await db.query(
+			`
+			INSERT INTO users_meals 
+			(username, meal_id, date)
+			VALUES ($1, $2, $3)
+			`,
+			[username, recipeId, date]
+		);
+		return { message: "Meal eaten" };
+	}
+
+	static async removeEatenMeal(username, recipeId, date) {
+		await db.query(
+			`
+			DELETE FROM users_meals 
+			WHERE username=$1 AND meal_id=$2 AND date=$3
+			`,
+			[username, recipeId, date]
+		);
+		return { message: "Bookmark deleted" };
 	}
 }
 

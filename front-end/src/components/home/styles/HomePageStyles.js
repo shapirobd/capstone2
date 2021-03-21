@@ -6,7 +6,7 @@ export const useStyles = makeStyles(() => ({
 		justifyContent: "space-around",
 	},
 	pagination: {
-		margin: "10px auto",
+		margin: "30px auto",
 		width: "fit-content",
 	},
 }));

@@ -29,9 +29,11 @@ const RecipeGrid = ({ feed, areBookmarks, removeBookmark, ingredients }) => {
 							{ingredients ? (
 								<GridListTileBar
 									className={
-										recipe.missedIngredientCount === 0
-											? classes.ingredientStatsSuccess
-											: classes.ingredientStatsMissing
+										recipe.missedIngredientCount >= 4
+											? classes.missingIngredients4
+											: classes[
+													`missingIngredients${recipe.missedIngredientCount}`
+											  ]
 									}
 									title={`Missing ${recipe.missedIngredientCount}`}
 								/>

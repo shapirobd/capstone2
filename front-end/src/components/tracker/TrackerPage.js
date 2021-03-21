@@ -21,7 +21,7 @@ const getDailyMacros = (carbs = 0, fat = 0, protein = 0) => ({
 		{
 			// label: "Fat",
 			data: [carbs, fat, protein],
-			backgroundColor: ["red", "green", "blue"],
+			backgroundColor: ["#f44336", "#4caf50", "#2196f3"],
 		},
 	],
 });
@@ -45,7 +45,15 @@ const getWeeklyMacros = (weekData) => {
 				data: weekData
 					? Object.keys(weekData).map((date) => weekData[date].carbs)
 					: [0, 0, 0, 0, 0, 0, 0],
-				backgroundColor: ["red", "red", "red", "red", "red", "red", "red"],
+				backgroundColor: [
+					"#f44336",
+					"#f44336",
+					"#f44336",
+					"#f44336",
+					"#f44336",
+					"#f44336",
+					"#f44336",
+				],
 			},
 			{
 				label: "Fat",
@@ -53,13 +61,13 @@ const getWeeklyMacros = (weekData) => {
 					? Object.keys(weekData).map((date) => weekData[date].fat)
 					: [0, 0, 0, 0, 0, 0, 0],
 				backgroundColor: [
-					"green",
-					"green",
-					"green",
-					"green",
-					"green",
-					"green",
-					"green",
+					"#4caf50",
+					"#4caf50",
+					"#4caf50",
+					"#4caf50",
+					"#4caf50",
+					"#4caf50",
+					"#4caf50",
 				],
 			},
 			{
@@ -68,13 +76,13 @@ const getWeeklyMacros = (weekData) => {
 					? Object.keys(weekData).map((date) => weekData[date].protein)
 					: [0, 0, 0, 0, 0, 0, 0],
 				backgroundColor: [
-					"blue",
-					"blue",
-					"blue",
-					"blue",
-					"blue",
-					"blue",
-					"blue",
+					"#2196f3",
+					"#2196f3",
+					"#2196f3",
+					"#2196f3",
+					"#2196f3",
+					"#2196f3",
+					"#2196f3",
 				],
 			},
 		],
@@ -208,21 +216,26 @@ const TrackerPage = () => {
 		<div style={{ width: "100%" }}>
 			{console.log(weekState)}
 			<Grid container cols={2} className={classes.root}>
-				<Grid item cols={1} md={3}>
-					<Calendar
-						onChange={setCalendarDate}
-						value={calendarDate}
-						minDetail="year"
-						className={classes.calendar}
-						calendarType="US"
-					/>
-					<div>
-						<Doughnut data={pieChartData} width={200} height={200} />
+				<Grid item cols={1} md={4} className={classes.gridItem}>
+					<div className={classes.calendarDiv}>
+						<Calendar
+							onChange={setCalendarDate}
+							value={calendarDate}
+							minDetail="year"
+							calendarType="US"
+							className={classes.calendar}
+						/>
+					</div>
+					<div className={classes.doughnutDiv}>
+						<Typography>Daily Macros</Typography>
+						<Doughnut data={pieChartData} className={classes.doughnut} />
 					</div>
 				</Grid>
-				<Grid item cols={1} md={8} className={classes.rightGridItem}>
-					<Typography variant="h3">Weekly Data</Typography>
-					<Bar data={barChartData} className={classes.barChart} />
+				<Grid item cols={1} md={8} className={classes.gridItem}>
+					<div className={classes.barChartDiv}>
+						<Typography variant="h3">Weekly Data</Typography>
+						<Bar data={barChartData} className={classes.barChart} />
+					</div>
 				</Grid>
 			</Grid>
 		</div>

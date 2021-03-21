@@ -23,6 +23,7 @@ const useStyles = makeStyles(() => ({
 		// flexWrap: "wrap",
 		justifyContent: "center",
 		// overflow: "hidden",
+		backgroundColor: "#444d4c",
 	},
 	mainContent: {
 		// float: "right",

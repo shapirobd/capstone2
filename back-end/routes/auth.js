@@ -11,10 +11,8 @@ router.post("/login", async function (req, res, next) {
 	try {
 		const { username, password } = req.body;
 		const user = await User.authenticate(username, password);
-		console.log(user);
 		if (user) {
 			// const user = jwt.sign({ username }, SECRET_KEY);
-			console.log(user);
 			return res.json(user);
 		} else {
 			throw new ExpressError("User not found", 404);

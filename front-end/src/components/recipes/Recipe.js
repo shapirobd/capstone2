@@ -5,6 +5,10 @@ import {
 	bookmarkRecipe,
 	unbookmarkRecipe,
 } from "../../actionCreators/bookmarkActionCreators";
+import {
+	addEatenMeal,
+	removeEatenMeal,
+} from "../../actionCreators/trackerActionCreators";
 import { useStyles } from "./styles/RecipeStyles";
 import PieChart from "./PieChart";
 import NutrientList from "./NutrientList";
@@ -14,17 +18,44 @@ import { generateMacros } from "../../helpers/generateMacros";
 import { Typography, Grid, Button, ButtonGroup } from "@material-ui/core";
 import axios from "axios";
 
+const convertDate = (date = new Date()) => {
+	let dd = String(date.getDate()).padStart(2, "0");
+	let mm = String(date.getMonth() + 1).padStart(2, "0");
+	let yyyy = date.getFullYear();
+	return yyyy + "-" + mm + "-" + dd;
+};
+
 const Recipe = () => {
 	const classes = useStyles();
 	const { recipeId } = useParams();
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.user);
 	const bookmarks = useSelector((state) => state.user.bookmarks);
+	const eatenMeals = useSelector((state) => state.user.eatenMeals);
+
+	console.log(user);
 
 	const [isBookmarked, setIsBookmarked] = useState(
 		bookmarks.includes(+recipeId)
 	);
+	const [isEaten, setIsEaten] = useState(
+		eatenMeals[convertDate()].includes(+recipeId)
+	);
+
 	const [currentRecipe, setCurrentRecipe] = useState(null);
+
+	const toggleEaten = () => {
+		if (!isEaten) {
+			dispatch(
+				addEatenMeal(user.username, currentRecipe.recipe.id, convertDate())
+			);
+		} else {
+			dispatch(
+				removeEatenMeal(user.username, currentRecipe.recipe.id, convertDate())
+			);
+		}
+		setIsEaten(!isEaten);
+	};
 
 	const toggleBookmarked = () => {
 		if (!isBookmarked) {
@@ -80,7 +111,11 @@ const Recipe = () => {
 								alt={currentRecipe.recipe.image}
 							/>
 							<ButtonGroup fullWidth className={classes.buttonGroup}>
-								<Button className={classes.button}>I ate this</Button>
+								<Button className={classes.button} onClick={toggleEaten}>
+									{isEaten
+										? "Remove from today's meals"
+										: "Add to today's meals"}
+								</Button>
 								<Button className={classes.button} onClick={toggleBookmarked}>
 									{isBookmarked ? "Unbookmark" : "Bookmark"}
 								</Button>

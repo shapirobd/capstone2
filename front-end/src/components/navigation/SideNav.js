@@ -11,10 +11,10 @@ import {
 } from "@material-ui/core";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import EventNoteIcon from "@material-ui/icons/EventNote";
-import SettingsIcon from "@material-ui/icons/Settings";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import KitchenIcon from "@material-ui/icons/Kitchen";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useSelector } from "react-redux";
 
 const SideNav = () => {
@@ -84,11 +84,14 @@ const SideNav = () => {
 							</ListItemIcon>
 							<ListItemText primary="Profile" />
 						</ListItem>
-						<ListItem button>
+						<ListItem button component="a" href={`/logout`}>
 							<ListItemIcon>
-								<SettingsIcon />
+								<ExitToAppIcon color="error" />
 							</ListItemIcon>
-							<ListItemText primary="Settings" />
+							<ListItemText
+								primaryTypographyProps={{ color: "error" }}
+								primary="Logout"
+							/>
 						</ListItem>
 					</List>
 				</div>

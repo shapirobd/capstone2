@@ -51,7 +51,7 @@ const unbookmarkedRecipe = (recipeId) => {
 
 export const getAllBookmarks = async (username) => {
 	const bookmarks = await axios.get(`${API_URL}/users/getAllBookmarks`, {
-		username,
+		params: { username },
 	});
 	return bookmarks;
 };
