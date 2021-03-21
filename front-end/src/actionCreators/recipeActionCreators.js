@@ -1,10 +1,5 @@
 import axios from "axios";
-import {
-	LOAD_FEED,
-	LOAD_RECIPE,
-	FILTER_FEED,
-	FILTER_BY_INGREDIENTS,
-} from "../components/actionTypes";
+import { LOAD_FEED, LOAD_RECIPE, FILTER_FEED } from "../components/actionTypes";
 import createMacrosParams from "../helpers/createMacrosParams";
 
 export const loadFeed = (page = 1, filterData = { diets: [], macros: {} }) => {

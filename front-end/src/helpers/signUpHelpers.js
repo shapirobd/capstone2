@@ -1,4 +1,3 @@
-import Typography from "@material-ui/core/Typography";
 import SignUpFormOne from "../components/user/SignUpFormOne";
 import SignUpFormTwo from "../components/user/SignUpFormTwo";
 import SignUpConfirmation from "../components/user/SignUpConfirmation";

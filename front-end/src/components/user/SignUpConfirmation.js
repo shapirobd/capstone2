@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography, Button } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { useStyles } from "./styles/SignUpFormStyles";
 
 const capitalize = (text) => {
@@ -29,9 +29,6 @@ const SignUpConfirmation = ({ handleSubmit, handleChange, formData }) => {
 					) : null
 				)}
 			</Grid>
-			{/* <Button type="submit" className={classes.button}>
-				Submit
-			</Button> */}
 		</form>
 	);
 };

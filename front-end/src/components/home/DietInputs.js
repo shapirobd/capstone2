@@ -26,7 +26,7 @@ const DietInputs = ({ allDiets, setFilterData, setChecked, checked }) => {
 			...filterData,
 			diets: checked,
 		}));
-	}, [checked]);
+	}, [checked, setFilterData]);
 
 	return (
 		<div style={{ float: "left", width: "50%" }}>

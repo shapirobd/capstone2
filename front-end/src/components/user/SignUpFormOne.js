@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, TextField, Button } from "@material-ui/core";
+import { Grid, TextField } from "@material-ui/core";
 import { useStyles } from "./styles/SignUpFormStyles";
 
 const SignUpFormOne = ({ handleSubmit, handleChange }) => {

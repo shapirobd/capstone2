@@ -3,13 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require("../config");
 const { default: axios } = require("axios");
-
-const convertDate = (date = new Date()) => {
-	let dd = String(date.getDate()).padStart(2, "0");
-	let mm = String(date.getMonth() + 1).padStart(2, "0");
-	let yyyy = date.getFullYear();
-	return yyyy + "-" + mm + "-" + dd;
-};
+const convertDate = require("../helpers/converDate");
 
 class User {
 	static async register({

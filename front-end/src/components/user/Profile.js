@@ -52,6 +52,7 @@ const Profile = () => {
 									key !== "first_name" &&
 									key !== "last_name" &&
 									key !== "bookmarks" &&
+									key !== "eatenMeals" &&
 									key !== "api_hash" ? (
 										<div
 											style={{

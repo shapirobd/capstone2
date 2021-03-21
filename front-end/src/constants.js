@@ -31,3 +31,43 @@ export const INITIAL_FILTER_DATA = {
 		},
 	},
 };
+
+export const WEEKDAYS = [
+	"Sunday",
+	"Monday",
+	"Tuesday",
+	"Wednesday",
+	"Thursday",
+	"Friday",
+	"Saturday",
+];
+
+export const WEEKLY_COLORS = {
+	carbs: [
+		"#f44336",
+		"#f44336",
+		"#f44336",
+		"#f44336",
+		"#f44336",
+		"#f44336",
+		"#f44336",
+	],
+	fat: [
+		"#4caf50",
+		"#4caf50",
+		"#4caf50",
+		"#4caf50",
+		"#4caf50",
+		"#4caf50",
+		"#4caf50",
+	],
+	protein: [
+		"#2196f3",
+		"#2196f3",
+		"#2196f3",
+		"#2196f3",
+		"#2196f3",
+		"#2196f3",
+		"#2196f3",
+	],
+};

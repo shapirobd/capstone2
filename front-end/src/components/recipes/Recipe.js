@@ -17,13 +17,7 @@ import RecipeSteps from "./RecipeSteps";
 import { generateMacros } from "../../helpers/generateMacros";
 import { Typography, Grid, Button, ButtonGroup } from "@material-ui/core";
 import axios from "axios";
-
-const convertDate = (date = new Date()) => {
-	let dd = String(date.getDate()).padStart(2, "0");
-	let mm = String(date.getMonth() + 1).padStart(2, "0");
-	let yyyy = date.getFullYear();
-	return yyyy + "-" + mm + "-" + dd;
-};
+import convertDate from "../../helpers/convertDate";
 
 const Recipe = () => {
 	const classes = useStyles();

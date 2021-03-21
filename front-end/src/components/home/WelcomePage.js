@@ -57,7 +57,7 @@ const WelcomePage = () => {
 			};
 			getResults();
 		}
-	}, [formSubmitted]);
+	}, [formSubmitted, ingredients]);
 
 	useEffect(() => {
 		setFormData("");

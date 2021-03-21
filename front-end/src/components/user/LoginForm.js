@@ -47,7 +47,7 @@ const LoginForm = () => {
 			setFormData(INITIAL_FORM_DATA);
 			history.push("/");
 		}
-	}, [user]);
+	}, [user, history]);
 
 	return (
 		<form onSubmit={handleSubmit} className={classes.form}>

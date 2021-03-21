@@ -22,7 +22,6 @@ export const useStyles = makeStyles((theme) => ({
 		width: "100%",
 	},
 	missingIngredients0: {
-		width: "20%",
 		top: 0,
 		right: 0,
 		backgroundColor: "#378e3c",
@@ -31,7 +30,6 @@ export const useStyles = makeStyles((theme) => ({
 		boxShadow: "2px 2px 8px rgba(0,0,0,0.5)",
 	},
 	missingIngredients1: {
-		width: "20%",
 		top: 0,
 		right: 0,
 		backgroundColor: "#cddc39",
@@ -43,11 +41,9 @@ export const useStyles = makeStyles((theme) => ({
 		},
 	},
 	missingIngredients2: {
-		width: "20%",
 		top: 0,
 		right: 0,
 		backgroundColor: "#ffc107",
-		// color: "#000 !important",
 		borderBottomRightRadius: "15px",
 		width: "30%",
 		boxShadow: "2px 2px 8px rgba(0,0,0,0.5)",
@@ -56,7 +52,6 @@ export const useStyles = makeStyles((theme) => ({
 		},
 	},
 	missingIngredients3: {
-		width: "20%",
 		top: 0,
 		right: 0,
 		backgroundColor: "#ff7722",
@@ -65,7 +60,6 @@ export const useStyles = makeStyles((theme) => ({
 		boxShadow: "2px 2px 8px rgba(0,0,0,0.5)",
 	},
 	missingIngredients4: {
-		width: "20%",
 		top: 0,
 		right: 0,
 		backgroundColor: "#e83935",

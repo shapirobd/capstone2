@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, TextField, Button } from "@material-ui/core";
+import { Grid, TextField } from "@material-ui/core";
 import { useStyles } from "./styles/SignUpFormStyles";
 
 const SignUpFormTwo = ({ handleSubmit, handleChange }) => {
@@ -44,9 +44,6 @@ const SignUpFormTwo = ({ handleSubmit, handleChange }) => {
 					/>
 				</Grid>
 			</Grid>
-			{/* <Button type="submit" className={classes.button}>
-				Submit
-			</Button> */}
 		</form>
 	);
 };
