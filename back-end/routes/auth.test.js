@@ -33,7 +33,6 @@ beforeEach(async () => {
 describe("POST /register route", () => {
 	it("should return an object containing a token if the user registers successfully", async () => {
 		const resp = await request(app).post("/auth/register").send(user);
-
 		expect(resp.body).toEqual({
 			username: user.username,
 			email: user.email,
@@ -52,7 +51,6 @@ describe("POST /login route", () => {
 		const resp = await request(app)
 			.post("/auth/login")
 			.send({ username: user.username, password: user.password });
-
 		expect(resp.body).toEqual({
 			username: user.username,
 			email: user.email,
@@ -65,6 +63,7 @@ describe("POST /login route", () => {
 			eatenMeals: {},
 		});
 	});
+
 	it("should throw 404 error if username is not found", async () => {
 		await User.register(user);
 		const resp = await request(app)
@@ -74,6 +73,7 @@ describe("POST /login route", () => {
 		expect(resp.status).toEqual(404);
 		expect(resp.body.message).toEqual("User not found");
 	});
+
 	it("should throw 404 error if password is incorrect", async () => {
 		await User.register(user);
 		const resp = await request(app)
