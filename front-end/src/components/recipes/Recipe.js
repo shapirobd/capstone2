@@ -96,9 +96,11 @@ const Recipe = () => {
 		<div className={classes.root}>
 			{currentRecipe ? (
 				<>
-					<Typography variant="h4">{currentRecipe.recipe.title}</Typography>
 					<Grid container spacing={3} className={classes.grid}>
-						<Grid item xs={12} md={8} className={classes.main}>
+						<Grid item xs={12} md={7} className={classes.main}>
+							<Typography variant="h4" className={classes.heading}>
+								{currentRecipe.recipe.title}
+							</Typography>
 							<img
 								src={currentRecipe.recipe.image}
 								className={classes.image}

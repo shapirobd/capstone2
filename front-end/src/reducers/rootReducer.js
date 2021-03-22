@@ -3,7 +3,6 @@ const INITIAL_STATE = {
 	page: 1,
 	countPerPage: 40,
 	totalResults: null,
-	token: null,
 	user: null,
 	filtered: false,
 	currentRecipe: null,
@@ -50,11 +49,11 @@ const rootReducer = (state = INITIAL_STATE, action) => {
 			return { ...state, currentRecipe };
 		}
 		case "LOGIN": {
-			const { token, user } = action.payload;
-			return { ...state, token, user };
+			const { user } = action.payload;
+			return { ...state, user };
 		}
 		case "LOGOUT": {
-			return { ...state, user: null, token: null, feed: [] };
+			return INITIAL_STATE;
 		}
 		case "EDIT_PROFILE": {
 			const { user } = action.payload;

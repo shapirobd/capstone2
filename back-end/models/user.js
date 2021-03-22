@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require("../config");
 const { default: axios } = require("axios");
-const convertDate = require("../helpers/converDate");
+const convertDate = require("../helpers/convertDate");
 
 class User {
 	static async register({
@@ -17,17 +17,17 @@ class User {
 		calorie_goal,
 	}) {
 		const hashedPwd = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
-		const apiResp = await axios.post(
-			`https://api.spoonacular.com/users/connect?apiKey=73baf9bb95a14f5fb4d71e2f12ab8479`,
-			{}
-		);
-		const api_hash = apiResp.data.hash;
-		const api_username = apiResp.data.username;
+		// const apiResp = await axios.post(
+		// 	`https://api.spoonacular.com/users/connect?apiKey=73baf9bb95a14f5fb4d71e2f12ab8479`,
+		// 	{}
+		// );
+		// const api_hash = apiResp.data.hash;
+		// const api_username = apiResp.data.username;
 		const results = await db.query(
 			`
-            INSERT INTO users (username, password, email, first_name, last_name, api_hash, api_username, weight, weight_goal, calorie_goal)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-            RETURNING username, email, first_name, last_name, api_hash, api_username, weight, weight_goal, calorie_goal
+            INSERT INTO users (username, password, email, first_name, last_name, weight, weight_goal, calorie_goal)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+            RETURNING username, email, first_name, last_name, weight, weight_goal, calorie_goal
         `,
 			[
 				username,
@@ -35,8 +35,6 @@ class User {
 				email,
 				first_name,
 				last_name,
-				api_hash,
-				api_username,
 				weight,
 				weight_goal,
 				calorie_goal,
@@ -86,6 +84,8 @@ class User {
 				});
 				user.eatenMeals = eatenMeals;
 
+				delete user.password;
+
 				return user;
 			}
 		}
@@ -129,7 +129,9 @@ class User {
 			`,
 			[username]
 		);
-		user.bookmarks = bookmarksRes.rows;
+		const bookmarks = [];
+		bookmarksRes.rows.map((bookmark) => bookmarks.push(bookmark.meal_id));
+		user.bookmarks = bookmarks;
 
 		const eatenMealsRes = await db.query(
 			`
@@ -140,10 +142,14 @@ class User {
 			[username]
 		);
 		const eatenMeals = {};
-		eatenMealsRes.rows.map(
-			(meal) =>
-				(eatenMeals[meal.date] = [...eatenMeals[meal.date], meal.meal_id])
-		);
+		eatenMealsRes.rows.map((meal) => {
+			let date = convertDate(meal.date);
+			if (eatenMeals[date]) {
+				eatenMeals[date] = [...eatenMeals[date], meal.meal_id];
+			} else {
+				eatenMeals[date] = [meal.meal_id];
+			}
+		});
 		user.eatenMeals = eatenMeals;
 
 		return user;
@@ -164,11 +170,11 @@ class User {
 			UPDATE users
 			SET ${query}
 			WHERE username=$${count}
-			RETURNING username, email, first_name, last_name, api_hash, weight, weight_goal, calorie_goal
+			RETURNING username, email, first_name, last_name, weight, weight_goal, calorie_goal
 			`,
 			[...Object.values(data), username]
 		);
-
+		console.log(userRes);
 		const user = userRes.rows[0];
 
 		const bookmarksRes = await db.query(
@@ -182,11 +188,29 @@ class User {
 		const bookmarks = bookmarksRes.rows.map((bookmark) => bookmark.meal_id);
 		user.bookmarks = bookmarks;
 
+		const eatenMealsRes = await db.query(
+			`
+					SELECT meal_id, date
+					FROM users_meals
+					WHERE username=$1
+					`,
+			[username]
+		);
+		const eatenMeals = {};
+		eatenMealsRes.rows.map((meal) => {
+			let date = convertDate(meal.date);
+			if (eatenMeals[date]) {
+				eatenMeals[date] = [...eatenMeals[date], meal.meal_id];
+			} else {
+				eatenMeals[date] = [meal.meal_id];
+			}
+		});
+		user.eatenMeals = eatenMeals;
+
 		return user;
 	}
 
 	static async bookmarkRecipe(username, recipeId) {
-		console.log(username, recipeId);
 		await db.query(
 			`
 			INSERT INTO bookmarks (username, meal_id)
@@ -194,7 +218,7 @@ class User {
 			`,
 			[username, recipeId]
 		);
-		return { message: "Bookmark added" };
+		return { message: `Bookmarked recipe ${recipeId}` };
 	}
 
 	static async unbookmarkRecipe(username, recipeId) {
@@ -205,24 +229,21 @@ class User {
 			`,
 			[username, recipeId]
 		);
-		return { message: "Bookmark deleted" };
+		return { message: `Unbookmarked recipe ${recipeId}` };
 	}
 
 	static async getAllBookmarks(username) {
 		const results = await db.query(
 			`
-			SELECT * FROM bookmarks
+			SELECT meal_id FROM bookmarks
 			WHERE username=$1
-			RETURNING meal_id
 			`,
 			[username]
 		);
-		return results.rows;
+		return results.rows.map((meal) => meal.meal_id);
 	}
 
 	static async getEatenMeals(username, date) {
-		console.log(189, username);
-		console.log(190, date);
 		const results = await db.query(
 			`
 			SELECT um.meal_id FROM users
@@ -255,7 +276,7 @@ class User {
 			`,
 			[username, recipeId, date]
 		);
-		return { message: "Bookmark deleted" };
+		return { message: "Meal deleted" };
 	}
 }
 

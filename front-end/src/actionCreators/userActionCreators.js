@@ -7,23 +7,21 @@ export const register = (data) => {
 	return async (dispatch) => {
 		try {
 			const registerResp = await axios.post(`${API_URL}/auth/register`, data);
-			const { token } = registerResp.data;
+			// const user = registerResp.data;
 			const userResp = await axios.get(`${API_URL}/users/${data.username}`);
-			dispatch(registered(token, userResp.data));
+			dispatch(registered(userResp.data));
 		} catch (e) {
 			console.error(e);
 		}
 	};
 };
 
-const registered = (token, user) => {
+const registered = (user) => {
 	const {
 		username,
 		email,
 		first_name,
 		last_name,
-		api_hash,
-		api_username,
 		bookmarks,
 		eatenMeals,
 		weight,
@@ -33,14 +31,12 @@ const registered = (token, user) => {
 	return {
 		type: LOGIN,
 		payload: {
-			token,
+			// token,
 			user: {
 				username,
 				email,
 				first_name,
 				last_name,
-				api_hash,
-				api_username,
 				bookmarks,
 				eatenMeals,
 				weight,
@@ -57,21 +53,20 @@ export const login = (data) => {
 			console.log("login");
 			const user = await axios.post(`${API_URL}/auth/login`, data);
 			console.log(user);
-			const { api_hash } = user.data;
-			dispatch(loggedIn(api_hash, user.data));
+			// const { api_hash } = user.data;
+			dispatch(loggedIn(user.data));
 		} catch (e) {
 			console.error(e);
 		}
 	};
 };
 
-const loggedIn = (token, user) => {
+const loggedIn = (user) => {
 	const {
 		username,
 		email,
 		first_name,
 		last_name,
-		api_hash,
 		bookmarks,
 		eatenMeals,
 		weight,
@@ -81,13 +76,12 @@ const loggedIn = (token, user) => {
 	return {
 		type: LOGIN,
 		payload: {
-			token,
+			// token,
 			user: {
 				username,
 				email,
 				first_name,
 				last_name,
-				api_hash,
 				bookmarks,
 				eatenMeals,
 				weight,

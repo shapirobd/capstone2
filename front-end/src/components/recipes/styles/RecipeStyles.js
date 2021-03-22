@@ -4,11 +4,19 @@ export const useStyles = makeStyles(() => ({
 	root: {
 		margin: "0 75px",
 	},
+	heading: {
+		margin: "20px 0",
+	},
 	grid: {
 		margin: "20px 0",
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-around",
+		alignItems: "space-around",
 	},
 	image: {
 		width: "100%",
+		borderRadius: "5px",
 	},
 	buttonGroup: {
 		margin: "15px 0",
@@ -22,7 +30,13 @@ export const useStyles = makeStyles(() => ({
 		},
 	},
 	main: {
-		padding: "0 36px 0 0 !important",
+		padding: "0 36px !important",
+		backgroundColor: "#fff",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "space-around",
+		alignItems: "space-around",
+		borderRadius: "5px",
 	},
 	infoPanel: {
 		padding: "0 !important",

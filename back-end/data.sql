@@ -6,16 +6,16 @@ CREATE TABLE "users" (
   "password" text,
   "weight" int,
   "weight_goal" int,
-  "calorie_goal" int,
-  "api_hash" text,
-  "api_username" text
+  "calorie_goal" int
+  -- "api_hash" text,
+  -- "api_username" text
 );
 
-CREATE TABLE "meals" (
-  "id" SERIAL PRIMARY KEY,
-  "name" text,
-  "calories" int
-);
+-- CREATE TABLE "meals" (
+--   "id" SERIAL PRIMARY KEY,
+--   "name" text,
+--   "calories" int
+-- );
 
 CREATE TABLE "users_meals" (
   "id" SERIAL PRIMARY KEY,
@@ -30,39 +30,39 @@ CREATE TABLE "bookmarks" (
   "meal_id" int
 );
 
-CREATE TABLE "nutrients" (
-  "id" SERIAL PRIMARY KEY,
-  "meal_id" int,
-  "nutrient_id" int,
-  "nutrient_amount" int
-);
+-- CREATE TABLE "nutrients" (
+--   "id" SERIAL PRIMARY KEY,
+--   "meal_id" int,
+--   "nutrient_id" int,
+--   "nutrient_amount" int
+-- );
 
-CREATE TABLE "macros" (
-  "id" SERIAL PRIMARY KEY,
-  "name" text
-);
+-- CREATE TABLE "macros" (
+--   "id" SERIAL PRIMARY KEY,
+--   "name" text
+-- );
 
-CREATE TABLE "vitamins" (
-  "id" SERIAL PRIMARY KEY,
-  "name" text
-);
+-- CREATE TABLE "vitamins" (
+--   "id" SERIAL PRIMARY KEY,
+--   "name" text
+-- );
 
-CREATE TABLE "minerals" (
-  "id" SERIAL PRIMARY KEY,
-  "name" text
-);
+-- CREATE TABLE "minerals" (
+--   "id" SERIAL PRIMARY KEY,
+--   "name" text
+-- );
 
 ALTER TABLE "users_meals" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
 ALTER TABLE "bookmarks" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
-ALTER TABLE "nutrients" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");
+-- ALTER TABLE "nutrients" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");
 
-ALTER TABLE "nutrients" ADD FOREIGN KEY ("nutrient_id") REFERENCES "macros" ("id");
+-- ALTER TABLE "nutrients" ADD FOREIGN KEY ("nutrient_id") REFERENCES "macros" ("id");
 
-ALTER TABLE "nutrients" ADD FOREIGN KEY ("nutrient_id") REFERENCES "vitamins" ("id");
+-- ALTER TABLE "nutrients" ADD FOREIGN KEY ("nutrient_id") REFERENCES "vitamins" ("id");
 
-ALTER TABLE "nutrients" ADD FOREIGN KEY ("nutrient_id") REFERENCES "minerals" ("id");
+-- ALTER TABLE "nutrients" ADD FOREIGN KEY ("nutrient_id") REFERENCES "minerals" ("id");
 
 INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716627, '2021-03-14');
 INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716408, '2021-03-14');
@@ -79,8 +79,8 @@ INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 7
 INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716426, '2021-03-20');
 INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 766453, '2021-03-20');
 
--- INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 652423, '2021-03-21');
--- INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 660306, '2021-03-21');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 652423, '2021-03-21');
+INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 660306, '2021-03-21');
 INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 715424, '2021-03-22');
 INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 662670, '2021-03-22');
 INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716195, '2021-03-23');

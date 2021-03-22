@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
 		// backgroundImage: "linear-gradient(#c8e6c9, #fff)",
 		backgroundColor: "#fff",
 		flexWrap: "wrap",
-		margin: "0 0 10px 0",
+		margin: "0 0 20px 0",
 		padding: "30px",
 		justifyContent: "left",
 		// boxShadow: "2px 2px 3px lightgray",

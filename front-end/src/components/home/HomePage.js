@@ -52,6 +52,7 @@ const HomePage = () => {
 							justifyContent: "space-around",
 							alignItems: "center",
 							borderRadius: "5px",
+							margin: "0 0 10px 0",
 						}}
 					>
 						<Pagination
