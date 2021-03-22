@@ -71,12 +71,6 @@ beforeEach(async () => {
 	await User.register(user1);
 });
 
-// afterEach(async () => {
-// 	await db.query("DELETE FROM users_meals");
-// 	await db.query("DELETE FROM bookmarks");
-// 	await db.query("DELETE FROM users");
-// });
-
 describe("GET / route", () => {
 	it("should return JSON of all users", async () => {
 		await User.register(user2);

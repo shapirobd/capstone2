@@ -6,6 +6,17 @@ const ExpressError = require("../expressError");
 
 const router = new express.Router();
 
+// POST route to register a new user
+router.post("/register", async function (req, res, next) {
+	try {
+		console.log(req.body);
+		const user = await User.register(req.body);
+		return res.json(user);
+	} catch (e) {
+		return next(e);
+	}
+});
+
 // POST route to login a new user
 router.post("/login", async function (req, res, next) {
 	try {
@@ -17,16 +28,6 @@ router.post("/login", async function (req, res, next) {
 		} else {
 			throw new ExpressError("User not found", 404);
 		}
-	} catch (e) {
-		return next(e);
-	}
-});
-
-// POST route to register a new user
-router.post("/register", async function (req, res, next) {
-	try {
-		const user = await User.register(req.body);
-		return res.json(user);
 	} catch (e) {
 		return next(e);
 	}

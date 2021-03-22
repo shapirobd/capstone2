@@ -69,12 +69,6 @@ beforeEach(async () => {
 	await db.query("DELETE FROM users");
 });
 
-// afterEach(async () => {
-// 	await db.query("DELETE FROM users_meals");
-// 	await db.query("DELETE FROM bookmarks");
-// 	await db.query("DELETE FROM users");
-// });
-
 describe("User.register() method", () => {
 	it("should return object containing information on user who is registering", async () => {
 		const resp = await User.register(user1);
