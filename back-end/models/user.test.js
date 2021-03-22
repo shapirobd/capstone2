@@ -203,15 +203,8 @@ describe("User.findOne() method", () => {
 	it("should get information on a single user", async () => {
 		await User.register(user1);
 
-		for (let id of bookmarks1) {
-			await User.bookmarkRecipe(user1.username, id);
-		}
-
-		for (let date in eatenMeals1) {
-			for (let id of eatenMeals1[date]) {
-				await User.addEatenMeal(user1.username, id, date);
-			}
-		}
+		await addBookmarks(bookmarks1, user1);
+		await addEatenMeals(eatenMeals1, user1);
 
 		const resp = await User.findOne(user1.username);
 		expect(resp).toEqual({
