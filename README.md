@@ -1,6 +1,9 @@
-![alt text](/front-end/src/images/logo.png "Text")
+<!-- ⚠️ This README has been generated from the file(s) "blueprint.md" ⚠️-->![alt text](/front-end/src/images/logo.png "Text")
 
-## Description
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#description)
+
+## ➤ Description
 
 KitchenMenu is a platform that uses the Spoonacular API to allow users to search for recipes to make and track the meals they end up eating. They can filter their results by macronutrient quantities, dietary restrictions and selected ingredients.
 
@@ -10,11 +13,17 @@ KitchenMenu is a platform that uses the Spoonacular API to allow users to search
 
 On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
 
-## Visuals
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#visuals)
+
+## ➤ Visuals
 
 Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
 
-## Installation
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#installation)
+
+## ➤ Installation
 
 ### front-end
 
@@ -63,6 +72,9 @@ cd back-end
 npm install
 ```
 
-## Usage
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#usage)
+
+## ➤ Usage
 
 Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
