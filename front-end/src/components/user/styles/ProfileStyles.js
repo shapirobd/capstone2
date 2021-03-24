@@ -20,14 +20,14 @@ export const useStyles = makeStyles(() => ({
 	},
 	gridContainer: {
 		height: "100%",
-		width: "40%",
+		// width: "40%",
 		boxShadow: "2px 2px 8px rgba(0,0,0,0.5)",
 		position: "relative",
 		backgroundColor: "#fff",
 	},
 	gridItem: { padding: "20px", height: "100%" },
 	profPic: {
-		width: "25vw",
+		width: "75%",
 		height: "25vw",
 		borderRadius: "50%",
 		backgroundColor: "lightGray",

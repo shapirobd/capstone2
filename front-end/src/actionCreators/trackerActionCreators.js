@@ -3,6 +3,8 @@ import { ADD_EATEN_MEAL, REMOVE_EATEN_MEAL } from "../components/actionTypes";
 
 const API_URL = "http://localhost:5000";
 
+// adds eaten meal to database as well as redux state for a given date
+// by dispatching action created by addedEatenMeal()
 export const addEatenMeal = (username, recipeId, date) => {
 	return async (dispatch) => {
 		try {
@@ -18,6 +20,8 @@ export const addEatenMeal = (username, recipeId, date) => {
 	};
 };
 
+// returns action to be dispatched containing id of recipe
+// to be eaten and date that it was eaten
 const addedEatenMeal = (recipeId, date) => {
 	return {
 		type: ADD_EATEN_MEAL,
@@ -28,6 +32,8 @@ const addedEatenMeal = (recipeId, date) => {
 	};
 };
 
+// removes eaten meal from database as well as redux state for a given date
+// by dispatching action created by removedEatenMeal()
 export const removeEatenMeal = (username, recipeId, date) => {
 	return async (dispatch) => {
 		try {
@@ -43,6 +49,8 @@ export const removeEatenMeal = (username, recipeId, date) => {
 	};
 };
 
+// returns action to be dispatched containing id of recipe
+// to be removed and date that it was eaten
 const removedEatenMeal = (recipeId, date) => {
 	return {
 		type: REMOVE_EATEN_MEAL,

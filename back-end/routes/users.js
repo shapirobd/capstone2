@@ -1,10 +1,24 @@
-const express = require("express");
+/** Express router providing user related routes
+ * @module routes/users
+ * @requires express
+ */
+
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const express = require("express");
 
+/**
+ * Express router to mount user related functions on.
+ * @type {object}
+ * @const
+ * @namespace users
+ */
 const router = new express.Router();
 
-// route for GET all users
+/**
+ * Route for getting all users from the database.
+ * @return {Array} Array of user objects (each object containing username, email, first_name, last_name)
+ */
 router.get("/", async function (req, res, next) {
 	try {
 		const users = await User.findAll();
@@ -14,6 +28,10 @@ router.get("/", async function (req, res, next) {
 	}
 });
 
+/**
+ * Route for finding a user from the databse with a given username
+ * @return {Object} Object containing username, email, first_name and last_name of the found user
+ */
 router.get("/:username", async function (req, res, next) {
 	try {
 		const user = await User.findOne(req.params.username);
@@ -23,6 +41,10 @@ router.get("/:username", async function (req, res, next) {
 	}
 });
 
+/**
+ *  Edit a user's basic information
+ * @return {Object} Object containing username, email, first_name, last_name, weight, weight_goal, calorie_goal     				bookmarks and eatenMEals of the editted user
+ */
 router.patch("/:username", async function (req, res, next) {
 	try {
 		const resp = await User.editProfile(req.body, req.params.username);
@@ -32,6 +54,10 @@ router.patch("/:username", async function (req, res, next) {
 	}
 });
 
+/**
+ *  Adds a recipe id to a user's list of bookmarked recipes
+ * @return {Object} Object containing success message with recipeId
+ */
 router.post("/bookmarkRecipe", async function (req, res, next) {
 	try {
 		const { username, recipeId } = req.body;
@@ -42,6 +68,10 @@ router.post("/bookmarkRecipe", async function (req, res, next) {
 	}
 });
 
+/**
+ *  Removes a recipe id from a user's list of bookmarked recipes
+ * @return {Object} Object containing success message with recipeId
+ */
 router.post("/unbookmarkRecipe", async function (req, res, next) {
 	try {
 		const { username, recipeId } = req.body;
@@ -52,6 +82,10 @@ router.post("/unbookmarkRecipe", async function (req, res, next) {
 	}
 });
 
+/**
+ *  Finds and returns all bookmarked recipes for a given user
+ * @return {Object} Array of all recipe ids that a user has bookmarked
+ */
 router.get("/:username/getAllBookmarks", async function (req, res, next) {
 	try {
 		const recipes = await User.getAllBookmarks(req.params.username);
@@ -61,6 +95,10 @@ router.get("/:username/getAllBookmarks", async function (req, res, next) {
 	}
 });
 
+/**
+ *  Finds and returns all eaten meals for a given user on a given day
+ * @return {Object} Array of all recipe ids that a user has eaten on the given date
+ */
 router.get("/:username/getEatenMeals", async function (req, res, next) {
 	try {
 		const meals = await User.getEatenMeals(req.params.username, req.query.date);
@@ -70,6 +108,10 @@ router.get("/:username/getEatenMeals", async function (req, res, next) {
 	}
 });
 
+/**
+ *  Adds a recipe id to a user's list of eaten meals for a given date
+ * @return {Object} Object containing success message
+ */
 router.post("/addEatenMeal", async function (req, res, next) {
 	try {
 		const { username, recipeId, date } = req.body;
@@ -80,6 +122,10 @@ router.post("/addEatenMeal", async function (req, res, next) {
 	}
 });
 
+/**
+ *  Removes a recipe id from a user's list of eaten meals for a given date
+ * @return {Object} Object containing success message
+ */
 router.post("/removeEatenMeal", async function (req, res, next) {
 	try {
 		const { username, recipeId, date } = req.body;

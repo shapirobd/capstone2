@@ -3,11 +3,12 @@ import { LOGIN, LOGOUT } from "../components/actionTypes";
 
 const API_URL = "http://localhost:5000";
 
+// adds user to database as well as redux state
+// by dispatching action created by registered()
 export const register = (data) => {
 	return async (dispatch) => {
 		try {
-			const registerResp = await axios.post(`${API_URL}/auth/register`, data);
-			// const user = registerResp.data;
+			await axios.post(`${API_URL}/auth/register`, data);
 			const userResp = await axios.get(`${API_URL}/users/${data.username}`);
 			dispatch(registered(userResp.data));
 		} catch (e) {
@@ -16,6 +17,8 @@ export const register = (data) => {
 	};
 };
 
+// returns action to be dispatched containing information on the
+// newly registered user
 const registered = (user) => {
 	const {
 		username,
@@ -31,7 +34,6 @@ const registered = (user) => {
 	return {
 		type: LOGIN,
 		payload: {
-			// token,
 			user: {
 				username,
 				email,
@@ -47,13 +49,13 @@ const registered = (user) => {
 	};
 };
 
+// verifies that username & password from data are valid
+// if valid, adds the user to redux state by dispatching action created by loggedIn()
+// in invalid, throws error
 export const login = (data) => {
 	return async (dispatch) => {
 		try {
-			console.log("login");
 			const user = await axios.post(`${API_URL}/auth/login`, data);
-			console.log(user);
-			// const { api_hash } = user.data;
 			dispatch(loggedIn(user.data));
 		} catch (e) {
 			console.error(e);
@@ -61,6 +63,8 @@ export const login = (data) => {
 	};
 };
 
+// returns action to be dispatched containing information on the
+// logged in user
 const loggedIn = (user) => {
 	const {
 		username,
@@ -76,7 +80,6 @@ const loggedIn = (user) => {
 	return {
 		type: LOGIN,
 		payload: {
-			// token,
 			user: {
 				username,
 				email,
@@ -92,12 +95,16 @@ const loggedIn = (user) => {
 	};
 };
 
+// returns action to be dispatched that ends up removing
+// the user's information from redux state
 export const logout = () => {
 	return {
 		type: LOGOUT,
 	};
 };
 
+// edits the information on a given user in the database
+// as well as redux state by dispatching action created by edittedProfile()
 export const editProfile = (username, data) => {
 	return async (dispatch) => {
 		try {
@@ -109,6 +116,8 @@ export const editProfile = (username, data) => {
 	};
 };
 
+// returns action to be dispatched containing information on the
+// logged in user
 const edittedProfile = (user) => {
 	return {
 		type: "EDIT_PROFILE",

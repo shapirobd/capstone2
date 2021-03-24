@@ -7,4 +7,7 @@ export const useStyles = makeStyles(() => ({
 		// boxShadow: "2px 3px 3px lightgray",
 		borderRadius: "5px",
 	},
+	doughnut: {
+		padding: "40px",
+	},
 }));

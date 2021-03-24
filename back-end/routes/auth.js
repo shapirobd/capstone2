@@ -6,10 +6,24 @@ const ExpressError = require("../expressError");
 
 const router = new express.Router();
 
-// POST route to register a new user
+/**
+ * POST route to register a new user by adding them to the database
+ * If successful, return object containing user's information
+ * If unsuccessful, throw error
+ *
+ * req.body should include:
+ * - username
+ * - password
+ * - email
+ * - first_name
+ * - last_name
+ * - weight
+ * - weight_goal
+ * - calorie_goal
+ */
+
 router.post("/register", async function (req, res, next) {
 	try {
-		console.log(req.body);
 		const user = await User.register(req.body);
 		return res.json(user);
 	} catch (e) {
@@ -17,7 +31,15 @@ router.post("/register", async function (req, res, next) {
 	}
 });
 
-// POST route to login a new user
+/**
+ * POST route to validate a given username and password
+ * If successful, return object containing user's information
+ * If unsuccessful, throw 404 error
+ *
+ * req.body should include:
+ * - username
+ * - password
+ */
 router.post("/login", async function (req, res, next) {
 	try {
 		const { username, password } = req.body;

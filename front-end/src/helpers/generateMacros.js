@@ -1,3 +1,10 @@
+/**
+ * Takes an array of objects (each with data on a specific nutrient for a specific meal)
+ * and uses the information for fat, carbs and protein to create an object with a
+ * breakdown of amounts of each macronutrient and their subnutrients
+ * @param {Object} nutrients contains number representing the amount of that nutrient in the recipe
+ * @returns object containing the name and amount for each macronutrient, as well as each of their subnutrients
+ */
 export const generateMacros = (nutrients) => {
 	return {
 		fat: {

@@ -19,6 +19,9 @@ const Profile = () => {
 				spacing={10}
 				justify="space-around"
 				className={classes.gridContainer}
+				xs={12}
+				sm={8}
+				md={5}
 				alignItems="center"
 			>
 				<Grid item cols={1} xs={12} className={classes.gridItem}>

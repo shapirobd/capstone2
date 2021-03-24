@@ -71,7 +71,6 @@ const rootReducer = (state = INITIAL_STATE, action) => {
 		}
 		case "UNBOOKMARK_RECIPE": {
 			const { recipeId } = action.payload;
-			console.log(recipeId);
 			return {
 				...state,
 				user: {
@@ -97,7 +96,6 @@ const rootReducer = (state = INITIAL_STATE, action) => {
 		}
 		case "REMOVE_EATEN_MEAL": {
 			const { recipeId, date } = action.payload;
-			console.log(recipeId);
 			return {
 				...state,
 				user: {

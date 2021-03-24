@@ -3,6 +3,8 @@ import { BOOKMARK_RECIPE, UNBOOKMARK_RECIPE } from "../components/actionTypes";
 
 const API_URL = "http://localhost:5000";
 
+// adds bookmarked recipe to database as well as redux state
+// by dispatching action created by bookmarkedRecipe()
 export const bookmarkRecipe = (username, recipeId) => {
 	return async (dispatch) => {
 		try {
@@ -17,6 +19,7 @@ export const bookmarkRecipe = (username, recipeId) => {
 	};
 };
 
+// returns action to be dispatched containing id of recipe to be bookmarked
 const bookmarkedRecipe = (recipeId) => {
 	return {
 		type: BOOKMARK_RECIPE,
@@ -26,6 +29,8 @@ const bookmarkedRecipe = (recipeId) => {
 	};
 };
 
+// removes bookmarked recipe from database as well as redux state
+// by dispatching action created by unbookmarkedRecipe()
 export const unbookmarkRecipe = (username, recipeId) => {
 	return async (dispatch) => {
 		try {
@@ -40,6 +45,7 @@ export const unbookmarkRecipe = (username, recipeId) => {
 	};
 };
 
+// returns action to be dispatched containing id of recipe to be unbookmarked
 const unbookmarkedRecipe = (recipeId) => {
 	return {
 		type: UNBOOKMARK_RECIPE,
@@ -49,9 +55,12 @@ const unbookmarkedRecipe = (recipeId) => {
 	};
 };
 
-export const getAllBookmarks = async (username) => {
-	const bookmarks = await axios.get(`${API_URL}/users/getAllBookmarks`, {
-		params: { username },
-	});
-	return bookmarks;
-};
+// retrieves all recipes from the database that have been bookmarked by a given user
+// returns array of recipe ids
+
+// export const getAllBookmarks = async (username) => {
+// 	const bookmarks = await axios.get(`${API_URL}/users/getAllBookmarks`, {
+// 		params: { username },
+// 	});
+// 	return bookmarks;
+// };

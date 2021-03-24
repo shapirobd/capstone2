@@ -2,6 +2,8 @@ import axios from "axios";
 import { LOAD_FEED, LOAD_RECIPE, FILTER_FEED } from "../components/actionTypes";
 import createMacrosParams from "../helpers/createMacrosParams";
 
+// retrieves all recipes from spoonacular API (paginated 40 per page) and updates
+// the feed & page number in redux state by dispatching array of recipes and the page number
 export const loadFeed = (page = 1, filterData = { diets: [], macros: {} }) => {
 	return async (dispatch) => {
 		try {
@@ -29,6 +31,9 @@ export const loadFeed = (page = 1, filterData = { diets: [], macros: {} }) => {
 	};
 };
 
+// returns action containing recipes to include in redux state's feed,
+// total number of results found to set as redux state's totalResults,
+// and the current page number to set as redux state's page
 const loadedFeed = (data, page) => {
 	return {
 		type: LOAD_FEED,
@@ -40,6 +45,8 @@ const loadedFeed = (data, page) => {
 	};
 };
 
+// retrieves data on a single recipe from spoonacular API and updates
+// currentRecipe in redux state by dispatching recipe info & instructions info
 export const loadRecipe = (recipeId) => {
 	console.log("2: ", recipeId);
 	return async (dispatch) => {
@@ -69,6 +76,7 @@ export const loadRecipe = (recipeId) => {
 	};
 };
 
+// returns action containing information to include in redux state's currentRecipe
 const loadedRecipe = (recipe, instructions) => {
 	return {
 		type: LOAD_RECIPE,
@@ -76,6 +84,9 @@ const loadedRecipe = (recipe, instructions) => {
 	};
 };
 
+// retrieves all recipes from spoonacular API with given ingredients (pagination not an option)
+// and updates feed, totalResults, page, and isIngredientBased in redux state by
+// dispatching array of found recipes and the length of that array
 export const getRecipesByIngredients = (ingredients) => {
 	return async (dispatch) => {
 		try {
@@ -158,6 +169,7 @@ export const getRecipesByIngredients = (ingredients) => {
 // 	};
 // };
 
+// returns action containing information to include in redux state's feed, totalResults, and page
 const filteredFeed = (data, page) => {
 	return {
 		type: FILTER_FEED,
