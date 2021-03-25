@@ -3,6 +3,8 @@ const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config");
 const ExpressError = require("../expressError");
+const continueIfValidRegister = require("../validators/registerValidator");
+const continueIfValidLogin = require("../validators/loginValidator");
 
 const router = new express.Router();
 
@@ -24,6 +26,7 @@ const router = new express.Router();
 
 router.post("/register", async function (req, res, next) {
 	try {
+		continueIfValidRegister(req, next);
 		const user = await User.register(req.body);
 		return res.json(user);
 	} catch (e) {
@@ -42,6 +45,7 @@ router.post("/register", async function (req, res, next) {
  */
 router.post("/login", async function (req, res, next) {
 	try {
+		continueIfValidLogin(req, next);
 		const { username, password } = req.body;
 		const user = await User.authenticate(username, password);
 		if (user) {

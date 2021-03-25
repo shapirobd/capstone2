@@ -122,6 +122,19 @@ describe("PATCH /:username route", () => {
 			eatenMeals: {},
 		});
 	});
+	it("should throw error if request body doesn't match json schema", async () => {
+		const resp = await request(app).patch(`/users/${user1.username}`).send({});
+
+		expect(resp.status).toEqual(400);
+		expect(resp.body.message).toEqual([
+			'instance requires property "email"',
+			'instance requires property "first_name"',
+			'instance requires property "last_name"',
+			'instance requires property "weight"',
+			'instance requires property "weight_goal"',
+			'instance requires property "calorie_goal"',
+		]);
+	});
 });
 describe("POST /bookmarkRecipe route", () => {
 	it("should add a recipe to a user's bookmarks", async () => {
@@ -135,6 +148,15 @@ describe("POST /bookmarkRecipe route", () => {
 			[user1.username]
 		);
 		expect(user.rows[0]).toEqual({ meal_id: 716408 });
+	});
+	it("should throw error if request body doesn't match json schema", async () => {
+		const resp = await request(app).post(`/users/bookmarkRecipe`).send({});
+
+		expect(resp.status).toEqual(400);
+		expect(resp.body.message).toEqual([
+			'instance requires property "username"',
+			'instance requires property "recipeId"',
+		]);
 	});
 });
 describe("POST /unbookmarkRecipe route", () => {
@@ -150,6 +172,15 @@ describe("POST /unbookmarkRecipe route", () => {
 			[user1.username]
 		);
 		expect(user.rows.length).toBe(0);
+	});
+	it("should throw error if request body doesn't match json schema", async () => {
+		const resp = await request(app).post(`/users/unbookmarkRecipe`).send({});
+
+		expect(resp.status).toEqual(400);
+		expect(resp.body.message).toEqual([
+			'instance requires property "username"',
+			'instance requires property "recipeId"',
+		]);
 	});
 });
 describe("GET /:username/getAllBookmarks route", () => {
@@ -179,30 +210,43 @@ describe("POST /addEatenMeal route", () => {
 			recipeId: bookmarks1[0],
 			date: "2021-03-14",
 		});
-
 		expect(resp.body).toEqual({ message: "Meal eaten" });
 
 		const user = await User.findOne(user1.username);
-
 		expect(Object.keys(user.eatenMeals)).toContain("2021-03-14");
 		expect(user.eatenMeals["2021-03-14"]).toEqual([716627]);
+	});
+	it("should throw error if request body doesn't match json schema", async () => {
+		const resp = await request(app).post(`/users/addEatenMeal`).send({});
+		expect(resp.status).toEqual(400);
+		expect(resp.body.message).toEqual([
+			'instance requires property "username"',
+			'instance requires property "recipeId"',
+			'instance requires property "date"',
+		]);
 	});
 });
 describe("POST /removeEatenMeal route", () => {
 	it("should remove a meal from a user's eaten meals", async () => {
 		await User.addEatenMeal(user1.username, bookmarks1[0], "2021-03-14");
-
 		const resp = await request(app).post(`/users/removeEatenMeal`).send({
 			username: user1.username,
 			recipeId: bookmarks1[0],
 			date: "2021-03-14",
 		});
-
 		expect(resp.body).toEqual({ message: "Meal deleted" });
 
 		const user = await User.findOne(user1.username);
-
 		expect(Object.keys(user.eatenMeals)).not.toContain("2021-03-14");
+	});
+	it("should throw error if request body doesn't match json schema", async () => {
+		const resp = await request(app).post(`/users/removeEatenMeal`).send({});
+		expect(resp.status).toEqual(400);
+		expect(resp.body.message).toEqual([
+			'instance requires property "username"',
+			'instance requires property "recipeId"',
+			'instance requires property "date"',
+		]);
 	});
 });
 

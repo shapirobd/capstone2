@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	bookmarkRecipe,
 	unbookmarkRecipe,
-} from "../../actionCreators/bookmarkActionCreators";
+} from "../../actionCreators/bookmarkActionCreators.js";
 import {
 	addEatenMeal,
 	removeEatenMeal,

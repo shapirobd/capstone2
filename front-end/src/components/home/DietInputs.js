@@ -29,7 +29,7 @@ const DietInputs = ({ allDiets, setFilterData, setChecked, checked }) => {
 	}, [checked, setFilterData]);
 
 	return (
-		<div style={{ float: "left", width: "50%" }}>
+		<div style={{ float: "left", width: "50%", height: "100%" }}>
 			<Typography>Diets</Typography>
 			<List className={classes.list}>
 				{allDiets.map((diet, idx) => {

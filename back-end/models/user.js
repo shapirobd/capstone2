@@ -4,12 +4,6 @@ const bcrypt = require("bcrypt");
 const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require("../config");
 const { default: axios } = require("axios");
 const convertDate = require("../helpers/convertDate");
-const {
-	unbookmarkRecipe,
-} = require("../../front-end/src/actionCreators/bookmarkActionCreators");
-const {
-	addEatenMeal,
-} = require("../../front-end/src/actionCreators/trackerActionCreators");
 
 /**
  *  User model with the following static methods:

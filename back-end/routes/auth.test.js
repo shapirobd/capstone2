@@ -43,6 +43,20 @@ describe("POST /register route", () => {
 			calorie_goal: user.calorie_goal,
 		});
 	});
+	it("should throw validation error if request body doesn't match json schema", async () => {
+		const resp = await request(app).post("/auth/register").send({});
+		expect(resp.status).toEqual(400);
+		expect(resp.body.message).toEqual([
+			'instance requires property "username"',
+			'instance requires property "password"',
+			'instance requires property "email"',
+			'instance requires property "first_name"',
+			'instance requires property "last_name"',
+			'instance requires property "weight"',
+			'instance requires property "weight_goal"',
+			'instance requires property "calorie_goal"',
+		]);
+	});
 });
 
 describe("POST /login route", () => {
@@ -82,6 +96,15 @@ describe("POST /login route", () => {
 
 		expect(resp.status).toEqual(404);
 		expect(resp.body.message).toEqual("User not found");
+	});
+
+	it("should throw validation error if request body doesn't match json schema", async () => {
+		const resp = await request(app).post("/auth/login").send({});
+		expect(resp.status).toEqual(400);
+		expect(resp.body.message).toEqual([
+			'instance requires property "username"',
+			'instance requires property "password"',
+		]);
 	});
 });
 

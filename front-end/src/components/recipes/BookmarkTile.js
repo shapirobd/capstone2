@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { GridListTile, GridListTileBar, Badge } from "@material-ui/core";
 import { useStyles } from "./styles/BookmarkTileStyles";
-import { unbookmarkRecipe } from "../../actionCreators/bookmarkActionCreators";
+import { unbookmarkRecipe } from "../../actionCreators/bookmarkActionCreators.js";
 import ClearIcon from "@material-ui/icons/Clear";
 
 const BookmarkTile = ({ user, recipe, removeBookmark }) => {

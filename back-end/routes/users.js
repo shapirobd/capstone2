@@ -6,6 +6,9 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const express = require("express");
+const continueIfValidEdit = require("../validators/editUserValidator");
+const continueIfValidBookmark = require("../validators/bookmarkRecipeValidator");
+const continueIfValidEatenMeal = require("../validators/eatenMealValidator");
 
 /**
  * Express router to mount user related functions on.
@@ -47,6 +50,7 @@ router.get("/:username", async function (req, res, next) {
  */
 router.patch("/:username", async function (req, res, next) {
 	try {
+		continueIfValidEdit(req, next);
 		const resp = await User.editProfile(req.body, req.params.username);
 		return res.json(resp);
 	} catch (e) {
@@ -60,6 +64,7 @@ router.patch("/:username", async function (req, res, next) {
  */
 router.post("/bookmarkRecipe", async function (req, res, next) {
 	try {
+		continueIfValidBookmark(req, next);
 		const { username, recipeId } = req.body;
 		const resp = await User.bookmarkRecipe(username, recipeId);
 		return res.json(resp);
@@ -74,6 +79,7 @@ router.post("/bookmarkRecipe", async function (req, res, next) {
  */
 router.post("/unbookmarkRecipe", async function (req, res, next) {
 	try {
+		continueIfValidBookmark(req, next);
 		const { username, recipeId } = req.body;
 		const resp = await User.unbookmarkRecipe(username, recipeId);
 		return res.json(resp);
@@ -114,6 +120,7 @@ router.get("/:username/getEatenMeals", async function (req, res, next) {
  */
 router.post("/addEatenMeal", async function (req, res, next) {
 	try {
+		continueIfValidEatenMeal(req, next);
 		const { username, recipeId, date } = req.body;
 		const resp = await User.addEatenMeal(username, recipeId, date);
 		return res.json(resp);
@@ -128,6 +135,7 @@ router.post("/addEatenMeal", async function (req, res, next) {
  */
 router.post("/removeEatenMeal", async function (req, res, next) {
 	try {
+		continueIfValidEatenMeal(req, next);
 		const { username, recipeId, date } = req.body;
 		const resp = await User.removeEatenMeal(username, recipeId, date);
 		return res.json(resp);
