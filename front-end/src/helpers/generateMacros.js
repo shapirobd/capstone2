@@ -7,6 +7,11 @@
  */
 export const generateMacros = (nutrients) => {
 	return {
+		calories: {
+			name: "Calories",
+			amount: nutrients[0].amount,
+			subNutrients: {},
+		},
 		fat: {
 			name: "Fat",
 			amount: nutrients[1].amount,

@@ -2,29 +2,12 @@ import React from "react";
 // import { CanvasJSChart } from "canvasjs-react-charts";
 import { useStyles } from "./styles/PieChartStyles";
 import { Doughnut } from "react-chartjs-2";
+import { Typography } from "@material-ui/core";
 
 const PieChart = ({ title, caloricBreakdown }) => {
+	console.log(caloricBreakdown);
 	const { percentFat, percentCarbs, percentProtein } = caloricBreakdown;
 	const classes = useStyles();
-
-	// const options = {
-	// 	animationEnabled: true,
-	// 	title: {
-	// 		text: title,
-	// 	},
-	// 	data: [
-	// 		{
-	// 			type: "pie",
-	// 			indexLabel: "{label}: {y}%",
-	// 			startAngle: -90,
-	// 			dataPoints: [
-	// 				{ y: `${Math.round(percentFat)}`, label: "Fat" },
-	// 				{ y: `${Math.round(percentCarbs)}`, label: "Carboydrates" },
-	// 				{ y: `${Math.round(percentProtein)}`, label: "Protein" },
-	// 			],
-	// 		},
-	// 	],
-	// };
 
 	const pieChartData = {
 		labels: ["Carbohydraetes", "Fat", "Protein"],
@@ -46,6 +29,7 @@ const PieChart = ({ title, caloricBreakdown }) => {
 
 	return (
 		<div className={classes.root}>
+			<Typography variant="h5">Caloric Breakdown</Typography>
 			<Doughnut
 				data={pieChartData}
 				options={{

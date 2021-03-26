@@ -7,10 +7,7 @@ import useWindowDimensions from "../../customHooks/getWindowDimensions";
 
 const TrackerBarChart = ({ weekState, barChartData }) => {
 	const classes = useStyles();
-
 	const { width } = useWindowDimensions();
-
-	console.log(barChartData);
 
 	return (
 		<div
@@ -22,7 +19,9 @@ const TrackerBarChart = ({ weekState, barChartData }) => {
 						Weekly Data
 					</Typography>
 					{weekState.empty ? (
-						<Typography variant="h3">No Data</Typography>
+						<Typography variant={width <= 599 ? "h6" : "h3"} color="error">
+							No data for the selected week
+						</Typography>
 					) : width <= 599 ? (
 						<HorizontalBar
 							data={barChartData}

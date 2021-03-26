@@ -24,7 +24,7 @@ const Recipe = ({ user }) => {
 	const { recipeId } = useParams();
 	const dispatch = useDispatch();
 	// const user = useSelector((state) => state.user);
-	console.log(user.bookmarks.includes(3));
+	// console.log(user.bookmarks.includes(3));
 	const { bookmarks, eatenMeals } = user;
 	console.log(eatenMeals);
 

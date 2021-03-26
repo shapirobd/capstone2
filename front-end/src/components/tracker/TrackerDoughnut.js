@@ -14,7 +14,7 @@ const TrackerDoughnut = ({ dayState, pieChartData }) => {
 				<>
 					<Typography variant="h6">Daily Macros</Typography>
 					{dayState.empty ? (
-						<Typography>No Data</Typography>
+						<Typography color="error">No data for the selected date</Typography>
 					) : (
 						<Doughnut data={pieChartData} className={classes.doughnut} />
 					)}
