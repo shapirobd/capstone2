@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match screenshot 1`] = `
+<DocumentFragment>
+  <div
+    class="makeStyles-root-11"
+  >
+    <div
+      style="width: 784px; height: 768px;"
+    >
+      <h4
+        class="MuiTypography-root MuiTypography-h4"
+      >
+        Bookmarks
+      </h4>
+      <div
+        class="makeStyles-root-12"
+      >
+        <ul
+          class="MuiGridList-root makeStyles-gridList-13"
+          style="margin: -2px;"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

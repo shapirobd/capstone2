@@ -88,18 +88,22 @@ class User {
 
 				const eatenMealsRes = await db.query(
 					`
-					SELECT meal_id, date
-					FROM users_meals
-					WHERE username=$1
+					SELECT um.meal_id AS id, um.date, m.protein, m.carbs, m.fat
+					FROM users_meals AS um
+					LEFT JOIN meals AS m
+					ON um.meal_id = m.id
+					WHERE um.username=$1
 					`,
 					[username]
 				);
+				console.log(eatenMealsRes.rows);
 				const eatenMeals = {};
 				eatenMealsRes.rows.map((meal) => {
 					let date = convertDate(meal.date);
+					const { id, protein, carbs, fat } = meal;
 					eatenMeals[date]
-						? eatenMeals[date].push(meal.meal_id)
-						: (eatenMeals[date] = [meal.meal_id]);
+						? eatenMeals[date].push({ id, protein, carbs, fat })
+						: (eatenMeals[date] = [{ id, protein, carbs, fat }]);
 				});
 				user.eatenMeals = eatenMeals;
 
@@ -319,7 +323,25 @@ class User {
 	 * @param {String} date The date that the user ate this meal
 	 * @return {Object} Object containing success message
 	 */
-	static async addEatenMeal(username, recipeId, date) {
+	static async addEatenMeal(username, recipeId, date, nutrients) {
+		const { calories, fat, carbs, protein } = nutrients;
+
+		console.log(recipeId);
+		console.log(calories);
+		console.log(fat);
+		console.log(carbs);
+		console.log(protein);
+		await db.query(
+			`
+			INSERT INTO meals 
+			(id, calories, fat, carbs, protein)
+			VALUES ($1, $2, $3, $4, $5)
+			ON CONFLICT (id)
+			DO NOTHING
+			`,
+			[recipeId, calories, fat, carbs, protein]
+		);
+
 		await db.query(
 			`
 			INSERT INTO users_meals 
@@ -344,6 +366,13 @@ class User {
 			WHERE username=$1 AND meal_id=$2 AND date=$3
 			`,
 			[username, recipeId, date]
+		);
+		await db.query(
+			`
+			DELETE FROM meals 
+			WHERE id=$1
+			`,
+			[recipeId]
 		);
 		return { message: "Meal deleted" };
 	}

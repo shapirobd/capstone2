@@ -11,7 +11,6 @@ const BookmarkTile = ({ user, recipe, removeBookmark }) => {
 	const dispatch = useDispatch();
 
 	const handleClick = () => {
-		console.log("YES");
 		dispatch(unbookmarkRecipe(user.username, recipe.id));
 		removeBookmark(recipe.id);
 	};

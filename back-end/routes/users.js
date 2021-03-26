@@ -50,6 +50,7 @@ router.get("/:username", async function (req, res, next) {
  */
 router.patch("/:username", async function (req, res, next) {
 	try {
+		console.log(req.body);
 		continueIfValidEdit(req, next);
 		const resp = await User.editProfile(req.body, req.params.username);
 		return res.json(resp);
@@ -121,8 +122,9 @@ router.get("/:username/getEatenMeals", async function (req, res, next) {
 router.post("/addEatenMeal", async function (req, res, next) {
 	try {
 		continueIfValidEatenMeal(req, next);
-		const { username, recipeId, date } = req.body;
-		const resp = await User.addEatenMeal(username, recipeId, date);
+		const { username, recipeId, date, nutrients } = req.body;
+		console.log(nutrients);
+		const resp = await User.addEatenMeal(username, recipeId, date, nutrients);
 		return res.json(resp);
 	} catch (e) {
 		return next(e);

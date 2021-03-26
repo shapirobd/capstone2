@@ -13,7 +13,6 @@ const RecipeGrid = ({ feed, areBookmarks, removeBookmark, ingredients }) => {
 		feed.sort((a, b) =>
 			a.missedIngredientCount > b.missedIngredientCount ? 1 : -1
 		);
-		console.log(feed);
 	}
 
 	return (

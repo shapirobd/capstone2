@@ -23,7 +23,6 @@ export const loadFeed = (page = 1, filterData = { diets: [], macros: {} }) => {
 					},
 				}
 			);
-			console.log(recipes.data);
 			dispatch(loadedFeed(recipes.data, page));
 		} catch (e) {
 			console.error(e);

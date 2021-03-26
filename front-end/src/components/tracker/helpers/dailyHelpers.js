@@ -26,24 +26,18 @@ export const getPieChartData = (carbs = 0, fat = 0, protein = 0) => {
 };
 
 export const getDateMacros = async (user, context, date, setDayState) => {
-	const mealIds = user.eatenMeals[date] || [];
-	let empty = true;
-	let meals;
-	if (mealIds.length) {
-		empty = false;
-		meals = await getMealsByIds(mealIds);
-	}
+	const meals = user.eatenMeals[date] || [];
 
-	let macros;
-	if (meals) {
-		macros = await getMacrosFromMeals(meals);
-	} else {
-		macros = {
-			carbs: 0,
-			fat: 0,
-			protein: 0,
-		};
+	const fat = getTotalMacro("fat", meals);
+	console.log(fat);
+	const carbs = getTotalMacro("carbs", meals);
+	const protein = getTotalMacro("protein", meals);
+
+	let empty = true;
+	if (meals.length) {
+		empty = false;
 	}
+	let macros = { fat, carbs, protein };
 
 	if (context === "day") {
 		setDayState({
@@ -57,31 +51,38 @@ export const getDateMacros = async (user, context, date, setDayState) => {
 	}
 };
 
-const getMealsByIds = async (ids) => {
-	const meals = await axios.get(
-		`https://api.spoonacular.com/recipes/informationBulk`,
-		{
-			params: {
-				apiKey: "73baf9bb95a14f5fb4d71e2f12ab8479",
-				ids: ids.join(","),
-				includeNutrition: true,
-			},
-		}
-	);
-	return meals;
+const getTotalMacro = (macro, meals) => {
+	console.log(meals);
+	return meals.reduce((total, meal) => {
+		return total + meal[macro];
+	}, 0);
 };
 
-const getMacrosFromMeals = async (meals) => {
-	const macros = {
-		carbs: meals.data.reduce((totalCarbs, meal) => {
-			return Math.round(totalCarbs + meal.nutrition.nutrients[3].amount) || 0;
-		}, 0),
-		fat: meals.data.reduce((totalFat, meal) => {
-			return Math.round(totalFat + meal.nutrition.nutrients[1].amount) || 0;
-		}, 0),
-		protein: meals.data.reduce((totalProtein, meal) => {
-			return Math.round(totalProtein + meal.nutrition.nutrients[8].amount) || 0;
-		}, 0),
-	};
-	return macros;
-};
+// const getMealsByIds = async (ids) => {
+// 	const meals = await axios.get(
+// 		`https://api.spoonacular.com/recipes/informationBulk`,
+// 		{
+// 			params: {
+// 				apiKey: "73baf9bb95a14f5fb4d71e2f12ab8479",
+// 				ids: ids.join(","),
+// 				includeNutrition: true,
+// 			},
+// 		}
+// 	);
+// 	return meals;
+// };
+
+// const getMacrosFromMeals = async (meals) => {
+// 	const macros = {
+// 		carbs: meals.data.reduce((totalCarbs, meal) => {
+// 			return Math.round(totalCarbs + meal.nutrition.nutrients[3].amount) || 0;
+// 		}, 0),
+// 		fat: meals.data.reduce((totalFat, meal) => {
+// 			return Math.round(totalFat + meal.nutrition.nutrients[1].amount) || 0;
+// 		}, 0),
+// 		protein: meals.data.reduce((totalProtein, meal) => {
+// 			return Math.round(totalProtein + meal.nutrition.nutrients[8].amount) || 0;
+// 		}, 0),
+// 	};
+// 	return macros;
+// };

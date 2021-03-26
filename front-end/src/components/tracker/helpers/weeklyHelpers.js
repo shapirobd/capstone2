@@ -5,6 +5,7 @@ import { getDateMacros } from "../helpers/dailyHelpers";
 
 export const getBarChartData = (weekData) => {
 	Object.keys(weekData).map((date) => console.log(date));
+	console.log(weekData);
 	return {
 		labels: WEEKDAYS,
 		datasets: [

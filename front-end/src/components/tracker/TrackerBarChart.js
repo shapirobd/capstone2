@@ -16,7 +16,21 @@ const TrackerBarChart = ({ weekState, barChartData }) => {
 					{weekState.empty ? (
 						<Typography variant="h3">No Data</Typography>
 					) : (
-						<Bar data={barChartData} className={classes.barChart} />
+						<Bar
+							data={barChartData}
+							className={classes.barChart}
+							options={{
+								scales: {
+									yAxes: [
+										{
+											ticks: {
+												beginAtZero: true,
+											},
+										},
+									],
+								},
+							}}
+						/>
 					)}
 				</>
 			) : (

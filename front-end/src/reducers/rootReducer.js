@@ -50,6 +50,7 @@ const rootReducer = (state = INITIAL_STATE, action) => {
 		}
 		case "LOGIN": {
 			const { user } = action.payload;
+			console.log(user);
 			return { ...state, user };
 		}
 		case "LOGOUT": {
@@ -82,14 +83,20 @@ const rootReducer = (state = INITIAL_STATE, action) => {
 			};
 		}
 		case "ADD_EATEN_MEAL": {
-			const { recipeId, date } = action.payload;
+			const { date, meal } = action.payload;
+			const { id, calories, fat, carbs, protein } = meal;
 			return {
 				...state,
 				user: {
 					...state.user,
 					eatenMeals: {
 						...state.user.eatenMeals,
-						[date]: [...state.user.eatenMeals[date], recipeId],
+						[date]: state.user.eatenMeals[date]
+							? [
+									...state.user.eatenMeals[date],
+									{ id, calories, fat, carbs, protein },
+							  ]
+							: [{ id, calories, fat, carbs, protein }],
 					},
 				},
 			};
@@ -103,7 +110,7 @@ const rootReducer = (state = INITIAL_STATE, action) => {
 					eatenMeals: {
 						...state.user.eatenMeals,
 						[date]: state.user.eatenMeals[date].filter(
-							(meal) => meal !== recipeId
+							(meal) => meal.id !== recipeId
 						),
 					},
 				},

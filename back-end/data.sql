@@ -7,15 +7,15 @@ CREATE TABLE "users" (
   "weight" int,
   "weight_goal" int,
   "calorie_goal" int
-  -- "api_hash" text,
-  -- "api_username" text
 );
 
--- CREATE TABLE "meals" (
---   "id" SERIAL PRIMARY KEY,
---   "name" text,
---   "calories" int
--- );
+CREATE TABLE "meals" (
+  "id" int PRIMARY KEY,
+  "calories" int,
+  "carbs" int,
+  "fat" int,
+  "protein" int
+);
 
 CREATE TABLE "users_meals" (
   "id" SERIAL PRIMARY KEY,
@@ -54,15 +54,51 @@ CREATE TABLE "bookmarks" (
 
 ALTER TABLE "users_meals" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
+ALTER TABLE "users_meals" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");
+
 ALTER TABLE "bookmarks" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
--- ALTER TABLE "nutrients" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");
+-- INSERT INTO users ("username", "password", "email", "first_name", "last_name", "weight", "weight_goal", "calorie_goal")
+-- VALUES ("shapirobd", "password", $3, $4, $5, $6, $7, $8)
+-- RETURNING username, email, first_name, last_name, weight, weight_goal, calorie_goal
+
 
 -- ALTER TABLE "nutrients" ADD FOREIGN KEY ("nutrient_id") REFERENCES "macros" ("id");
 
 -- ALTER TABLE "nutrients" ADD FOREIGN KEY ("nutrient_id") REFERENCES "vitamins" ("id");
 
 -- ALTER TABLE "nutrients" ADD FOREIGN KEY ("nutrient_id") REFERENCES "minerals" ("id");
+
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (716627, 300, 40, 25, 20);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (716408, 300, 40, 25, 20);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (716426, 300, 40, 25, 20);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (715594, 300, 40, 25, 20);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (715497, 300, 40, 25, 20);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (644387, 300, 40, 25, 20);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (715392, 300, 40, 25, 20);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (716268, 300, 40, 25, 20);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (716381, 300, 40, 25, 20);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (782601, 300, 40, 25, 20);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (715446, 300, 40, 25, 20);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (715415, 300, 40, 25, 20);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (716426, 300, 40, 25, 20);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (766453, 300, 40, 25, 20);
+
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (652423, 500, 55, 70, 30);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (660306, 500, 55, 70, 30);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (715424, 500, 55, 70, 30);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (662670, 500, 55, 70, 30);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (716195, 500, 55, 70, 30);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (663559, 500, 55, 70, 30);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (633942, 500, 55, 70, 30);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (715521, 500, 55, 70, 30);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (716276, 500, 55, 70, 30);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (782622, 500, 55, 70, 30);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (661340, 500, 55, 70, 30);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (715385, 500, 55, 70, 30);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (716406, 500, 55, 70, 30);
+INSERT INTO "meals" ("id", "calories", "carbs", "fat", "protein") VALUES (658579, 500, 55, 70, 30);
+
 
 INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716627, '2021-03-14');
 INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716408, '2021-03-14');

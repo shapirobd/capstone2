@@ -5,15 +5,22 @@ const API_URL = "http://localhost:5000";
 
 // adds eaten meal to database as well as redux state for a given date
 // by dispatching action created by addedEatenMeal()
-export const addEatenMeal = (username, recipeId, date) => {
+export const addEatenMeal = (username, recipeId, date, nutrients) => {
 	return async (dispatch) => {
 		try {
+			const macros = {
+				calories: Math.round(nutrients[0].amount),
+				fat: Math.round(nutrients[1].amount),
+				carbs: Math.round(nutrients[3].amount),
+				protein: Math.round(nutrients[8].amount),
+			};
 			await axios.post(`${API_URL}/users/addEatenMeal`, {
 				username,
 				recipeId,
 				date,
+				nutrients: macros,
 			});
-			dispatch(addedEatenMeal(recipeId, date));
+			dispatch(addedEatenMeal(recipeId, date, macros));
 		} catch (e) {
 			console.error(e);
 		}
@@ -22,12 +29,19 @@ export const addEatenMeal = (username, recipeId, date) => {
 
 // returns action to be dispatched containing id of recipe
 // to be eaten and date that it was eaten
-const addedEatenMeal = (recipeId, date) => {
+const addedEatenMeal = (recipeId, date, nutrients) => {
+	const { calories, fat, carbs, protein } = nutrients;
 	return {
 		type: ADD_EATEN_MEAL,
 		payload: {
-			recipeId,
 			date,
+			meal: {
+				id: recipeId,
+				calories,
+				fat,
+				carbs,
+				protein,
+			},
 		},
 	};
 };

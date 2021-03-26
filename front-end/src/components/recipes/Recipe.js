@@ -19,29 +19,43 @@ import { Typography, Grid, Button, ButtonGroup } from "@material-ui/core";
 import axios from "axios";
 import convertDate from "../../helpers/convertDate";
 
-const Recipe = () => {
+const Recipe = ({ user }) => {
 	const classes = useStyles();
 	const { recipeId } = useParams();
 	const dispatch = useDispatch();
-	const user = useSelector((state) => state.user);
-	const bookmarks = useSelector((state) => state.user.bookmarks);
-	const eatenMeals = useSelector((state) => state.user.eatenMeals);
-
-	console.log(user);
+	// const user = useSelector((state) => state.user);
+	console.log(user.bookmarks.includes(3));
+	const { bookmarks, eatenMeals } = user;
+	console.log(eatenMeals);
 
 	const [isBookmarked, setIsBookmarked] = useState(
-		bookmarks.includes(+recipeId)
+		!bookmarks ? false : user.bookmarks.includes(+recipeId)
 	);
 	const [isEaten, setIsEaten] = useState(
-		eatenMeals[convertDate()].includes(+recipeId)
+		!eatenMeals[convertDate()]
+			? false
+			: eatenMeals[convertDate()].includes(+recipeId)
 	);
 
 	const [currentRecipe, setCurrentRecipe] = useState(null);
 
+	console.log(currentRecipe);
+
+	// currentRecipe.recipe.nutrition.nutrients[0] calories
+	// currentRecipe.recipe.nutrition.nutrients[1] fat
+	// currentRecipe.recipe.nutrition.nutrients[3] carbs
+	// currentRecipe.recipe.nutrition.nutrients[8] protein
+
 	const toggleEaten = () => {
 		if (!isEaten) {
+			const { nutrients } = currentRecipe.recipe.nutrition;
 			dispatch(
-				addEatenMeal(user.username, currentRecipe.recipe.id, convertDate())
+				addEatenMeal(
+					user.username,
+					currentRecipe.recipe.id,
+					convertDate(),
+					nutrients
+				)
 			);
 		} else {
 			dispatch(

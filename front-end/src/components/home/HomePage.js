@@ -12,6 +12,8 @@ const HomePage = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
+	const user = useSelector((state) => state.user, shallowEqual);
+	console.log(user);
 	const feed = useSelector((state) => state.feed, shallowEqual);
 	const page = useSelector((state) => state.page, shallowEqual);
 	const totalResults = useSelector((state) => state.totalResults, shallowEqual);
@@ -34,8 +36,6 @@ const HomePage = () => {
 
 	return (
 		<>
-			{console.log(totalResults)}
-			{console.log(countPerPage)}
 			<div className={classes.root}>
 				<div style={{ width: `${width - 240}px`, height: `${height}px` }}>
 					<FilterPanel
