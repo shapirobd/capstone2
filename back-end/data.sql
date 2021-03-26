@@ -130,6 +130,21 @@ INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 7
 INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 716406, '2021-03-27');
 INSERT INTO "users_meals" ("username", "meal_id", "date") VALUES ('shapirobd', 658579, '2021-03-27');
 
+INSERT INTO "bookmarks" ("username", "meal_id") VALUES ('shapirobd', 716627);
+INSERT INTO "bookmarks" ("username", "meal_id") VALUES ('shapirobd', 716408);
+INSERT INTO "bookmarks" ("username", "meal_id") VALUES ('shapirobd', 716426);
+INSERT INTO "bookmarks" ("username", "meal_id") VALUES ('shapirobd', 715594);
+INSERT INTO "bookmarks" ("username", "meal_id") VALUES ('shapirobd', 715497);
+INSERT INTO "bookmarks" ("username", "meal_id") VALUES ('shapirobd', 644387);
+INSERT INTO "bookmarks" ("username", "meal_id") VALUES ('shapirobd', 715392);
+INSERT INTO "bookmarks" ("username", "meal_id") VALUES ('shapirobd', 716268);
+INSERT INTO "bookmarks" ("username", "meal_id") VALUES ('shapirobd', 716381);
+INSERT INTO "bookmarks" ("username", "meal_id") VALUES ('shapirobd', 782601);
+INSERT INTO "bookmarks" ("username", "meal_id") VALUES ('shapirobd', 715446);
+INSERT INTO "bookmarks" ("username", "meal_id") VALUES ('shapirobd', 715415);
+INSERT INTO "bookmarks" ("username", "meal_id") VALUES ('shapirobd', 716426);
+INSERT INTO "bookmarks" ("username", "meal_id") VALUES ('shapirobd', 766453);
+
 -- ALTER TABLE "users_meals" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");
 
 -- ALTER TABLE "bookmarks" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");

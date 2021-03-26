@@ -81,6 +81,7 @@ router.post("/bookmarkRecipe", async function (req, res, next) {
 router.post("/unbookmarkRecipe", async function (req, res, next) {
 	try {
 		continueIfValidBookmark(req, next);
+		console.log("VALID");
 		const { username, recipeId } = req.body;
 		const resp = await User.unbookmarkRecipe(username, recipeId);
 		return res.json(resp);

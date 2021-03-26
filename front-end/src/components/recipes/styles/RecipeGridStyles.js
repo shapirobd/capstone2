@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
 	gridList: {
 		display: "flex",
 		flexDirection: "row",
-		width: "max-content",
+		// width: "max-content",
 		justifyContent: "center",
 		alignItems: "center",
 	},
@@ -19,7 +19,8 @@ export const useStyles = makeStyles((theme) => ({
 		color: "rgba(255, 255, 255, 0.54)",
 	},
 	img: {
-		width: "100%",
+		maxWidth: "100%",
+		minHeight: "100%",
 	},
 	missingIngredients0: {
 		top: 0,
@@ -66,5 +67,10 @@ export const useStyles = makeStyles((theme) => ({
 		borderBottomRightRadius: "15px",
 		width: "30%",
 		boxShadow: "2px 2px 8px rgba(0,0,0,0.5)",
+	},
+	fab: {
+		borderRadius: 0,
+		width: "40px",
+		height: "20px",
 	},
 }));
