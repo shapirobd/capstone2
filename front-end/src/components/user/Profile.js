@@ -4,15 +4,18 @@ import { Grid, Divider, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import EditIcon from "@material-ui/icons/Edit";
 import EditProfileForm from "./EditProfileForm";
+import useWindowDimensions from "../../customHooks/getWindowDimensions";
 
 const Profile = () => {
 	const classes = useStyles();
 	const user = useSelector((state) => state.user);
 
+	const { width } = useWindowDimensions();
+
 	const [editting, setEditting] = useState(false);
 
 	return (
-		<div className={classes.root}>
+		<div className={width > 599 ? classes.root : classes.mobileRoot}>
 			<Grid
 				container
 				cols={1}
@@ -33,7 +36,11 @@ const Profile = () => {
 								className={classes.editIcon}
 								onClick={() => setEditting(true)}
 							/>
-							<div className={classes.profPic}></div>
+							<div
+								className={
+									width > 599 ? classes.profPic : classes.mobileProfPic
+								}
+							></div>
 							<div className={classes.userInfo}>
 								<Typography
 									variant="h6"

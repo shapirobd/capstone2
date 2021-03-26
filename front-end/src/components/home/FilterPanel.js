@@ -6,10 +6,13 @@ import DietInputs from "./DietInputs";
 import { useDispatch } from "react-redux";
 import { loadFeed } from "../../actionCreators/recipeActionCreators";
 import { ALL_DIETS, ALL_MACROS, INITIAL_FILTER_DATA } from "../../constants";
+import useWindowDimensions from "../../customHooks/getWindowDimensions";
 
-const FilterPanel = ({ setFiltered, filterData, setFilterData }) => {
+const FilterPanel = ({ setFiltered, filterData, setFilterData, mobile }) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
+
+	const { height, width } = useWindowDimensions();
 
 	const [checked, setChecked] = useState([]);
 
@@ -60,18 +63,23 @@ const FilterPanel = ({ setFiltered, filterData, setFilterData }) => {
 	};
 
 	return (
-		<form className={classes.root} onSubmit={handleSubmit}>
+		<form
+			className={width > 1039 ? classes.root : classes.mobileRoot}
+			onSubmit={handleSubmit}
+		>
 			<DietInputs
 				allDiets={ALL_DIETS}
 				handleChange={handleChange}
 				setFilterData={setFilterData}
 				checked={checked}
 				setChecked={setChecked}
+				mobile={width <= 1039}
 			/>
 			<MacroInputs
 				allMacros={ALL_MACROS}
 				handleChange={handleChange}
 				setFilterData={setFilterData}
+				mobile={width <= 1039}
 			/>
 			<div style={{ width: "100%", margin: "15px 0 0 0" }}>
 				<Button type="submit" className={classes.button}>

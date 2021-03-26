@@ -26,7 +26,16 @@ const RecipeGrid = ({ feed, areBookmarks, removeBookmark, ingredients }) => {
 				className={classes.gridList}
 			>
 				{feed.map((recipe) => (
-					<GridListTile key={recipe.image} style={{ position: "relative" }}>
+					<GridListTile
+						key={recipe.image}
+						style={{
+							position: "relative",
+							// backgroundImage: width <= 599 ? `url(${recipe.image})` : null,
+							// backgroundSize: width <= 599 ? "cover" : null,
+							// backgroundOrigin: width <= 599 ? "content-box" : null,
+							margin: width <= 599 ? "5px 0" : 0,
+						}}
+					>
 						{ingredients ? (
 							<GridListTileBar
 								className={
@@ -57,11 +66,23 @@ const RecipeGrid = ({ feed, areBookmarks, removeBookmark, ingredients }) => {
 							</div>
 						) : null}
 						<Link to={`/recipes/${recipe.id}`}>
-							<img
-								src={recipe.image}
-								alt={recipe.title}
-								className={classes.img}
-							/>
+							{/* {width > 599 ? ( */}
+							<div
+								style={{
+									height: "100%",
+									width: "100%",
+									display: "flex",
+									alignItems: "center",
+								}}
+							>
+								<img
+									src={recipe.image}
+									alt={recipe.title}
+									className={classes.img}
+								/>
+							</div>
+
+							{/* ) : null} */}
 							<GridListTileBar title={recipe.title} />
 						</Link>
 					</GridListTile>

@@ -8,6 +8,13 @@ export const useStyles = makeStyles(() => ({
 		justifyContent: "center",
 		alignItems: "center",
 	},
+	mobileRoot: {
+		width: "100%",
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "center",
+		alignItems: "center",
+	},
 	editIcon: {
 		position: "absolute",
 		top: 0,
@@ -27,8 +34,15 @@ export const useStyles = makeStyles(() => ({
 	},
 	gridItem: { padding: "20px", height: "100%" },
 	profPic: {
-		width: "75%",
+		width: "25vw",
 		height: "25vw",
+		borderRadius: "50%",
+		backgroundColor: "lightGray",
+		margin: "0 auto",
+	},
+	mobileProfPic: {
+		width: "65vw",
+		height: "65vw",
 		borderRadius: "50%",
 		backgroundColor: "lightGray",
 		margin: "0 auto",

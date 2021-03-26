@@ -14,9 +14,12 @@ import {
 import TrackerCalendar from "./TrackerCalendar";
 import TrackerDoughnut from "./TrackerDoughnut";
 import TrackerBarChart from "./TrackerBarChart";
+import useWindowDimensions from "../../customHooks/getWindowDimensions";
 
 const TrackerPage = () => {
 	const classes = useStyles();
+	const { width } = useWindowDimensions();
+
 	const user = useSelector((state) => state.user);
 
 	const [calendarDate, setCalendarDate] = useState(new Date());
@@ -88,15 +91,26 @@ const TrackerPage = () => {
 	return (
 		<div style={{ width: "100%" }}>
 			{console.log(weekState)}
-			<Grid container cols={2} className={classes.root}>
+			<Grid
+				container
+				cols={width <= 599 ? 1 : 2}
+				className={width <= 599 ? classes.mobileRoot : classes.root}
+			>
 				<Grid item cols={1} md={4} className={classes.gridItem}>
 					<TrackerCalendar
 						calendarDate={calendarDate}
 						setCalendarDate={setCalendarDate}
 					/>
 
-					<TrackerDoughnut dayState={dayState} pieChartData={pieChartData} />
+					{width > 599 ? (
+						<TrackerDoughnut dayState={dayState} pieChartData={pieChartData} />
+					) : null}
 				</Grid>
+				{width <= 599 ? (
+					<Grid item cols={1} md={4} className={classes.gridItem}>
+						<TrackerDoughnut dayState={dayState} pieChartData={pieChartData} />
+					</Grid>
+				) : null}
 				<Grid item cols={1} md={8} className={classes.gridItem}>
 					<TrackerBarChart weekState={weekState} barChartData={barChartData} />
 				</Grid>

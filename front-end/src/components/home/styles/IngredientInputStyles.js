@@ -4,6 +4,10 @@ export const useStyles = makeStyles(() => ({
 	leftGridItem: {
 		height: "100%",
 	},
+	topGridItem: {
+		height: "100vw",
+		width: "100vw",
+	},
 	main: {
 		display: "flex",
 		flexDirection: "column",
@@ -14,6 +18,17 @@ export const useStyles = makeStyles(() => ({
 		borderRadius: "5px",
 		backgroundColor: "rgba(255,255,255,0.5)",
 		boxShadow: "2px 2px 10px black",
+	},
+	mobileMain: {
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center",
+		height: "100%",
+		width: "100%",
+		borderRadius: "5px",
+		backgroundColor: "rgba(255,255,255,0.5)",
+		// boxShadow: "2px 2px 10px black",
 	},
 	heading: {
 		display: "block",

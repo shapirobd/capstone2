@@ -13,11 +13,17 @@ const IngredientInput = ({
 	handleChange,
 	formData,
 	addIngredient,
+	mobile,
 }) => {
 	const classes = useStyles();
 
 	return (
-		<Grid item cols={1} md={8} className={classes.leftGridItem}>
+		<Grid
+			item
+			cols={1}
+			md={8}
+			className={mobile ? classes.topGridItem : classes.leftGridItem}
+		>
 			<form
 				style={{
 					width: "100%",
@@ -28,8 +34,11 @@ const IngredientInput = ({
 					alignItems: "center",
 				}}
 			>
-				<div className={classes.main}>
-					<Typography variant="h4" className={classes.heading}>
+				<div className={mobile ? classes.mobileMain : classes.main}>
+					<Typography
+						variant={mobile ? "h5" : "h4"}
+						className={classes.heading}
+					>
 						What's in your kitchen?
 					</Typography>
 					<FormGroup row>

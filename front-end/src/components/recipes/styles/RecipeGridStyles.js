@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
 	gridList: {
 		display: "flex",
 		flexDirection: "row",
-		// width: "max-content",
+		width: "100%",
 		justifyContent: "center",
 		alignItems: "center",
 	},
@@ -19,15 +19,16 @@ export const useStyles = makeStyles((theme) => ({
 		color: "rgba(255, 255, 255, 0.54)",
 	},
 	img: {
-		maxWidth: "100%",
+		minWidth: "100%",
 		minHeight: "100%",
+		// boxSizing: "content-box",
 	},
 	missingIngredients0: {
 		top: 0,
 		right: 0,
 		backgroundColor: "#378e3c",
 		borderBottomRightRadius: "15px",
-		width: "30%",
+		width: "35%",
 		boxShadow: "2px 2px 8px rgba(0,0,0,0.5)",
 	},
 	missingIngredients1: {
@@ -35,7 +36,7 @@ export const useStyles = makeStyles((theme) => ({
 		right: 0,
 		backgroundColor: "#cddc39",
 		borderBottomRightRadius: "15px",
-		width: "30%",
+		width: "35%",
 		boxShadow: "2px 2px 8px rgba(0,0,0,0.5)",
 		"& > div": {
 			color: "#333",
@@ -46,7 +47,7 @@ export const useStyles = makeStyles((theme) => ({
 		right: 0,
 		backgroundColor: "#ffc107",
 		borderBottomRightRadius: "15px",
-		width: "30%",
+		width: "35%",
 		boxShadow: "2px 2px 8px rgba(0,0,0,0.5)",
 		"& > div": {
 			color: "#333",
@@ -57,7 +58,7 @@ export const useStyles = makeStyles((theme) => ({
 		right: 0,
 		backgroundColor: "#ff7722",
 		borderBottomRightRadius: "15px",
-		width: "30%",
+		width: "35%",
 		boxShadow: "2px 2px 8px rgba(0,0,0,0.5)",
 	},
 	missingIngredients4: {
@@ -65,7 +66,7 @@ export const useStyles = makeStyles((theme) => ({
 		right: 0,
 		backgroundColor: "#e83935",
 		borderBottomRightRadius: "15px",
-		width: "30%",
+		width: "35%",
 		boxShadow: "2px 2px 8px rgba(0,0,0,0.5)",
 	},
 	fab: {

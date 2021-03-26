@@ -36,8 +36,14 @@ const HomePage = () => {
 
 	return (
 		<>
-			<div className={classes.root}>
-				<div style={{ width: `${width - 240}px`, height: `${height}px` }}>
+			<div className={width > 599 ? classes.root : classes.mobileRoot}>
+				<div
+					style={
+						width > 599
+							? { width: `${width - 240}px`, height: `${height}px` }
+							: { width: "100%", height: "100%" }
+					}
+				>
 					<FilterPanel
 						setFiltered={setFiltered}
 						filterData={filterData}

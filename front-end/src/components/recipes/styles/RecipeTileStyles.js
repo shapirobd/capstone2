@@ -6,6 +6,7 @@ export const useStyles = makeStyles((theme) => ({
 		margin: "10px",
 		backgroundColor: "rgb(0,0,0,0)",
 		borderRadius: "5px",
+		boxSizing: "fit-content",
 	},
 	img: {
 		height: "100%",

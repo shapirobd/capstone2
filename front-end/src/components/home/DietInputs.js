@@ -7,7 +7,13 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Typography } from "@material-ui/core";
 
-const DietInputs = ({ allDiets, setFilterData, setChecked, checked }) => {
+const DietInputs = ({
+	allDiets,
+	setFilterData,
+	setChecked,
+	checked,
+	mobile,
+}) => {
 	const classes = useStyles();
 
 	const handleToggle = (value) => () => {
@@ -29,9 +35,15 @@ const DietInputs = ({ allDiets, setFilterData, setChecked, checked }) => {
 	}, [checked, setFilterData]);
 
 	return (
-		<div style={{ float: "left", width: "50%", height: "100%" }}>
+		<div
+			style={{
+				float: "left",
+				width: mobile ? "100%" : "50%",
+				height: "100%",
+			}}
+		>
 			<Typography>Diets</Typography>
-			<List className={classes.list}>
+			<List className={mobile ? classes.mobileList : classes.list}>
 				{allDiets.map((diet, idx) => {
 					const labelId = `checkbox-list-label-${idx}`;
 

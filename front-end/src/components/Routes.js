@@ -13,6 +13,7 @@ import BookmarksPage from "./recipes/BookmarksPage";
 import { Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
+import useWindowDimensions from "../customHooks/getWindowDimensions";
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -36,9 +37,12 @@ const Routes = () => {
 	const classes = useStyles();
 	const user = useSelector((state) => state.user);
 
+	const { width } = useWindowDimensions();
+
 	return (
 		<Container maxWidth="xl" className={classes.root}>
-			<SideNav />
+			{width > 599 ? <SideNav /> : null}
+
 			<Switch className={classes.mainContent}>
 				<Route exact path="/">
 					{user ? <HomePage /> : <WelcomePage />}

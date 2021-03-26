@@ -13,4 +13,11 @@ export const useStyles = makeStyles(() => ({
 		padding: "30px",
 		borderRadius: "5px",
 	},
+	mobileCalendarDiv: {
+		backgroundColor: "#fff",
+		width: "88%",
+		height: "38%",
+		padding: "30px",
+		borderRadius: "5px",
+	},
 }));

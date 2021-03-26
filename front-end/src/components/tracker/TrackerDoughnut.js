@@ -12,7 +12,7 @@ const TrackerDoughnut = ({ dayState, pieChartData }) => {
 		<div className={classes.doughnutDiv}>
 			{dayState.loaded ? (
 				<>
-					<Typography>Daily Macros</Typography>
+					<Typography variant="h6">Daily Macros</Typography>
 					{dayState.empty ? (
 						<Typography>No Data</Typography>
 					) : (

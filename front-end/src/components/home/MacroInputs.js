@@ -9,23 +9,24 @@ import {
 } from "@material-ui/core";
 import Select from "@material-ui/core/Select";
 
-const MacroInputs = ({ allMacros, handleChange }) => {
+const MacroInputs = ({ allMacros, handleChange, mobile }) => {
 	const classes = useStyles();
 
 	return (
-		<div style={{ width: "50%", justifyContent: "right" }}>
+		<div style={{ width: mobile ? "100%" : "50%", justifyContent: "right" }}>
 			<Typography>Macros</Typography>
 			<div style={{ margin: "0 0 10px 0" }}>
 				{allMacros.map((macro, idx) => {
 					return (
 						<Grid
 							container
-							cols={3}
+							cols={mobile ? 2 : 3}
 							spacing={2}
 							alignItems="flex-end"
 							key={macro}
+							className={classes.gridContainer}
 						>
-							<Grid item cols={1} md={6} style={{ paddingRight: 0 }}>
+							<Grid item cols={1} xs={6} style={{ paddingRight: 0 }}>
 								<FormControl variant="outlined" fullWidth size="small">
 									<Select
 										name={`operator-${macro}`}
@@ -43,7 +44,12 @@ const MacroInputs = ({ allMacros, handleChange }) => {
 									</Select>
 								</FormControl>
 							</Grid>
-							<Grid item cols={2} md={6} style={{ paddingLeft: 0 }}>
+							<Grid
+								item
+								cols={mobile ? 1 : 2}
+								xs={6}
+								style={{ paddingLeft: 0 }}
+							>
 								<TextField
 									name={`amount-${macro}`}
 									variant="outlined"

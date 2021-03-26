@@ -3,6 +3,9 @@ import { makeStyles, fade } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
 	},
 	appBar: {
 		backgroundColor: "#388e3c",
@@ -35,9 +38,22 @@ export const useStyles = makeStyles((theme) => ({
 		"&:hover": {
 			backgroundColor: fade(theme.palette.common.white, 0.25),
 		},
+		width: "40vw",
+		// [theme.breakpoints.up("sm")]: {
+		// 	marginLeft: theme.spacing(3),
+		// 	width: "auto",
+		// },
+	},
+	searchMobile: {
+		width: "75%",
+		position: "relative",
+		borderRadius: theme.shape.borderRadius,
+		backgroundColor: fade(theme.palette.common.white, 0.15),
+		"&:hover": {
+			backgroundColor: fade(theme.palette.common.white, 0.25),
+		},
 		marginRight: theme.spacing(2),
 		marginLeft: 0,
-		width: "30vw !important",
 		[theme.breakpoints.up("sm")]: {
 			marginLeft: theme.spacing(3),
 			width: "auto",

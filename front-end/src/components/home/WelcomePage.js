@@ -5,9 +5,11 @@ import { useStyles } from "./styles/WelcomePageStyles";
 import RecipeGrid from "../recipes/RecipeGrid";
 import IngredientInput from "./IngredientInput";
 import IngredientList from "./IngredientList";
+import useWindowDimensions from "../../customHooks/getWindowDimensions";
 
 const WelcomePage = () => {
 	const classes = useStyles();
+	const { width, height } = useWindowDimensions();
 
 	const [formData, setFormData] = useState("");
 	const [ingredients, setIngredients] = useState([]);
@@ -64,28 +66,54 @@ const WelcomePage = () => {
 	}, [ingredients]);
 
 	return (
-		<Grid container cols={2} className={classes.root}>
+		<Grid
+			container
+			cols={width > 599 ? 2 : 1}
+			spacing={1}
+			className={width > 599 ? classes.root : classes.mobileRoot}
+		>
 			<IngredientInput
 				ingredients={ingredients}
 				handleChange={handleChange}
 				formData={formData}
 				addIngredient={addIngredient}
+				mobile={width <= 599}
 			/>
 			<IngredientList
 				ingredients={ingredients}
 				handleSubmit={handleSubmit}
 				deleteIngredient={deleteIngredient}
+				mobile={width <= 599}
 			/>
 			{formSubmitted ? (
 				results.length ? (
-					<Grid
-						item
-						cols={2}
-						xs={12}
-						style={{ margin: "10px 0", padding: "0 10px 0 40px" }}
+					<div
+						style={{
+							width: "100%",
+							backgroundColor: "white",
+							display: "flex",
+							flexDirection: "column",
+							justifyContent: "space-around",
+							alignItems: "center",
+							borderRadius: "5px",
+							margin: "0 0 10px 0",
+							paddingBottom: "30px",
+						}}
 					>
-						<RecipeGrid feed={results} ingredients={ingredients} />
-					</Grid>
+						<Grid
+							item
+							cols={2}
+							xs={12}
+							style={{
+								margin: "10px 0",
+								padding: width > 599 ? "0 10px 0 40px" : 0,
+								display: "flex",
+								justifyContent: "center",
+							}}
+						>
+							<RecipeGrid feed={results} ingredients={ingredients} />
+						</Grid>
+					</div>
 				) : (
 					<div
 						style={{

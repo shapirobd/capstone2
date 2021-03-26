@@ -38,7 +38,7 @@ const BookmarksPage = () => {
 
 	return (
 		<>
-			<div className={classes.root}>
+			<div className={width > 599 ? classes.root : classes.mobileRoot}>
 				<div
 					style={
 						width > 599

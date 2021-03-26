@@ -2,24 +2,23 @@ import React from "react";
 import { Grid, Typography, Button, Chip, Divider } from "@material-ui/core";
 import { useStyles } from "./styles/IngredientListStyles";
 
-const IngredientList = ({ ingredients, handleSubmit, deleteIngredient }) => {
+const IngredientList = ({
+	ingredients,
+	handleSubmit,
+	deleteIngredient,
+	mobile,
+}) => {
 	const classes = useStyles();
 
 	return (
-		<Grid item cols={1} md={4} className={classes.rightGridItem}>
-			<div className={classes.ingredients}>
-				<Typography
-					variant="h5"
-					style={{
-						padding: "10px 0",
-						width: "100%",
-						backgroundColor: "#fff",
-						borderTopLeftRadius: "5px",
-						borderTopRightRadius: "5px",
-						textAlign: "center",
-						height: "5%",
-					}}
-				>
+		<Grid
+			item
+			cols={1}
+			md={4}
+			className={mobile ? classes.bottomGridItem : classes.rightGridItem}
+		>
+			<div className={mobile ? classes.mobileIngredients : classes.ingredients}>
+				<Typography variant="h6" className={classes.heading}>
 					Selected Ingredients
 				</Typography>
 				<Divider style={{ width: "100%" }} />
@@ -56,7 +55,7 @@ const IngredientList = ({ ingredients, handleSubmit, deleteIngredient }) => {
 						position: "absolute",
 						bottom: "0",
 						width: "100%",
-						height: "5%",
+						height: "10%",
 						boxShadow: "-2px 0px 8px rgba(0,0,0,0.5)",
 					}}
 				>
