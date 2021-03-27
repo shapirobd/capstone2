@@ -99,7 +99,6 @@ class User {
 					`,
 					[username]
 				);
-				console.log(eatenMealsRes.rows);
 				const eatenMeals = {};
 				eatenMealsRes.rows.map((meal) => {
 					let date = convertDate(meal.date);

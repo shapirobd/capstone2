@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useStyles } from "./styles/EditProfileFormStyles";
 import { TextField, Button } from "@material-ui/core";
 import { editProfile } from "../../actionCreators/userActionCreators";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const capitalize = (text) => {
 	return text
@@ -15,6 +15,7 @@ const capitalize = (text) => {
 const EditProfileForm = ({ user, setEditting }) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
+	const token = useSelector((state) => state.token);
 
 	const [formData, setFormData] = useState({
 		first_name: user.first_name,
@@ -35,7 +36,7 @@ const EditProfileForm = ({ user, setEditting }) => {
 
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
-		dispatch(editProfile(user.username, formData));
+		dispatch(editProfile(user.username, { _token: token, data: formData }));
 		setEditting(false);
 	};
 

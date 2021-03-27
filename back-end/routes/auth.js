@@ -27,9 +27,9 @@ const router = new express.Router();
 router.post("/register", async function (req, res, next) {
 	try {
 		continueIfValidRegister(req, next);
-		console.log("VALID");
 		const user = await User.register(req.body);
-		return res.json(user);
+		const token = jwt.sign({ username: user.username }, SECRET_KEY);
+		return res.json({ user, token });
 	} catch (e) {
 		return next(e);
 	}
@@ -50,8 +50,8 @@ router.post("/login", async function (req, res, next) {
 		const { username, password } = req.body;
 		const user = await User.authenticate(username, password);
 		if (user) {
-			// const user = jwt.sign({ username }, SECRET_KEY);
-			return res.json(user);
+			const token = jwt.sign({ username }, SECRET_KEY);
+			return res.json({ user, token });
 		} else {
 			throw new ExpressError("User not found", 404);
 		}

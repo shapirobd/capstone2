@@ -49,9 +49,10 @@ const rootReducer = (state = INITIAL_STATE, action) => {
 			return { ...state, currentRecipe };
 		}
 		case "LOGIN": {
-			const { user } = action.payload;
+			const { user, token } = action.payload;
 			console.log(user);
-			return { ...state, user };
+			console.log(token);
+			return { ...state, user, token };
 		}
 		case "LOGOUT": {
 			return INITIAL_STATE;

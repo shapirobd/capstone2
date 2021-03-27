@@ -8,9 +8,10 @@ const API_URL = "http://localhost:5000";
 export const register = (data) => {
 	return async (dispatch) => {
 		try {
-			const userResp = await axios.post(`${API_URL}/auth/register`, data);
+			const resp = await axios.post(`${API_URL}/auth/register`, data);
 			// const userResp = await axios.get(`${API_URL}/users/${data.username}`);
-			dispatch(registered(userResp.data));
+			const { user, token } = resp.data;
+			dispatch(registered(token, user));
 		} catch (e) {
 			console.error(e);
 		}
@@ -19,11 +20,12 @@ export const register = (data) => {
 
 // returns action to be dispatched containing information on the
 // newly registered user
-const registered = (user) => {
+const registered = (token, user) => {
 	return {
 		type: LOGIN,
 		payload: {
 			user,
+			token,
 		},
 	};
 };
@@ -34,8 +36,9 @@ const registered = (user) => {
 export const login = (data) => {
 	return async (dispatch) => {
 		try {
-			const user = await axios.post(`${API_URL}/auth/login`, data);
-			dispatch(loggedIn(user.data));
+			const resp = await axios.post(`${API_URL}/auth/login`, data);
+			const { user, token } = resp.data;
+			dispatch(loggedIn(token, user));
 		} catch (e) {
 			console.error(e);
 		}
@@ -44,32 +47,12 @@ export const login = (data) => {
 
 // returns action to be dispatched containing information on the
 // logged in user
-const loggedIn = (user) => {
-	const {
-		username,
-		email,
-		first_name,
-		last_name,
-		bookmarks,
-		eatenMeals,
-		weight,
-		weight_goal,
-		calorie_goal,
-	} = user;
+const loggedIn = (token, user) => {
 	return {
 		type: LOGIN,
 		payload: {
-			user: {
-				username,
-				email,
-				first_name,
-				last_name,
-				bookmarks,
-				eatenMeals,
-				weight,
-				weight_goal,
-				calorie_goal,
-			},
+			user,
+			token,
 		},
 	};
 };

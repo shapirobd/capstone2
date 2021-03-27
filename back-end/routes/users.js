@@ -9,6 +9,7 @@ const express = require("express");
 const continueIfValidEdit = require("../validators/editUserValidator");
 const continueIfValidBookmark = require("../validators/bookmarkRecipeValidator");
 const continueIfValidEatenMeal = require("../validators/eatenMealValidator");
+const { ensureLoggedIn, authenticateJWT } = require("../middleware/auth");
 
 /**
  * Express router to mount user related functions on.
@@ -48,9 +49,8 @@ router.get("/:username", async function (req, res, next) {
  *  Edit a user's basic information
  * @return {Object} Object containing username, email, first_name, last_name, weight, weight_goal, calorie_goal     				bookmarks and eatenMEals of the editted user
  */
-router.patch("/:username", async function (req, res, next) {
+router.patch("/:username", authenticateJWT, async function (req, res, next) {
 	try {
-		console.log(req.body);
 		continueIfValidEdit(req, next);
 		const resp = await User.editProfile(req.body, req.params.username);
 		return res.json(resp);
@@ -63,7 +63,7 @@ router.patch("/:username", async function (req, res, next) {
  *  Adds a recipe id to a user's list of bookmarked recipes
  * @return {Object} Object containing success message with recipeId
  */
-router.post("/bookmarkRecipe", async function (req, res, next) {
+router.post("/bookmarkRecipe", ensureLoggedIn, async function (req, res, next) {
 	try {
 		continueIfValidBookmark(req, next);
 		const { username, recipeId } = req.body;
@@ -78,17 +78,20 @@ router.post("/bookmarkRecipe", async function (req, res, next) {
  *  Removes a recipe id from a user's list of bookmarked recipes
  * @return {Object} Object containing success message with recipeId
  */
-router.post("/unbookmarkRecipe", async function (req, res, next) {
-	try {
-		continueIfValidBookmark(req, next);
-		console.log("VALID");
-		const { username, recipeId } = req.body;
-		const resp = await User.unbookmarkRecipe(username, recipeId);
-		return res.json(resp);
-	} catch (e) {
-		return next(e);
+router.post(
+	"/unbookmarkRecipe",
+	ensureLoggedIn,
+	async function (req, res, next) {
+		try {
+			continueIfValidBookmark(req, next);
+			const { username, recipeId } = req.body;
+			const resp = await User.unbookmarkRecipe(username, recipeId);
+			return res.json(resp);
+		} catch (e) {
+			return next(e);
+		}
 	}
-});
+);
 
 /**
  *  Finds and returns all bookmarked recipes for a given user
@@ -120,7 +123,7 @@ router.get("/:username/getEatenMeals", async function (req, res, next) {
  *  Adds a recipe id to a user's list of eaten meals for a given date
  * @return {Object} Object containing success message
  */
-router.post("/addEatenMeal", async function (req, res, next) {
+router.post("/addEatenMeal", ensureLoggedIn, async function (req, res, next) {
 	try {
 		continueIfValidEatenMeal(req, next);
 		const { username, recipeId, date, nutrients } = req.body;
@@ -136,15 +139,19 @@ router.post("/addEatenMeal", async function (req, res, next) {
  *  Removes a recipe id from a user's list of eaten meals for a given date
  * @return {Object} Object containing success message
  */
-router.post("/removeEatenMeal", async function (req, res, next) {
-	try {
-		continueIfValidEatenMeal(req, next);
-		const { username, recipeId, date } = req.body;
-		const resp = await User.removeEatenMeal(username, recipeId, date);
-		return res.json(resp);
-	} catch (e) {
-		return next(e);
+router.post(
+	"/removeEatenMeal",
+	ensureLoggedIn,
+	async function (req, res, next) {
+		try {
+			continueIfValidEatenMeal(req, next);
+			const { username, recipeId, date } = req.body;
+			const resp = await User.removeEatenMeal(username, recipeId, date);
+			return res.json(resp);
+		} catch (e) {
+			return next(e);
+		}
 	}
-});
+);
 
 module.exports = router;
