@@ -8,8 +8,8 @@ const API_URL = "http://localhost:5000";
 export const register = (data) => {
 	return async (dispatch) => {
 		try {
-			await axios.post(`${API_URL}/auth/register`, data);
-			const userResp = await axios.get(`${API_URL}/users/${data.username}`);
+			const userResp = await axios.post(`${API_URL}/auth/register`, data);
+			// const userResp = await axios.get(`${API_URL}/users/${data.username}`);
 			dispatch(registered(userResp.data));
 		} catch (e) {
 			console.error(e);
@@ -20,31 +20,10 @@ export const register = (data) => {
 // returns action to be dispatched containing information on the
 // newly registered user
 const registered = (user) => {
-	const {
-		username,
-		email,
-		first_name,
-		last_name,
-		bookmarks,
-		eatenMeals,
-		weight,
-		weight_goal,
-		calorie_goal,
-	} = user;
 	return {
 		type: LOGIN,
 		payload: {
-			user: {
-				username,
-				email,
-				first_name,
-				last_name,
-				bookmarks,
-				eatenMeals,
-				weight,
-				weight_goal,
-				calorie_goal,
-			},
+			user,
 		},
 	};
 };

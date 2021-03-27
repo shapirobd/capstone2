@@ -14,7 +14,7 @@ const WelcomePage = () => {
 	const [formData, setFormData] = useState("");
 	const [ingredients, setIngredients] = useState([]);
 	const [formSubmitted, setFormSubmitted] = useState(false);
-	const [results, setResults] = useState([]);
+	const [results, setResults] = useState(undefined);
 
 	const handleChange = (evt) => {
 		setFormData(evt.target.value);
@@ -59,7 +59,13 @@ const WelcomePage = () => {
 			};
 			getResults();
 		}
-	}, [formSubmitted, ingredients]);
+	}, [formSubmitted]);
+
+	useEffect(() => {
+		if (results) {
+			setFormSubmitted(false);
+		}
+	}, [results]);
 
 	useEffect(() => {
 		setFormData("");
@@ -72,6 +78,7 @@ const WelcomePage = () => {
 			spacing={1}
 			className={width > 599 ? classes.root : classes.mobileRoot}
 		>
+			{console.log(ingredients)}
 			<IngredientInput
 				ingredients={ingredients}
 				handleChange={handleChange}
@@ -85,7 +92,7 @@ const WelcomePage = () => {
 				deleteIngredient={deleteIngredient}
 				mobile={width <= 599}
 			/>
-			{formSubmitted ? (
+			{results ? (
 				results.length ? (
 					<div
 						style={{

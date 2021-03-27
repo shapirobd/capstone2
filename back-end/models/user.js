@@ -48,12 +48,15 @@ class User {
 				email,
 				first_name,
 				last_name,
-				weight,
-				weight_goal,
-				calorie_goal,
+				+weight,
+				+weight_goal,
+				+calorie_goal,
 			]
 		);
-		return results.rows[0];
+		const user = results.rows[0];
+		user.bookmarks = [];
+		user.eatenMeals = {};
+		return user;
 	}
 
 	/**

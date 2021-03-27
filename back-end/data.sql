@@ -30,6 +30,13 @@ CREATE TABLE "bookmarks" (
   "meal_id" int
 );
 
+ALTER TABLE "users_meals" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+
+ALTER TABLE "users_meals" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");
+
+ALTER TABLE "bookmarks" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+
+
 -- CREATE TABLE "nutrients" (
 --   "id" SERIAL PRIMARY KEY,
 --   "meal_id" int,
@@ -51,12 +58,6 @@ CREATE TABLE "bookmarks" (
 --   "id" SERIAL PRIMARY KEY,
 --   "name" text
 -- );
-
-ALTER TABLE "users_meals" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
-
-ALTER TABLE "users_meals" ADD FOREIGN KEY ("meal_id") REFERENCES "meals" ("id");
-
-ALTER TABLE "bookmarks" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
 -- INSERT INTO users ("username", "password", "email", "first_name", "last_name", "weight", "weight_goal", "calorie_goal")
 -- VALUES ("shapirobd", "password", $3, $4, $5, $6, $7, $8)

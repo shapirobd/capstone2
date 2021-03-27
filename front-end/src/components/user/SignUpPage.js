@@ -26,6 +26,9 @@ const SignUpPage = () => {
 		username: "",
 		email: "",
 		password: "",
+		weight: null,
+		weight_goal: null,
+		calorie_goal: null,
 	};
 	const [formData, setFormData] = useState(INITIAL_FORM_DATA);
 
@@ -33,7 +36,10 @@ const SignUpPage = () => {
 		const { name, value } = evt.target;
 		setFormData((formData) => ({
 			...formData,
-			[name]: value,
+			[name]:
+				name === "weight" || name === "weight_goal" || name === "calorie_goal"
+					? +value
+					: value,
 		}));
 	};
 
