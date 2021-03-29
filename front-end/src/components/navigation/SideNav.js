@@ -1,20 +1,7 @@
 import React from "react";
 import { useStyles } from "./styles/SideNavStyles";
-import {
-	Button,
-	SwipeableDrawer,
-	List,
-	Divider,
-	ListItem,
-	ListItemText,
-	ListItemIcon,
-} from "@material-ui/core";
-import BookmarkIcon from "@material-ui/icons/Bookmark";
-import EventNoteIcon from "@material-ui/icons/EventNote";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import KitchenIcon from "@material-ui/icons/Kitchen";
+import { Button } from "@material-ui/core";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useSelector } from "react-redux";
 import SideNavDrawer from "./SideNavDrawer";
 

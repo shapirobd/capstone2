@@ -16,7 +16,13 @@ export const getSteps = () => {
  * @param {Function} handleSubmit function that registers the user once the form is submitted
  * @param {Object} formData object containing information that has been entered into the form by the user
  */
-export const getStepContent = (step, handleChange, handleSubmit, formData) => {
+export const getStepContent = (
+	step,
+	handleChange,
+	handleSubmit,
+	formData,
+	missingData
+) => {
 	switch (step) {
 		case 0:
 			return (
@@ -24,6 +30,7 @@ export const getStepContent = (step, handleChange, handleSubmit, formData) => {
 					<SignUpFormOne
 						handleChange={handleChange}
 						handleSubmit={handleSubmit}
+						missingData={missingData}
 					/>
 				</>
 			);

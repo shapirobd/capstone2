@@ -19,7 +19,6 @@ const HomePage = () => {
 	const feed = useSelector((state) => state.feed, shallowEqual);
 	const page = useSelector((state) => state.page, shallowEqual);
 	const totalResults = useSelector((state) => state.totalResults, shallowEqual);
-	const countPerPage = useSelector((state) => state.countPerPage, shallowEqual);
 
 	const { height, width } = useWindowDimensions();
 	const [filtered, setFiltered] = useState(false);

@@ -10,8 +10,8 @@ const SignUpFormTwo = ({ handleSubmit, handleChange }) => {
 				<Grid item xs={12}>
 					<TextField
 						className={classes.textField}
-						required
 						id="weight"
+						inputProps={{ role: "text" }}
 						name="weight"
 						label="Weight"
 						fullWidth
@@ -22,8 +22,8 @@ const SignUpFormTwo = ({ handleSubmit, handleChange }) => {
 				<Grid item xs={12}>
 					<TextField
 						className={classes.textField}
-						required
 						id="weight_goal"
+						inputProps={{ role: "text" }}
 						name="weight_goal"
 						label="Weight Goal"
 						fullWidth
@@ -34,8 +34,8 @@ const SignUpFormTwo = ({ handleSubmit, handleChange }) => {
 				<Grid item xs={12}>
 					<TextField
 						className={classes.textField}
-						required
 						id="calorie_goal"
+						inputProps={{ role: "text" }}
 						name="calorie_goal"
 						label="Calorie Goal"
 						fullWidth

@@ -6,7 +6,6 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 const TrackerDoughnut = ({ dayState, pieChartData }) => {
 	const classes = useStyles();
-	console.log(pieChartData);
 
 	return (
 		<div className={classes.doughnutDiv}>

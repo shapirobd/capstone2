@@ -91,7 +91,7 @@ class User {
 
 				const eatenMealsRes = await db.query(
 					`
-					SELECT um.meal_id AS id, um.date, m.protein, m.carbs, m.fat
+					SELECT um.meal_id AS id, um.username, um.date, m.protein, m.carbs, m.fat
 					FROM users_meals AS um
 					LEFT JOIN meals AS m
 					ON um.meal_id = m.id
@@ -169,20 +169,21 @@ class User {
 
 		const eatenMealsRes = await db.query(
 			`
-					SELECT meal_id, date
-					FROM users_meals
-					WHERE username=$1
+					SELECT um.meal_id AS id, um.username, um.date, m.protein, m.carbs, m.fat
+					FROM users_meals AS um
+					LEFT JOIN meals AS m
+					ON um.meal_id = m.id
+					WHERE um.username=$1
 					`,
 			[username]
 		);
 		const eatenMeals = {};
 		eatenMealsRes.rows.map((meal) => {
 			let date = convertDate(meal.date);
-			if (eatenMeals[date]) {
-				eatenMeals[date] = [...eatenMeals[date], meal.meal_id];
-			} else {
-				eatenMeals[date] = [meal.meal_id];
-			}
+			const { id, protein, carbs, fat } = meal;
+			eatenMeals[date]
+				? eatenMeals[date].push({ id, protein, carbs, fat })
+				: (eatenMeals[date] = [{ id, protein, carbs, fat }]);
 		});
 		user.eatenMeals = eatenMeals;
 
@@ -229,20 +230,21 @@ class User {
 
 		const eatenMealsRes = await db.query(
 			`
-					SELECT meal_id, date
-					FROM users_meals
-					WHERE username=$1
+					SELECT um.meal_id AS id, um.username, um.date, m.protein, m.carbs, m.fat
+					FROM users_meals AS um
+					LEFT JOIN meals AS m
+					ON um.meal_id = m.id
+					WHERE um.username=$1
 					`,
 			[username]
 		);
 		const eatenMeals = {};
 		eatenMealsRes.rows.map((meal) => {
 			let date = convertDate(meal.date);
-			if (eatenMeals[date]) {
-				eatenMeals[date] = [...eatenMeals[date], meal.meal_id];
-			} else {
-				eatenMeals[date] = [meal.meal_id];
-			}
+			const { id, protein, carbs, fat } = meal;
+			eatenMeals[date]
+				? eatenMeals[date].push({ id, protein, carbs, fat })
+				: (eatenMeals[date] = [{ id, protein, carbs, fat }]);
 		});
 		user.eatenMeals = eatenMeals;
 
@@ -328,11 +330,6 @@ class User {
 	static async addEatenMeal(username, recipeId, date, nutrients) {
 		const { calories, fat, carbs, protein } = nutrients;
 
-		console.log(recipeId);
-		console.log(calories);
-		console.log(fat);
-		console.log(carbs);
-		console.log(protein);
 		await db.query(
 			`
 			INSERT INTO meals 
@@ -377,6 +374,28 @@ class User {
 			[recipeId]
 		);
 		return { message: "Meal deleted" };
+	}
+
+	static async deleteUser(username) {
+		await db.query(
+			`
+			DELETE FROM users_meals WHERE username=$1
+		`,
+			[username]
+		);
+		await db.query(
+			`
+			DELETE FROM bookmarks WHERE username=$1
+		`,
+			[username]
+		);
+		await db.query(
+			`
+			DELETE FROM users WHERE username=$1
+		`,
+			[username]
+		);
+		return { message: "User deleted" };
 	}
 }
 

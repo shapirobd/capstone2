@@ -50,8 +50,6 @@ const rootReducer = (state = INITIAL_STATE, action) => {
 		}
 		case "LOGIN": {
 			const { user, token } = action.payload;
-			console.log(user);
-			console.log(token);
 			return { ...state, user, token };
 		}
 		case "LOGOUT": {

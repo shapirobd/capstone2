@@ -68,7 +68,7 @@ const NavBar = () => {
 			{console.log(width)}
 			<AppBar position="fixed" className={classes.appBar}>
 				<Toolbar classes={{ root: classes.root }}>
-					{width <= 599 ? (
+					{width <= 599 && user ? (
 						<>
 							<IconButton
 								edge="start"
@@ -110,7 +110,19 @@ const NavBar = () => {
 							onChange={handleChange}
 						/>
 					</form>
-					<div style={{ float: "right" }}>
+					<div
+						style={
+							width > 599
+								? { float: "right" }
+								: {
+										width: "50%",
+										float: "right",
+										display: "flex",
+										flexDirection: "row",
+										justifyContent: "flex-end",
+								  }
+						}
+					>
 						{user ? (
 							<>
 								<Button
@@ -123,10 +135,18 @@ const NavBar = () => {
 							</>
 						) : (
 							<>
-								<Link to="/login" className={classes.navLink}>
+								<Link
+									to="/login"
+									className={classes.navLink}
+									// style={{ width: "50%" }}
+								>
 									<Button color="inherit">Login</Button>
 								</Link>
-								<Link to="/signup" className={classes.navLink}>
+								<Link
+									to="/signup"
+									className={classes.navLink}
+									// style={{ width: "50%" }}
+								>
 									<Button color="inherit" className={classes.signupBtn}>
 										Sign up
 									</Button>

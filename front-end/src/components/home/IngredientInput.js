@@ -21,7 +21,7 @@ const IngredientInput = ({
 		<Grid
 			item
 			cols={1}
-			md={8}
+			sm={8}
 			className={mobile ? classes.topGridItem : classes.leftGridItem}
 		>
 			<form

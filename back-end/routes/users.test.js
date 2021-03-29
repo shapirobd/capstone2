@@ -5,7 +5,8 @@ const request = require("supertest");
 const User = require("../models/user");
 const axios = require("axios");
 const { Client } = require("pg");
-const { DB_URI } = require("../config");
+const { DB_URI, SECRET_KEY } = require("../config");
+const jwt = require("jsonwebtoken");
 
 let db = new Client({
 	connectionString: DB_URI,
@@ -59,16 +60,24 @@ const addBookmarks = async (bookmarks, user) => {
 const addEatenMeals = async (eatenMeals, user) => {
 	for (let date in eatenMeals) {
 		for (let id of eatenMeals[date]) {
-			await User.addEatenMeal(user.username, id, date);
+			await User.addEatenMeal(user.username, id, date, {
+				calories: 500,
+				protein: 30,
+				carbs: 40,
+				fat: 20,
+			});
 		}
 	}
 };
+
+let token;
 
 beforeEach(async () => {
 	await db.query("DELETE FROM users_meals");
 	await db.query("DELETE FROM bookmarks");
 	await db.query("DELETE FROM users");
 	await User.register(user1);
+	token = jwt.sign({ username: user1.username }, SECRET_KEY);
 });
 
 describe("GET / route", () => {
@@ -108,7 +117,7 @@ describe("PATCH /:username route", () => {
 	it("should update information on a single user", async () => {
 		const resp = await request(app)
 			.patch(`/users/${user1.username}`)
-			.send(user1EditData);
+			.send({ data: user1EditData, _token: token });
 
 		expect(resp.body).toEqual({
 			username: user1.username,
@@ -123,7 +132,9 @@ describe("PATCH /:username route", () => {
 		});
 	});
 	it("should throw error if request body doesn't match json schema", async () => {
-		const resp = await request(app).patch(`/users/${user1.username}`).send({});
+		const resp = await request(app)
+			.patch(`/users/${user1.username}`)
+			.send({ _token: token, data: {} });
 
 		expect(resp.status).toEqual(400);
 		expect(resp.body.message).toEqual([
@@ -150,13 +161,19 @@ describe("POST /bookmarkRecipe route", () => {
 		expect(user.rows[0]).toEqual({ meal_id: 716408 });
 	});
 	it("should throw error if request body doesn't match json schema", async () => {
-		const resp = await request(app).post(`/users/bookmarkRecipe`).send({});
+		const resp = await request(app)
+			.post(`/users/bookmarkRecipe`)
+			.send({ username: user1.username });
 
 		expect(resp.status).toEqual(400);
 		expect(resp.body.message).toEqual([
-			'instance requires property "username"',
 			'instance requires property "recipeId"',
 		]);
+	});
+	it("should throw error if username not included in request body", async () => {
+		const resp = await request(app).post(`/users/bookmarkRecipe`).send({});
+
+		expect(resp.status).toEqual(401);
 	});
 });
 describe("POST /unbookmarkRecipe route", () => {
@@ -174,13 +191,19 @@ describe("POST /unbookmarkRecipe route", () => {
 		expect(user.rows.length).toBe(0);
 	});
 	it("should throw error if request body doesn't match json schema", async () => {
-		const resp = await request(app).post(`/users/unbookmarkRecipe`).send({});
+		const resp = await request(app)
+			.post(`/users/unbookmarkRecipe`)
+			.send({ username: user1.username });
 
 		expect(resp.status).toEqual(400);
 		expect(resp.body.message).toEqual([
-			'instance requires property "username"',
 			'instance requires property "recipeId"',
 		]);
+	});
+	it("should throw error if request body doesn't contain username", async () => {
+		const resp = await request(app).post(`/users/unbookmarkRecipe`).send({});
+
+		expect(resp.status).toEqual(401);
 	});
 });
 describe("GET /:username/getAllBookmarks route", () => {
@@ -205,30 +228,55 @@ describe("GET /:username/getEatenMeals route", () => {
 });
 describe("POST /addEatenMeal route", () => {
 	it("should add a meal to a user's eaten meals", async () => {
-		const resp = await request(app).post(`/users/addEatenMeal`).send({
-			username: user1.username,
-			recipeId: bookmarks1[0],
-			date: "2021-03-14",
-		});
+		const resp = await request(app)
+			.post(`/users/addEatenMeal`)
+			.send({
+				username: user1.username,
+				recipeId: bookmarks1[0],
+				date: "2021-03-14",
+				nutrients: {
+					calories: 500,
+					protein: 30,
+					carbs: 40,
+					fat: 20,
+				},
+			});
 		expect(resp.body).toEqual({ message: "Meal eaten" });
 
 		const user = await User.findOne(user1.username);
 		expect(Object.keys(user.eatenMeals)).toContain("2021-03-14");
-		expect(user.eatenMeals["2021-03-14"]).toEqual([716627]);
+		expect(user.eatenMeals["2021-03-14"]).toEqual([
+			{
+				carbs: 40,
+				fat: 20,
+				id: 716627,
+				protein: 30,
+			},
+		]);
 	});
 	it("should throw error if request body doesn't match json schema", async () => {
-		const resp = await request(app).post(`/users/addEatenMeal`).send({});
+		const resp = await request(app)
+			.post(`/users/addEatenMeal`)
+			.send({ username: user1.username });
 		expect(resp.status).toEqual(400);
 		expect(resp.body.message).toEqual([
-			'instance requires property "username"',
 			'instance requires property "recipeId"',
 			'instance requires property "date"',
 		]);
 	});
+	it("should throw error if request body doesn't contain username", async () => {
+		const resp = await request(app).post(`/users/addEatenMeal`).send({});
+		expect(resp.status).toEqual(401);
+	});
 });
 describe("POST /removeEatenMeal route", () => {
 	it("should remove a meal from a user's eaten meals", async () => {
-		await User.addEatenMeal(user1.username, bookmarks1[0], "2021-03-14");
+		await User.addEatenMeal(user1.username, bookmarks1[0], "2021-03-14", {
+			calories: 500,
+			protein: 30,
+			carbs: 40,
+			fat: 20,
+		});
 		const resp = await request(app).post(`/users/removeEatenMeal`).send({
 			username: user1.username,
 			recipeId: bookmarks1[0],
@@ -240,13 +288,18 @@ describe("POST /removeEatenMeal route", () => {
 		expect(Object.keys(user.eatenMeals)).not.toContain("2021-03-14");
 	});
 	it("should throw error if request body doesn't match json schema", async () => {
-		const resp = await request(app).post(`/users/removeEatenMeal`).send({});
+		const resp = await request(app)
+			.post(`/users/removeEatenMeal`)
+			.send({ username: user1.username });
 		expect(resp.status).toEqual(400);
 		expect(resp.body.message).toEqual([
-			'instance requires property "username"',
 			'instance requires property "recipeId"',
 			'instance requires property "date"',
 		]);
+	});
+	it("should throw error if request body doesn't contain username", async () => {
+		const resp = await request(app).post(`/users/removeEatenMeal`).send({});
+		expect(resp.status).toEqual(401);
 	});
 });
 

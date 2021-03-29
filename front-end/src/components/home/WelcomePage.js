@@ -9,7 +9,7 @@ import useWindowDimensions from "../../customHooks/getWindowDimensions";
 
 const WelcomePage = () => {
 	const classes = useStyles();
-	const { width, height } = useWindowDimensions();
+	const { width } = useWindowDimensions();
 
 	const [formData, setFormData] = useState("");
 	const [ingredients, setIngredients] = useState([]);

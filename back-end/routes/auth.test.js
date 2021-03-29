@@ -5,7 +5,8 @@ const request = require("supertest");
 const User = require("../models/user");
 const axios = require("axios");
 const { Client } = require("pg");
-const { DB_URI } = require("../config");
+const { DB_URI, SECRET_KEY } = require("../config");
+const jwt = require("jsonwebtoken");
 
 let db = new Client({
 	connectionString: DB_URI,
@@ -26,6 +27,7 @@ const user = {
 
 beforeEach(async () => {
 	await db.query("DELETE FROM users_meals");
+	await db.query("DELETE FROM meals");
 	await db.query("DELETE FROM bookmarks");
 	await db.query("DELETE FROM users");
 });
@@ -33,7 +35,9 @@ beforeEach(async () => {
 describe("POST /register route", () => {
 	it("should return an object containing a token if the user registers successfully", async () => {
 		const resp = await request(app).post("/auth/register").send(user);
-		expect(resp.body).toEqual({
+
+		expect(jwt.verify(resp.body.token, SECRET_KEY).username).toBe("username1");
+		expect(resp.body.user).toEqual({
 			username: user.username,
 			email: user.email,
 			first_name: user.first_name,
@@ -41,6 +45,8 @@ describe("POST /register route", () => {
 			weight: user.weight,
 			weight_goal: user.weight_goal,
 			calorie_goal: user.calorie_goal,
+			bookmarks: [],
+			eatenMeals: {},
 		});
 	});
 	it("should throw validation error if request body doesn't match json schema", async () => {
@@ -65,7 +71,9 @@ describe("POST /login route", () => {
 		const resp = await request(app)
 			.post("/auth/login")
 			.send({ username: user.username, password: user.password });
-		expect(resp.body).toEqual({
+
+		expect(jwt.verify(resp.body.token, SECRET_KEY).username).toBe("username1");
+		expect(resp.body.user).toEqual({
 			username: user.username,
 			email: user.email,
 			first_name: user.first_name,

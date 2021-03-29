@@ -9,9 +9,11 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { register } from "../../actionCreators/userActionCreators";
 import { getStepContent, getSteps } from "../../helpers/signUpHelpers";
+import useWindowDimensions from "../../customHooks/getWindowDimensions";
 
 const SignUpPage = () => {
 	const classes = useStyles();
+	const { width } = useWindowDimensions();
 
 	const [activeStep, setActiveStep] = React.useState(0);
 	const [skipped, setSkipped] = React.useState(new Set());
@@ -31,6 +33,13 @@ const SignUpPage = () => {
 		calorie_goal: null,
 	};
 	const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+	const [missingData, setMissingData] = useState({
+		first_name: false,
+		last_name: false,
+		username: false,
+		email: false,
+		password: false,
+	});
 
 	const handleChange = (evt) => {
 		const { name, value } = evt.target;
@@ -45,7 +54,6 @@ const SignUpPage = () => {
 
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
-		console.log("1:", formData);
 		dispatch(register(formData));
 		history.push("/");
 	};
@@ -59,6 +67,22 @@ const SignUpPage = () => {
 	};
 
 	const handleNext = () => {
+		let dataMissing = false;
+		Object.keys(missingData).map((fieldName) => {
+			let isMissing;
+			if (formData[fieldName] === "") {
+				dataMissing = true;
+				isMissing = true;
+			} else {
+				isMissing = false;
+			}
+			setMissingData((missingData) => ({
+				...missingData,
+				[fieldName]: isMissing,
+			}));
+		});
+		if (dataMissing) return;
+
 		let newSkipped = skipped;
 		if (isStepSkipped(activeStep)) {
 			newSkipped = new Set(newSkipped.values());
@@ -91,10 +115,10 @@ const SignUpPage = () => {
 	};
 
 	return (
-		<div className={classes.root}>
+		<div className={width > 599 ? classes.main : classes.mobileMain}>
 			<Stepper
 				activeStep={activeStep}
-				style={{ backgroundColor: "rgba(0,0,0,0)" }}
+				style={{ backgroundColor: "rgba(0,0,0,0)", padding: "20px 0 0 0" }}
 			>
 				{steps.map((label, index) => {
 					const stepProps = {};
@@ -108,8 +132,13 @@ const SignUpPage = () => {
 						stepProps.completed = false;
 					}
 					return (
-						<Step key={label} {...stepProps}>
-							<StepLabel {...labelProps}>{label}</StepLabel>
+						<Step key={label} {...stepProps} classes={{ root: classes.root }}>
+							<StepLabel
+								{...labelProps}
+								classes={{ root: classes.root, label: classes.label }}
+							>
+								{label}
+							</StepLabel>
 						</Step>
 					);
 				})}
@@ -127,37 +156,46 @@ const SignUpPage = () => {
 				) : (
 					<div>
 						<Typography className={classes.instructions}>
-							{getStepContent(activeStep, handleChange, handleSubmit, formData)}
+							{getStepContent(
+								activeStep,
+								handleChange,
+								handleSubmit,
+								formData,
+								missingData
+							)}
 						</Typography>
 						<div>
-							<Button
-								disabled={activeStep === 0}
-								onClick={handleBack}
-								className={classes.button}
-							>
-								Back
-							</Button>
-							{isStepOptional(activeStep) && (
+							<div style={{ float: "right" }}>
+								<Button
+									disabled={activeStep === 0}
+									onClick={handleBack}
+									className={classes.button}
+								>
+									Back
+								</Button>
+								{isStepOptional(activeStep) && (
+									<Button
+										variant="contained"
+										color="primary"
+										onClick={handleSkip}
+										className={`${classes.button} ${classes.skipButton}`}
+									>
+										Skip
+									</Button>
+								)}
+
 								<Button
 									variant="contained"
 									color="primary"
-									onClick={handleSkip}
-									className={classes.button}
+									label="nextBtn"
+									onClick={
+										activeStep === steps.length - 1 ? handleSubmit : handleNext
+									}
+									className={`${classes.button} ${classes.nextButton}`}
 								>
-									Skip
+									{activeStep === steps.length - 1 ? "Finish" : "Next"}
 								</Button>
-							)}
-
-							<Button
-								variant="contained"
-								color="primary"
-								onClick={
-									activeStep === steps.length - 1 ? handleSubmit : handleNext
-								}
-								className={classes.button}
-							>
-								{activeStep === steps.length - 1 ? "Finish" : "Next"}
-							</Button>
+							</div>
 						</div>
 					</div>
 				)}

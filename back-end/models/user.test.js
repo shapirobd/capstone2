@@ -47,8 +47,13 @@ const addBookmarks = async (bookmarks, user) => {
 
 const addEatenMeals = async (eatenMeals, user) => {
 	for (let date in eatenMeals) {
-		for (let id of eatenMeals[date]) {
-			await User.addEatenMeal(user.username, id, date);
+		for (let meal of eatenMeals[date]) {
+			await User.addEatenMeal(user.username, meal.id, date, {
+				calories: 500,
+				protein: 30,
+				carbs: 40,
+				fat: 20,
+			});
 		}
 	}
 };
@@ -57,10 +62,63 @@ const bookmarks1 = [716627, 716408, 716426, 715594, 715497];
 // const bookmarks2 = [644387, 715392, 716268, 716381, 782601]
 
 const eatenMeals1 = {
-	"2021-03-14": [652423, 660306],
-	"2021-03-15": [715424, 662670],
-	"2021-03-16": [716195, 663559],
-	"2021-03-17": [633942, 715521],
+	"2021-03-14": [
+		{
+			id: 652423,
+			protein: 30,
+			carbs: 40,
+			fat: 20,
+		},
+		{
+			id: 660306,
+			protein: 30,
+			carbs: 40,
+			fat: 20,
+		},
+	],
+	"2021-03-15": [
+		{
+			id: 715424,
+			protein: 30,
+			carbs: 40,
+			fat: 20,
+		},
+		{
+			id: 662670,
+			protein: 30,
+			carbs: 40,
+			fat: 20,
+		},
+	],
+	"2021-03-16": [
+		{
+			id: 716195,
+			protein: 30,
+			carbs: 40,
+			fat: 20,
+		},
+		{
+			id: 663559,
+			protein: 30,
+			carbs: 40,
+			fat: 20,
+		},
+	],
+	"2021-03-17": [
+		{
+			id: 633942,
+			protein: 30,
+			carbs: 40,
+			fat: 20,
+		},
+
+		{
+			id: 715521,
+			protein: 30,
+			carbs: 40,
+			fat: 20,
+		},
+	],
 };
 
 beforeEach(async () => {
@@ -80,6 +138,8 @@ describe("User.register() method", () => {
 			weight: user1.weight,
 			weight_goal: user1.weight_goal,
 			calorie_goal: user1.calorie_goal,
+			bookmarks: [],
+			eatenMeals: {},
 		});
 	});
 });
@@ -160,13 +220,21 @@ describe("User.addEatenMeal() method", () => {
 		await User.register(user1);
 		const resp = await User.addEatenMeal(
 			user1.username,
-			eatenMeals1["2021-03-14"][0],
-			"2021-03-14"
+			eatenMeals1["2021-03-14"][0].id,
+			"2021-03-14",
+			{
+				calories: 500,
+				protein: 30,
+				carbs: 40,
+				fat: 20,
+			}
 		);
 		expect(resp).toEqual({ message: "Meal eaten" });
 		const user = await User.findOne(user1.username);
 		expect(Object.keys(user.eatenMeals)).toContain("2021-03-14");
-		expect(user.eatenMeals["2021-03-14"]).toContain(652423);
+		expect(user.eatenMeals["2021-03-14"][0]).toEqual(
+			eatenMeals1["2021-03-14"][0]
+		);
 	});
 });
 describe("User.getEatenMeals() method", () => {
@@ -175,7 +243,7 @@ describe("User.getEatenMeals() method", () => {
 		await addEatenMeals(eatenMeals1, user1);
 		for (let date in eatenMeals1) {
 			let resp = await User.getEatenMeals(user1.username, date);
-			expect(resp).toEqual(eatenMeals1[date]);
+			expect(resp).toEqual(eatenMeals1[date].map((meal) => meal.id));
 		}
 	});
 });
@@ -185,12 +253,18 @@ describe("User.removeEatenMeal() method", () => {
 		await User.register(user1);
 		await User.addEatenMeal(
 			user1.username,
-			eatenMeals1["2021-03-14"][0],
-			"2021-03-14"
+			eatenMeals1["2021-03-14"][0].id,
+			"2021-03-14",
+			{
+				calories: 500,
+				protein: 30,
+				carbs: 40,
+				fat: 20,
+			}
 		);
 		const resp = await User.removeEatenMeal(
 			user1.username,
-			eatenMeals1["2021-03-14"][0],
+			eatenMeals1["2021-03-14"][0].id,
 			"2021-03-14"
 		);
 		expect(resp).toEqual({ message: "Meal deleted" });

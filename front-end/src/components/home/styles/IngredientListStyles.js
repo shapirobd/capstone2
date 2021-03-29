@@ -40,7 +40,6 @@ export const useStyles = makeStyles(() => ({
 	},
 	ingredients: {
 		boxShadow: "-2px -2px 10px black",
-		backgroundColor: "#fff",
 		borderRadius: "5px",
 		display: "flex",
 		flexDirection: "column",
@@ -48,11 +47,8 @@ export const useStyles = makeStyles(() => ({
 		height: "50%",
 		width: "80%",
 		position: "relative",
-		backgroundColor: "none",
 	},
 	mobileIngredients: {
-		// boxShadow: "-2px -2px 10px black",
-		backgroundColor: "#fff",
 		borderRadius: "5px",
 		display: "flex",
 		flexDirection: "column",
@@ -60,6 +56,5 @@ export const useStyles = makeStyles(() => ({
 		height: "100%",
 		width: "100%",
 		position: "relative",
-		backgroundColor: "none",
 	},
 }));

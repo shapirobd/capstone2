@@ -3,16 +3,16 @@
 exports[`should match screenshot 1`] = `
 <DocumentFragment>
   <div
-    class="makeStyles-root-29"
+    class="makeStyles-root-34"
   >
     <div
       style="width: 784px; height: 768px;"
     >
       <form
-        class="makeStyles-root-31"
+        class="makeStyles-mobileRoot-38"
       >
         <div
-          style="float: left; width: 50%; height: 100%;"
+          style="float: left; width: 100%; height: 100%;"
         >
           <p
             class="MuiTypography-root MuiTypography-body1"
@@ -20,24 +20,24 @@ exports[`should match screenshot 1`] = `
             Diets
           </p>
           <ul
-            class="MuiList-root makeStyles-list-34 MuiList-padding"
+            class="MuiList-root makeStyles-mobileList-41 MuiList-padding"
           >
             <li
-              class="MuiListItem-root makeStyles-listItem-35 MuiListItem-dense MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-listItem-43 MuiListItem-dense MuiListItem-gutters"
             >
               <div
                 class="MuiListItemIcon-root"
               >
                 <span
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-37 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-36 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
+                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-45 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-44 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
                 >
                   <span
                     class="MuiIconButton-label"
                   >
                     <input
                       aria-labelledby="checkbox-list-label-0"
-                      class="PrivateSwitchBase-input-40"
+                      class="PrivateSwitchBase-input-48"
                       data-indeterminate="false"
                       tabindex="-1"
                       type="checkbox"
@@ -68,21 +68,21 @@ exports[`should match screenshot 1`] = `
               </div>
             </li>
             <li
-              class="MuiListItem-root makeStyles-listItem-35 MuiListItem-dense MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-listItem-43 MuiListItem-dense MuiListItem-gutters"
             >
               <div
                 class="MuiListItemIcon-root"
               >
                 <span
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-37 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-36 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
+                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-45 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-44 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
                 >
                   <span
                     class="MuiIconButton-label"
                   >
                     <input
                       aria-labelledby="checkbox-list-label-1"
-                      class="PrivateSwitchBase-input-40"
+                      class="PrivateSwitchBase-input-48"
                       data-indeterminate="false"
                       tabindex="-1"
                       type="checkbox"
@@ -113,21 +113,21 @@ exports[`should match screenshot 1`] = `
               </div>
             </li>
             <li
-              class="MuiListItem-root makeStyles-listItem-35 MuiListItem-dense MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-listItem-43 MuiListItem-dense MuiListItem-gutters"
             >
               <div
                 class="MuiListItemIcon-root"
               >
                 <span
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-37 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-36 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
+                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-45 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-44 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
                 >
                   <span
                     class="MuiIconButton-label"
                   >
                     <input
                       aria-labelledby="checkbox-list-label-2"
-                      class="PrivateSwitchBase-input-40"
+                      class="PrivateSwitchBase-input-48"
                       data-indeterminate="false"
                       tabindex="-1"
                       type="checkbox"
@@ -158,21 +158,21 @@ exports[`should match screenshot 1`] = `
               </div>
             </li>
             <li
-              class="MuiListItem-root makeStyles-listItem-35 MuiListItem-dense MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-listItem-43 MuiListItem-dense MuiListItem-gutters"
             >
               <div
                 class="MuiListItemIcon-root"
               >
                 <span
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-37 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-36 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
+                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-45 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-44 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
                 >
                   <span
                     class="MuiIconButton-label"
                   >
                     <input
                       aria-labelledby="checkbox-list-label-3"
-                      class="PrivateSwitchBase-input-40"
+                      class="PrivateSwitchBase-input-48"
                       data-indeterminate="false"
                       tabindex="-1"
                       type="checkbox"
@@ -203,21 +203,21 @@ exports[`should match screenshot 1`] = `
               </div>
             </li>
             <li
-              class="MuiListItem-root makeStyles-listItem-35 MuiListItem-dense MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-listItem-43 MuiListItem-dense MuiListItem-gutters"
             >
               <div
                 class="MuiListItemIcon-root"
               >
                 <span
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-37 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-36 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
+                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-45 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-44 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
                 >
                   <span
                     class="MuiIconButton-label"
                   >
                     <input
                       aria-labelledby="checkbox-list-label-4"
-                      class="PrivateSwitchBase-input-40"
+                      class="PrivateSwitchBase-input-48"
                       data-indeterminate="false"
                       tabindex="-1"
                       type="checkbox"
@@ -248,21 +248,21 @@ exports[`should match screenshot 1`] = `
               </div>
             </li>
             <li
-              class="MuiListItem-root makeStyles-listItem-35 MuiListItem-dense MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-listItem-43 MuiListItem-dense MuiListItem-gutters"
             >
               <div
                 class="MuiListItemIcon-root"
               >
                 <span
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-37 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-36 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
+                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-45 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-44 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
                 >
                   <span
                     class="MuiIconButton-label"
                   >
                     <input
                       aria-labelledby="checkbox-list-label-5"
-                      class="PrivateSwitchBase-input-40"
+                      class="PrivateSwitchBase-input-48"
                       data-indeterminate="false"
                       tabindex="-1"
                       type="checkbox"
@@ -293,21 +293,21 @@ exports[`should match screenshot 1`] = `
               </div>
             </li>
             <li
-              class="MuiListItem-root makeStyles-listItem-35 MuiListItem-dense MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-listItem-43 MuiListItem-dense MuiListItem-gutters"
             >
               <div
                 class="MuiListItemIcon-root"
               >
                 <span
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-37 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-36 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
+                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-45 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-44 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
                 >
                   <span
                     class="MuiIconButton-label"
                   >
                     <input
                       aria-labelledby="checkbox-list-label-6"
-                      class="PrivateSwitchBase-input-40"
+                      class="PrivateSwitchBase-input-48"
                       data-indeterminate="false"
                       tabindex="-1"
                       type="checkbox"
@@ -338,21 +338,21 @@ exports[`should match screenshot 1`] = `
               </div>
             </li>
             <li
-              class="MuiListItem-root makeStyles-listItem-35 MuiListItem-dense MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-listItem-43 MuiListItem-dense MuiListItem-gutters"
             >
               <div
                 class="MuiListItemIcon-root"
               >
                 <span
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-37 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-36 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
+                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-45 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-44 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
                 >
                   <span
                     class="MuiIconButton-label"
                   >
                     <input
                       aria-labelledby="checkbox-list-label-7"
-                      class="PrivateSwitchBase-input-40"
+                      class="PrivateSwitchBase-input-48"
                       data-indeterminate="false"
                       tabindex="-1"
                       type="checkbox"
@@ -383,21 +383,21 @@ exports[`should match screenshot 1`] = `
               </div>
             </li>
             <li
-              class="MuiListItem-root makeStyles-listItem-35 MuiListItem-dense MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-listItem-43 MuiListItem-dense MuiListItem-gutters"
             >
               <div
                 class="MuiListItemIcon-root"
               >
                 <span
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-37 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-36 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
+                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-45 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-44 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
                 >
                   <span
                     class="MuiIconButton-label"
                   >
                     <input
                       aria-labelledby="checkbox-list-label-8"
-                      class="PrivateSwitchBase-input-40"
+                      class="PrivateSwitchBase-input-48"
                       data-indeterminate="false"
                       tabindex="-1"
                       type="checkbox"
@@ -428,21 +428,21 @@ exports[`should match screenshot 1`] = `
               </div>
             </li>
             <li
-              class="MuiListItem-root makeStyles-listItem-35 MuiListItem-dense MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-listItem-43 MuiListItem-dense MuiListItem-gutters"
             >
               <div
                 class="MuiListItemIcon-root"
               >
                 <span
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-37 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-36 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
+                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-45 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-44 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
                 >
                   <span
                     class="MuiIconButton-label"
                   >
                     <input
                       aria-labelledby="checkbox-list-label-9"
-                      class="PrivateSwitchBase-input-40"
+                      class="PrivateSwitchBase-input-48"
                       data-indeterminate="false"
                       tabindex="-1"
                       type="checkbox"
@@ -473,21 +473,21 @@ exports[`should match screenshot 1`] = `
               </div>
             </li>
             <li
-              class="MuiListItem-root makeStyles-listItem-35 MuiListItem-dense MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-listItem-43 MuiListItem-dense MuiListItem-gutters"
             >
               <div
                 class="MuiListItemIcon-root"
               >
                 <span
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-37 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-36 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
+                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-45 MuiCheckbox-root MuiCheckbox-colorSecondary makeStyles-checkbox-44 MuiIconButton-colorSecondary MuiIconButton-edgeStart"
                 >
                   <span
                     class="MuiIconButton-label"
                   >
                     <input
                       aria-labelledby="checkbox-list-label-10"
-                      class="PrivateSwitchBase-input-40"
+                      class="PrivateSwitchBase-input-48"
                       data-indeterminate="false"
                       tabindex="-1"
                       type="checkbox"
@@ -520,7 +520,7 @@ exports[`should match screenshot 1`] = `
           </ul>
         </div>
         <div
-          style="width: 50%; justify-content: right;"
+          style="width: 100%; justify-content: right;"
         >
           <p
             class="MuiTypography-root MuiTypography-body1"
@@ -531,11 +531,11 @@ exports[`should match screenshot 1`] = `
             style="margin: 0px 0px 10px 0px;"
           >
             <div
-              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-flex-end"
-              cols="3"
+              class="MuiGrid-root makeStyles-gridContainer-49 MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-flex-end"
+              cols="2"
             >
               <div
-                class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-6"
+                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"
                 cols="1"
                 style="padding-right: 0px;"
               >
@@ -543,7 +543,7 @@ exports[`should match screenshot 1`] = `
                   class="MuiFormControl-root MuiFormControl-fullWidth"
                 >
                   <div
-                    class="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectField-42 MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                    class="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectField-51 MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
                   >
                     <div
                       aria-haspopup="listbox"
@@ -576,10 +576,10 @@ exports[`should match screenshot 1`] = `
                     </svg>
                     <fieldset
                       aria-hidden="true"
-                      class="PrivateNotchedOutline-root-44 MuiOutlinedInput-notchedOutline"
+                      class="PrivateNotchedOutline-root-53 MuiOutlinedInput-notchedOutline"
                     >
                       <legend
-                        class="PrivateNotchedOutline-legendLabelled-46"
+                        class="PrivateNotchedOutline-legendLabelled-55"
                       >
                         <span>
                           Comparison
@@ -590,8 +590,8 @@ exports[`should match screenshot 1`] = `
                 </div>
               </div>
               <div
-                class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-6"
-                cols="2"
+                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"
+                cols="1"
                 style="padding-left: 0px;"
               >
                 <div
@@ -605,7 +605,7 @@ exports[`should match screenshot 1`] = `
                     Fat
                   </label>
                   <div
-                    class="MuiInputBase-root MuiOutlinedInput-root makeStyles-textField-43 MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                    class="MuiInputBase-root MuiOutlinedInput-root makeStyles-textField-52 MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd MuiInputBase-marginDense MuiOutlinedInput-marginDense"
                   >
                     <input
                       aria-invalid="false"
@@ -625,10 +625,10 @@ exports[`should match screenshot 1`] = `
                     </div>
                     <fieldset
                       aria-hidden="true"
-                      class="PrivateNotchedOutline-root-44 MuiOutlinedInput-notchedOutline"
+                      class="PrivateNotchedOutline-root-53 MuiOutlinedInput-notchedOutline"
                     >
                       <legend
-                        class="PrivateNotchedOutline-legendLabelled-46"
+                        class="PrivateNotchedOutline-legendLabelled-55"
                       >
                         <span>
                           Fat
@@ -640,11 +640,11 @@ exports[`should match screenshot 1`] = `
               </div>
             </div>
             <div
-              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-flex-end"
-              cols="3"
+              class="MuiGrid-root makeStyles-gridContainer-49 MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-flex-end"
+              cols="2"
             >
               <div
-                class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-6"
+                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"
                 cols="1"
                 style="padding-right: 0px;"
               >
@@ -652,7 +652,7 @@ exports[`should match screenshot 1`] = `
                   class="MuiFormControl-root MuiFormControl-fullWidth"
                 >
                   <div
-                    class="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectField-42 MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                    class="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectField-51 MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
                   >
                     <div
                       aria-haspopup="listbox"
@@ -685,10 +685,10 @@ exports[`should match screenshot 1`] = `
                     </svg>
                     <fieldset
                       aria-hidden="true"
-                      class="PrivateNotchedOutline-root-44 MuiOutlinedInput-notchedOutline"
+                      class="PrivateNotchedOutline-root-53 MuiOutlinedInput-notchedOutline"
                     >
                       <legend
-                        class="PrivateNotchedOutline-legendLabelled-46"
+                        class="PrivateNotchedOutline-legendLabelled-55"
                       >
                         <span>
                           Comparison
@@ -699,8 +699,8 @@ exports[`should match screenshot 1`] = `
                 </div>
               </div>
               <div
-                class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-6"
-                cols="2"
+                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"
+                cols="1"
                 style="padding-left: 0px;"
               >
                 <div
@@ -714,7 +714,7 @@ exports[`should match screenshot 1`] = `
                     Protein
                   </label>
                   <div
-                    class="MuiInputBase-root MuiOutlinedInput-root makeStyles-textField-43 MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                    class="MuiInputBase-root MuiOutlinedInput-root makeStyles-textField-52 MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd MuiInputBase-marginDense MuiOutlinedInput-marginDense"
                   >
                     <input
                       aria-invalid="false"
@@ -734,10 +734,10 @@ exports[`should match screenshot 1`] = `
                     </div>
                     <fieldset
                       aria-hidden="true"
-                      class="PrivateNotchedOutline-root-44 MuiOutlinedInput-notchedOutline"
+                      class="PrivateNotchedOutline-root-53 MuiOutlinedInput-notchedOutline"
                     >
                       <legend
-                        class="PrivateNotchedOutline-legendLabelled-46"
+                        class="PrivateNotchedOutline-legendLabelled-55"
                       >
                         <span>
                           Protein
@@ -749,11 +749,11 @@ exports[`should match screenshot 1`] = `
               </div>
             </div>
             <div
-              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-flex-end"
-              cols="3"
+              class="MuiGrid-root makeStyles-gridContainer-49 MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-flex-end"
+              cols="2"
             >
               <div
-                class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-6"
+                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"
                 cols="1"
                 style="padding-right: 0px;"
               >
@@ -761,7 +761,7 @@ exports[`should match screenshot 1`] = `
                   class="MuiFormControl-root MuiFormControl-fullWidth"
                 >
                   <div
-                    class="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectField-42 MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                    class="MuiInputBase-root MuiOutlinedInput-root makeStyles-selectField-51 MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
                   >
                     <div
                       aria-haspopup="listbox"
@@ -794,10 +794,10 @@ exports[`should match screenshot 1`] = `
                     </svg>
                     <fieldset
                       aria-hidden="true"
-                      class="PrivateNotchedOutline-root-44 MuiOutlinedInput-notchedOutline"
+                      class="PrivateNotchedOutline-root-53 MuiOutlinedInput-notchedOutline"
                     >
                       <legend
-                        class="PrivateNotchedOutline-legendLabelled-46"
+                        class="PrivateNotchedOutline-legendLabelled-55"
                       >
                         <span>
                           Comparison
@@ -808,8 +808,8 @@ exports[`should match screenshot 1`] = `
                 </div>
               </div>
               <div
-                class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-6"
-                cols="2"
+                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"
+                cols="1"
                 style="padding-left: 0px;"
               >
                 <div
@@ -823,7 +823,7 @@ exports[`should match screenshot 1`] = `
                     Carbohydrates
                   </label>
                   <div
-                    class="MuiInputBase-root MuiOutlinedInput-root makeStyles-textField-43 MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                    class="MuiInputBase-root MuiOutlinedInput-root makeStyles-textField-52 MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd MuiInputBase-marginDense MuiOutlinedInput-marginDense"
                   >
                     <input
                       aria-invalid="false"
@@ -843,10 +843,10 @@ exports[`should match screenshot 1`] = `
                     </div>
                     <fieldset
                       aria-hidden="true"
-                      class="PrivateNotchedOutline-root-44 MuiOutlinedInput-notchedOutline"
+                      class="PrivateNotchedOutline-root-53 MuiOutlinedInput-notchedOutline"
                     >
                       <legend
-                        class="PrivateNotchedOutline-legendLabelled-46"
+                        class="PrivateNotchedOutline-legendLabelled-55"
                       >
                         <span>
                           Carbohydrates
@@ -880,11 +880,11 @@ exports[`should match screenshot 1`] = `
                 />
                 <fieldset
                   aria-hidden="true"
-                  class="PrivateNotchedOutline-root-44 MuiOutlinedInput-notchedOutline"
+                  class="PrivateNotchedOutline-root-53 MuiOutlinedInput-notchedOutline"
                   style="padding-left: 8px;"
                 >
                   <legend
-                    class="PrivateNotchedOutline-legend-45"
+                    class="PrivateNotchedOutline-legend-54"
                     style="width: 0.01px;"
                   >
                     <span>
@@ -900,7 +900,7 @@ exports[`should match screenshot 1`] = `
           style="width: 100%; margin: 15px 0px 0px 0px;"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button-32"
+            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button-39"
             tabindex="0"
             type="submit"
           >
@@ -914,7 +914,7 @@ exports[`should match screenshot 1`] = `
             />
           </button>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-resetButton-33"
+            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-resetButton-40"
             tabindex="0"
             type="button"
           >
@@ -934,7 +934,7 @@ exports[`should match screenshot 1`] = `
       >
         <nav
           aria-label="pagination navigation"
-          class="MuiPagination-root makeStyles-pagination-30"
+          class="MuiPagination-root makeStyles-pagination-36"
         >
           <ul
             class="MuiPagination-ul"
@@ -982,16 +982,16 @@ exports[`should match screenshot 1`] = `
           </ul>
         </nav>
         <div
-          class="makeStyles-root-48"
+          class="makeStyles-root-57"
         >
           <ul
-            class="MuiGridList-root makeStyles-gridList-49"
+            class="MuiGridList-root makeStyles-gridList-58"
             style="margin: -2px;"
           />
         </div>
         <nav
           aria-label="pagination navigation"
-          class="MuiPagination-root makeStyles-pagination-30"
+          class="MuiPagination-root makeStyles-pagination-36"
         >
           <ul
             class="MuiPagination-ul"

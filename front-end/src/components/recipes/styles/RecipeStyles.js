@@ -4,11 +4,14 @@ export const useStyles = makeStyles(() => ({
 	root: {
 		margin: "0 75px",
 	},
+	mobileRoot: {
+		margin: 0,
+	},
 	heading: {
 		margin: "20px 0",
 	},
 	grid: {
-		margin: "20px 0",
+		margin: "20px -12px",
 		display: "flex",
 		flexDirection: "row",
 		justifyContent: "space-around",
@@ -37,6 +40,7 @@ export const useStyles = makeStyles(() => ({
 		justifyContent: "space-around",
 		alignItems: "space-around",
 		borderRadius: "5px",
+		marginBottom: "20px",
 	},
 	infoPanel: {
 		padding: "0 !important",

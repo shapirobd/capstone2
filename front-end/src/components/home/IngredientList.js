@@ -14,7 +14,7 @@ const IngredientList = ({
 		<Grid
 			item
 			cols={1}
-			md={4}
+			sm={4}
 			className={mobile ? classes.bottomGridItem : classes.rightGridItem}
 		>
 			<div className={mobile ? classes.mobileIngredients : classes.ingredients}>

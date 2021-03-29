@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useParams, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import {
 	bookmarkRecipe,
 	unbookmarkRecipe,
@@ -14,19 +14,21 @@ import PieChart from "./PieChart";
 import NutrientList from "./NutrientList";
 import DietList from "./DietList";
 import RecipeSteps from "./RecipeSteps";
+import RecipeIngredients from "./RecipeIngredients";
 import { generateMacros } from "../../helpers/generateMacros";
 import { Typography, Grid, Button, ButtonGroup } from "@material-ui/core";
 import axios from "axios";
 import convertDate from "../../helpers/convertDate";
+import useWindowDimensions from "../../customHooks/getWindowDimensions";
 
 const Recipe = ({ user }) => {
+	console.log(user);
 	const classes = useStyles();
+	const { width } = useWindowDimensions();
 	const { recipeId } = useParams();
 	const dispatch = useDispatch();
-	// const user = useSelector((state) => state.user);
-	// console.log(user.bookmarks.includes(3));
+	const history = useHistory();
 	const { bookmarks, eatenMeals } = user;
-	console.log(eatenMeals);
 
 	const [isBookmarked, setIsBookmarked] = useState(
 		!bookmarks ? false : user.bookmarks.includes(+recipeId)
@@ -38,40 +40,41 @@ const Recipe = ({ user }) => {
 	);
 
 	const [currentRecipe, setCurrentRecipe] = useState(null);
-
 	console.log(currentRecipe);
-
-	// currentRecipe.recipe.nutrition.nutrients[0] calories
-	// currentRecipe.recipe.nutrition.nutrients[1] fat
-	// currentRecipe.recipe.nutrition.nutrients[3] carbs
-	// currentRecipe.recipe.nutrition.nutrients[8] protein
-
 	const toggleEaten = () => {
-		if (!isEaten) {
-			const { nutrients } = currentRecipe.recipe.nutrition;
-			dispatch(
-				addEatenMeal(
-					user.username,
-					currentRecipe.recipe.id,
-					convertDate(),
-					nutrients
-				)
-			);
+		if (!user.username) {
+			history.push("/signup");
 		} else {
-			dispatch(
-				removeEatenMeal(user.username, currentRecipe.recipe.id, convertDate())
-			);
+			if (!isEaten) {
+				const { nutrients } = currentRecipe.recipe.nutrition;
+				dispatch(
+					addEatenMeal(
+						user.username,
+						currentRecipe.recipe.id,
+						convertDate(),
+						nutrients
+					)
+				);
+			} else {
+				dispatch(
+					removeEatenMeal(user.username, currentRecipe.recipe.id, convertDate())
+				);
+			}
+			setIsEaten(!isEaten);
 		}
-		setIsEaten(!isEaten);
 	};
 
 	const toggleBookmarked = () => {
-		if (!isBookmarked) {
-			dispatch(bookmarkRecipe(user.username, currentRecipe.recipe.id));
+		if (!user.username) {
+			history.push("/signup");
 		} else {
-			dispatch(unbookmarkRecipe(user.username, currentRecipe.recipe.id));
+			if (!isBookmarked) {
+				dispatch(bookmarkRecipe(user.username, currentRecipe.recipe.id));
+			} else {
+				dispatch(unbookmarkRecipe(user.username, currentRecipe.recipe.id));
+			}
+			setIsBookmarked(!isBookmarked);
 		}
-		setIsBookmarked(!isBookmarked);
 	};
 
 	useEffect(() => {
@@ -107,7 +110,7 @@ const Recipe = ({ user }) => {
 	}, [recipeId]);
 
 	return (
-		<div className={classes.root}>
+		<div className={width > 599 ? classes.root : classes.mobileRoot}>
 			{currentRecipe ? (
 				<>
 					<Grid container spacing={3} className={classes.grid}>
@@ -130,6 +133,11 @@ const Recipe = ({ user }) => {
 									{isBookmarked ? "Unbookmark" : "Bookmark"}
 								</Button>
 							</ButtonGroup>
+							{currentRecipe.recipe.extendedIngredients.length ? (
+								<RecipeIngredients
+									ingredients={currentRecipe.recipe.extendedIngredients}
+								/>
+							) : null}
 							{currentRecipe.instructions.length ? (
 								<RecipeSteps steps={currentRecipe.instructions[0].steps} />
 							) : null}

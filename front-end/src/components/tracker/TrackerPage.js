@@ -49,7 +49,7 @@ const TrackerPage = () => {
 
 	useEffect(() => {
 		setBarChartData(getBarChartData(weekState.weekData));
-	}, []);
+	}, [weekState.weekData]);
 
 	useEffect(() => {
 		const updateWeekState = async () => {
@@ -57,7 +57,7 @@ const TrackerPage = () => {
 			const weekData = await getWeekMacros(user, getWeekDates(calendarDate));
 			let empty = true;
 			Object.values(weekData).map((date) => {
-				if (date.carbs || date.fat || date.protein) {
+				if (empty && (date.carbs || date.fat || date.protein)) {
 					empty = false;
 				}
 			});
@@ -86,11 +86,10 @@ const TrackerPage = () => {
 
 	useEffect(() => {
 		setBarChartData(getBarChartData(weekState.weekData));
-	}, [weekState]);
+	}, [weekState.weekData]);
 
 	return (
 		<div style={{ width: "100%" }}>
-			{console.log(weekState)}
 			<Grid
 				container
 				cols={width <= 599 ? 1 : 2}

@@ -18,7 +18,7 @@ const SignUpConfirmation = ({ handleSubmit, handleChange, formData }) => {
 				<Typography variant="h5">Confirm</Typography>
 				{Object.keys(formData).map((key) =>
 					key !== "password" ? (
-						<Grid item xs={12}>
+						<Grid item xs={12} key={key}>
 							<Typography className={classes.textField}>
 								{capitalize(key)}
 							</Typography>

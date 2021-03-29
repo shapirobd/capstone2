@@ -1,28 +1,20 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-// export const useStyles = makeStyles(() => ({
-// 	root: {
-// 		margin: "0 auto",
-// 		width: "100%",
-// 		height: "100%",
-// 		flexGrow: 1,
-// 	},
-// 	gridItem: {
-// 		height: "75%",
-// 	},
-// 	signUp: {
-// 		backgroundColor: "white",
-// 		padding: "35px 50px !important",
-// 		borderRadius: "5px",
-// 	},
-// 	signUpFacts: {
-// 		width: "100%",
-// 	},
-// }));
-
 export const useStyles = makeStyles((theme) => ({
 	root: {
+		color: "#fff !important",
+	},
+	label: {
+		color: "#fff !important",
+	},
+	main: {
 		width: "50%",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+	},
+	mobileMain: {
+		width: "100%",
 	},
 	form: {
 		backgroundColor: "#fff",
@@ -31,6 +23,23 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	button: {
 		marginRight: theme.spacing(1),
+		color: "#fff",
+		"&:disabled": {
+			color: "#aaa",
+		},
+	},
+	nextButton: {
+		backgroundColor: "#378e3c",
+		"&:hover": {
+			backgroundColor: "#81c784",
+		},
+	},
+	skipButton: {
+		color: "#000 !important",
+		backgroundColor: "#fff",
+		"&:hover": {
+			backgroundColor: "#ccc",
+		},
 	},
 	instructions: {
 		marginTop: theme.spacing(1),

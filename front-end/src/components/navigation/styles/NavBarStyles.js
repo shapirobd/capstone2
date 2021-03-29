@@ -45,7 +45,7 @@ export const useStyles = makeStyles((theme) => ({
 		// },
 	},
 	searchMobile: {
-		width: "75%",
+		width: "65%",
 		position: "relative",
 		borderRadius: theme.shape.borderRadius,
 		backgroundColor: fade(theme.palette.common.white, 0.15),

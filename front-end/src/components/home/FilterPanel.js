@@ -12,7 +12,7 @@ const FilterPanel = ({ setFiltered, filterData, setFilterData, mobile }) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
-	const { height, width } = useWindowDimensions();
+	const { width } = useWindowDimensions();
 
 	const [checked, setChecked] = useState([]);
 

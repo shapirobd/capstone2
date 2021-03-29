@@ -52,7 +52,7 @@ router.get("/:username", async function (req, res, next) {
 router.patch("/:username", authenticateJWT, async function (req, res, next) {
 	try {
 		continueIfValidEdit(req, next);
-		const resp = await User.editProfile(req.body, req.params.username);
+		const resp = await User.editProfile(req.body.data, req.params.username);
 		return res.json(resp);
 	} catch (e) {
 		return next(e);
@@ -127,7 +127,6 @@ router.post("/addEatenMeal", ensureLoggedIn, async function (req, res, next) {
 	try {
 		continueIfValidEatenMeal(req, next);
 		const { username, recipeId, date, nutrients } = req.body;
-		console.log(nutrients);
 		const resp = await User.addEatenMeal(username, recipeId, date, nutrients);
 		return res.json(resp);
 	} catch (e) {
@@ -153,5 +152,14 @@ router.post(
 		}
 	}
 );
+
+router.delete("/:username", authenticateJWT, async function (req, res, next) {
+	try {
+		const resp = await User.deleteUser(req.params.username);
+		return res.json(resp);
+	} catch (e) {
+		return next(e);
+	}
+});
 
 module.exports = router;

@@ -67,7 +67,7 @@ const Routes = () => {
 					{user ? <BookmarksPage /> : <WelcomePage />}
 				</Route>
 				<Route path="/recipes/:recipeId">
-					<Recipe user={user} />
+					<Recipe user={user ? user : { bookmarks: [], eatenMeals: {} }} />
 				</Route>
 			</Switch>
 		</Container>

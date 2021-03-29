@@ -42,8 +42,9 @@ const EditProfileForm = ({ user, setEditting }) => {
 
 	return (
 		<form onSubmit={handleSubmit}>
+			{console.log(formData)}
 			{Object.keys(user).map((key) =>
-				key !== "username" && key !== "bookmarks" && key !== "api_hash" ? (
+				key !== "username" && key !== "bookmarks" && key !== "eatenMeals" ? (
 					<TextField
 						variant="outlined"
 						name={key}
@@ -57,6 +58,9 @@ const EditProfileForm = ({ user, setEditting }) => {
 			)}
 			<Button type="submit" className={classes.button}>
 				Submit
+			</Button>
+			<Button className={classes.backButton} onClick={() => setEditting(false)}>
+				Back
 			</Button>
 		</form>
 	);

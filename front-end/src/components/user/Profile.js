@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import EditIcon from "@material-ui/icons/Edit";
 import EditProfileForm from "./EditProfileForm";
 import useWindowDimensions from "../../customHooks/getWindowDimensions";
+// import profilePic from "../../images/profile_pics/shapirobd/default_prof_pic.jpg";
 
 const Profile = () => {
 	const classes = useStyles();
@@ -36,11 +37,14 @@ const Profile = () => {
 								className={classes.editIcon}
 								onClick={() => setEditting(true)}
 							/>
-							<div
+
+							{/* <img
 								className={
 									width > 599 ? classes.profPic : classes.mobileProfPic
 								}
-							></div>
+								src={profilePic}
+							/> */}
+
 							<div className={classes.userInfo}>
 								<Typography
 									variant="h6"

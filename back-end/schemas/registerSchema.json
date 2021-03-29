@@ -67,30 +67,6 @@
 			"description": "An explanation about the purpose of this instance.",
 			"default": "",
 			"examples": ["Smith"]
-		},
-		"weight": {
-			"$id": "#/properties/weight",
-			"type": "integer",
-			"title": "The weight schema",
-			"description": "An explanation about the purpose of this instance.",
-			"default": 0,
-			"examples": [170]
-		},
-		"weight_goal": {
-			"$id": "#/properties/weight_goal",
-			"type": "integer",
-			"title": "The weight_goal schema",
-			"description": "An explanation about the purpose of this instance.",
-			"default": 0,
-			"examples": [160]
-		},
-		"calorie_goal": {
-			"$id": "#/properties/calorie_goal",
-			"type": "integer",
-			"title": "The calorie_goal schema",
-			"description": "An explanation about the purpose of this instance.",
-			"default": 0,
-			"examples": [2000]
 		}
 	},
 	"additionalProperties": true
