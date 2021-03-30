@@ -1,7 +1,8 @@
 import App from "./App";
 import SignUpPage from "./user/SignUpPage";
+import HomePage from "./home/HomePage";
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
@@ -68,7 +69,7 @@ describe("to register page", () => {
 
 describe("registering a user", () => {
 	it("allows user to go to register page", async () => {
-		const { getByText, getByLabelText, getByRole } = render(
+		const { getByText, getByRole } = render(
 			<Provider store={store}>
 				<MemoryRouter>
 					<PersistGate loading={null} persistor={persistor}>
@@ -119,6 +120,29 @@ describe("registering a user", () => {
 		fireEvent.click(finishBtn);
 		setTimeout(() => {
 			expect(getByText("Logout")).toBeInTheDocument();
-		}, 2000);
+		}, 1000);
+	});
+});
+
+describe("bookmarking a recipe", () => {
+	it("allows user to add a recipe to their list of bookmarks", async () => {
+		const { getByRole } = render(
+			<Provider store={store}>
+				<MemoryRouter>
+					<PersistGate loading={null} persistor={persistor}>
+						<HomePage />
+					</PersistGate>
+				</MemoryRouter>
+			</Provider>
+		);
+		setTimeout(() => {
+			const recipeLink = getByRole("link", { name: 716426 });
+			fireEvent.click(recipeLink);
+		}, 1000);
+		setTimeout(() => {
+			expect(getByRole("button", { name: "Bookmark" })).toBeInTheDocument();
+			fireEvent.click(getByRole("button", { name: "Bookmark" }));
+			expect(getByRole("button", { name: "Unbookmark" })).toBeInTheDocument();
+		}, 1000);
 	});
 });

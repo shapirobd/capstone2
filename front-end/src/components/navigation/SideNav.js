@@ -25,6 +25,10 @@ const SideNav = () => {
 
 	const user = useSelector((state) => state.user);
 
+	const btnProps = {
+		name: "sideBtn",
+	};
+
 	return user ? (
 		<React.Fragment>
 			<Button onClick={toggleDrawer("left", true)} className={classes.toggler}>

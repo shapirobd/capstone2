@@ -49,7 +49,6 @@ const NavBar = () => {
 	});
 
 	const toggleDrawer = (anchor, open) => (event) => {
-		console.log("TOGGLE");
 		if (
 			event &&
 			event.type === "keydown" &&
@@ -57,7 +56,6 @@ const NavBar = () => {
 		) {
 			return;
 		}
-		console.log("STILL GOING");
 		setState({ ...state, [anchor]: open });
 	};
 

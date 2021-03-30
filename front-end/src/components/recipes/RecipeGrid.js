@@ -17,6 +17,11 @@ const RecipeGrid = ({ feed, areBookmarks, removeBookmark, ingredients }) => {
 		);
 	}
 
+	const getLinkProps = (id) => ({
+		role: "link",
+		name: id,
+	});
+
 	return (
 		<div className={classes.root}>
 			{console.log(width / 400)}
@@ -65,7 +70,7 @@ const RecipeGrid = ({ feed, areBookmarks, removeBookmark, ingredients }) => {
 								</Fab>
 							</div>
 						) : null}
-						<Link to={`/recipes/${recipe.id}`}>
+						<Link to={`/recipes/${recipe.id}`} {...getLinkProps(recipe.id)}>
 							{/* {width > 599 ? ( */}
 							<div
 								style={{
