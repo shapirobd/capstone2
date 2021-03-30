@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+![alt text](/front-end/src/images/logo.png "Text")
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#description)
 
-## Available Scripts
+## ➤ Description
 
-In the project directory, you can run:
+KitchenMenu is a platform that uses the Spoonacular API to allow users to search for recipes to make and track the meals they end up eating. They can filter their results by macronutrient quantities, dietary restrictions and selected ingredients.
 
-### `yarn start`
+[![Generic badge](https://img.shields.io/badge/contributors-1-red.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/npm-v7.0.15-blue.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/tests-passing-green.svg)](https://shields.io/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#visuals)
 
-### `yarn test`
+## ➤ Visuals
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
 
-### `yarn build`
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#installation)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ➤ Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### front-end
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Used Libraries
 
-### `yarn eject`
+[![Generic badge](https://img.shields.io/badge/axios-^0.21.1-blue.svg)](https://github.com/axios/axios)
+[![Generic badge](https://img.shields.io/badge/moment-^2.29.1-blue.svg)](https://momentjs.com/docs/)
+[![Generic badge](https://img.shields.io/badge/react-^17.0.1-blue.svg)](https://reactjs.org/docs/getting-started.html)
+[![Generic badge](https://img.shields.io/badge/react_calendar-^3.3.1-blue.svg)](https://www.npmjs.com/package/react-calendar)
+[![Generic badge](https://img.shields.io/badge/react_chartjs_2-^2.11.1-blue.svg)](https://www.npmjs.com/package/react-chartjs-2)
+[![Generic badge](https://img.shields.io/badge/react_dom-^17.0.1-blue.svg)](https://www.npmjs.com/package/react-dom)
+[![Generic badge](https://img.shields.io/badge/react_redux-^7.2.2-blue.svg)](https://react-redux.js.org/)
+[![Generic badge](https://img.shields.io/badge/react_router_dom-^5.2.0-blue.svg)](https://reactrouter.com/web/guides/quick-start)
+[![Generic badge](https://img.shields.io/badge/react_scripts-v4.0.3-blue.svg)](https://www.npmjs.com/package/react-scripts)
+[![Generic badge](https://img.shields.io/badge/react_scroll-^1.8.2-blue.svg)](https://www.npmjs.com/package/react-scroll)
+[![Generic badge](https://img.shields.io/badge/redux-^4.0.5-blue.svg)](https://redux.js.org/)
+[![Generic badge](https://img.shields.io/badge/redux_persist-^6.0.0-blue.svg)](https://github.com/rt2zz/redux-persist)
+[![Generic badge](https://img.shields.io/badge/redux_thunk-^2.3.0-blue.svg)](https://github.com/reduxjs/redux-thunk)
+[![Generic badge](https://img.shields.io/badge/@material_ui/core-^4.11.3-green.svg)](https://material-ui.com/)
+[![Generic badge](https://img.shields.io/badge/@material_ui/icons-^4.11.2-green.svg)](https://material-ui.com/)
+[![Generic badge](https://img.shields.io/badge/@material_ui/lab-^4.0.0_alpha.57-green.svg)](https://material-ui.com/)
+[![Generic badge](https://img.shields.io/badge/@testing_library/jest_dom-^5.11.4-red.svg)](https://testing-library.com/docs/react-testing-library/intro/)
+[![Generic badge](https://img.shields.io/badge/@testing_library/react-^11.1.0-red.svg)](https://testing-library.com/docs/react-testing-library/intro/)
+[![Generic badge](https://img.shields.io/badge/@testing_library/user_event-^12.1.0-red.svg)](https://testing-library.com/docs/react-testing-library/intro/)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Installing dependencies (npm)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+cd front-end
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### back-end
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Used Libraries
 
-## Learn More
+[![Generic badge](https://img.shields.io/badge/express-^4.17.1-blue.svg)](https://expressjs.com/)
+[![Generic badge](https://img.shields.io/badge/pg-^8.5.1-blue.svg)](https://www.npmjs.com/package/pg)
+[![Generic badge](https://img.shields.io/badge/cors-^2.8.5-blue.svg)](https://www.npmjs.com/package/cors)
+[![Generic badge](https://img.shields.io/badge/jsonwebtoken-^8.5.1-blue.svg)](https://www.npmjs.com/package/jsonwebtoken)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Installing dependencies (npm)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+cd back-end
+npm install
+```
 
-### Code Splitting
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#usage)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## ➤ Usage
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.

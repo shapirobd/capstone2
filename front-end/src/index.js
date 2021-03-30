@@ -1,21 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import rootReducer from "./reducers/rootReducer";
-import thunk from "redux-thunk";
+// import { createStore, applyMiddleware } from "redux";
+// import rootReducer from "./reducers/rootReducer";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./configureStore";
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+// const store = createStore(rootReducer, applyMiddleware(thunk));
+// const persistor = persistReducer();
+
+// const { store, persistor } = usePersist();
 
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<BrowserRouter>
-				<App />
+				<PersistGate loading={null} persistor={persistor}>
+					<App />
+				</PersistGate>
 			</BrowserRouter>
 		</Provider>
 	</React.StrictMode>,
