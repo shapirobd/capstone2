@@ -146,3 +146,26 @@ describe("bookmarking a recipe", () => {
 		}, 1000);
 	});
 });
+
+describe("adding a recipe as an eaten meal", () => {
+	it("allows user to add a recipe to their list of bookmarks", async () => {
+		const { getByRole } = render(
+			<Provider store={store}>
+				<MemoryRouter>
+					<PersistGate loading={null} persistor={persistor}>
+						<HomePage />
+					</PersistGate>
+				</MemoryRouter>
+			</Provider>
+		);
+		setTimeout(() => {
+			const recipeLink = getByRole("link", { name: 716426 });
+			fireEvent.click(recipeLink);
+		}, 1000);
+		setTimeout(() => {
+			expect(getByRole("button", { name: "Bookmark" })).toBeInTheDocument();
+			fireEvent.click(getByRole("button", { name: "Bookmark" }));
+			expect(getByRole("button", { name: "Unbookmark" })).toBeInTheDocument();
+		}, 1000);
+	});
+});

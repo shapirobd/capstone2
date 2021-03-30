@@ -8,9 +8,11 @@ const API_URL = "http://localhost:5000";
 export const register = (data) => {
 	return async (dispatch) => {
 		try {
+			console.log("1. ACTION CREATOR");
 			const resp = await axios.post(`${API_URL}/auth/register`, data);
 			// const userResp = await axios.get(`${API_URL}/users/${data.username}`);
 			const { user, token } = resp.data;
+			console.log(user);
 			dispatch(registered(token, user));
 		} catch (e) {
 			console.error(e);
