@@ -1,3 +1,4 @@
+
 ![alt text](/front-end/src/images/logo.png "Text")
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#description)
@@ -74,3 +75,7 @@ npm install
 ## ➤ Usage
 
 Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+=======
+# DB Schema
+<img width="880" alt="Screen Shot 2021-03-04 at 6 09 39 PM" src="https://user-images.githubusercontent.com/67729880/110044168-ae2efe80-7d16-11eb-950a-bd0e64e51efa.png">
+
