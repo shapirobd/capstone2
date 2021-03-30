@@ -5,7 +5,7 @@ let DB_URI = `postgresql://`;
 if (process.env.NODE_ENV === "test") {
 	DB_URI = `${DB_URI}/kitchen_menu_test`;
 } else {
-	DB_URI = process.env.DATABASE_URI || `${DB_URI}/kitchen_menu`;
+	DB_URI = process.env.DATABASE_URL || `${DB_URI}/kitchen_menu`;
 }
 
 console.log(process.env.SECRET_KEY);
