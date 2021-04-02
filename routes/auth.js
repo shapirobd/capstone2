@@ -50,6 +50,7 @@ router.post("/register", async function (req, res, next) {
  */
 router.post("/login", async function (req, res, next) {
 	try {
+		console.log(req);
 		continueIfValidLogin(req, next);
 		const { username, password } = req.body;
 		const user = await User.authenticate(username, password);
