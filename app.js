@@ -14,7 +14,8 @@ app.use("/auth", authRoutes);
 
 // 404 handler
 app.use(function (req, res, next) {
-	const err = new ExpressError(`Not found: ${req.body}`, 404);
+	console.log(req.body);
+	const err = new ExpressError(`Not found`, 404);
 	return next(err);
 });
 
