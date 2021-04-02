@@ -12,6 +12,10 @@ app.use(cors());
 app.use("/users", usersRoutes);
 app.use("/auth", authRoutes);
 
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static("client/build"));
+}
+
 // 404 handler
 app.use(function (req, res, next) {
 	console.log(req);
