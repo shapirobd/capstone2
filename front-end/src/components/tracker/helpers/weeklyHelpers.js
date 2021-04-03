@@ -1,7 +1,7 @@
 import moment from "moment";
 import convertDate from "../../../helpers/convertDate";
 import { WEEKDAYS, WEEKLY_COLORS } from "../../../constants";
-import { getDateMacros } from "../helpers/dailyHelpers";
+import { getDateMacros } from "./dailyHelpers";
 
 export const getBarChartData = (weekData) => {
 	return {

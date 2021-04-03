@@ -7,7 +7,8 @@
 		"begin": "npm run build && node app.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node app.js",
-		"build": "cd front-end && npm install && npm run build"
+		"build": "cd client && npm install && npm run build",
+		"heroku-postbuild": "cd client && npm install && npm run build"
 	},
 	"keywords": [],
 	"author": "",
