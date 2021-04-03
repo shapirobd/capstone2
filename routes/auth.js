@@ -26,6 +26,7 @@ const router = new express.Router();
 
 router.post("/register", async function (req, res, next) {
 	try {
+		console.log("INITIAL!");
 		continueIfValidRegister(req, next);
 		console.log("2. VALID");
 		const user = await User.register(req.body);
