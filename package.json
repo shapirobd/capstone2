@@ -7,7 +7,11 @@
 		"begin": "npm run build && node app.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node app.js",
-		"heroku-postbuild": "cd front-end && npm install --only=dev && npm install && npm run build"
+		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix front-end && npm run build --prefix front-end",
+		"client-install": "npm install --prefix front-end",
+		"server": "nodemon index.js",
+		"client": "npm start --prefix front-end",
+		"dev": "concurrently \"npm run server\" \"npm run client\""
 	},
 	"keywords": [],
 	"author": "",
@@ -15,6 +19,7 @@
 	"dependencies": {
 		"axios": "^0.21.1",
 		"bcrypt": "^5.0.1",
+		"concurrently": "^6.0.0",
 		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
